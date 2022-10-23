@@ -11,7 +11,7 @@ function StudioCard(): JSX.Element{
             src="img/apartment-01.jpg"
             width={260}
             height={200}
-            alt="Place image"
+            alt="Place to live"
           />
         </a>
       </div>
@@ -30,7 +30,7 @@ function StudioCard(): JSX.Element{
         </div>
         <h2 className="place-card__name">
           <a href="#">
-                            Beautiful &amp; luxurious apartment at great location
+          Beautiful &amp; luxurious apartment at great location
           </a>
         </h2>
         <p className="place-card__type">Apartment</p>

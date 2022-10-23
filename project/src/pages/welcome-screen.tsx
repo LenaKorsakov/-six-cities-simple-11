@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import Header from '../components/header/header';
 import StudioCard from '../components/studio-card/studio-card';
 

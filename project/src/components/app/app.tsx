@@ -6,7 +6,7 @@ type AppProps = {
 
 function App({offersCount}: AppProps): JSX.Element {
   return(
-    <WelcomeScreen offersCount={offersCount}/>
+    <WelcomeScreen offersCount = {offersCount}/>
   );
 }
 
