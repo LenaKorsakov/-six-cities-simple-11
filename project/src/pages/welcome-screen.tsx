@@ -1,9 +1,53 @@
+import { PropsWithChildren } from 'react';
 import Header from '../components/header/header';
-import StudioCard from '../components/studio-card/studio-card';
+import RoomCard from '../components/room-card/room-card';
 
-type WelcomeScreenProps = {
+type WelcomeScreenProps = PropsWithChildren <{
   offersCount: number;
-}
+}>;
+
+const rooms = [
+  {
+    src: 'img/room.jpg',
+    premium: true,
+    price: 120,
+    title: 'Wood and stone place',
+    type: 'Apartment',
+    rating: 4
+  },
+  {
+    src: 'img/apartment-02.jpg',
+    premium: true,
+    price: 80,
+    title: 'Wood and stone place',
+    type: 'Private room',
+    rating: 3
+  },
+  {
+    src: 'img/apartment-01.jpg',
+    premium: true,
+    price: 665,
+    title: 'Nice place',
+    type: 'Apartment',
+    rating: 4
+  },
+  {
+    src: 'img/room.jpg',
+    premium: true,
+    price: 399,
+    title: 'Wood and stone place',
+    type: 'Apartment',
+    rating: 2
+  },
+  {
+    src: 'img/apartment-01',
+    premium: true,
+    price: 10,
+    title: 'Nice place',
+    type: 'Private room',
+    rating: 1
+  },
+];
 
 function WelcomeScreen({offersCount}: WelcomeScreenProps): JSX.Element {
   return (
@@ -81,11 +125,19 @@ function WelcomeScreen({offersCount}: WelcomeScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <StudioCard />
-                <StudioCard />
-                <StudioCard />
-                <StudioCard />
-                <StudioCard />
+                {rooms.map((item) =>
+                  (
+                    <RoomCard
+                      key = {1}
+                      src = {item.src}
+                      premium = {item.premium}
+                      price = {item.price}
+                      title = {item.title}
+                      type = {item.type}
+                      rating = {item.rating}
+                    />
+                  )
+                )}
               </div>
             </section>
             <div className="cities__right-section">

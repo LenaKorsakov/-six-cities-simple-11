@@ -1,4 +1,12 @@
-function StudioCard(): JSX.Element{
+type RoomCardProps = {
+  src: string;
+  premium: boolean;
+  price: number;
+  title: string;
+  type: string;
+  rating: number;
+}
+function RoomCard({src, premium, price, title, type, rating}: RoomCardProps): JSX.Element{
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -8,7 +16,7 @@ function StudioCard(): JSX.Element{
         <a href="#">
           <img
             className="place-card__image"
-            src="img/apartment-01.jpg"
+            src={src}
             width={260}
             height={200}
             alt="Place to live"
@@ -18,7 +26,9 @@ function StudioCard(): JSX.Element{
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€120</b>{' '}
+            <b className="place-card__price-value">€
+              {price}
+            </b>{' '}
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
         </div>
@@ -30,13 +40,16 @@ function StudioCard(): JSX.Element{
         </div>
         <h2 className="place-card__name">
           <a href="#">
-          Beautiful &amp; luxurious apartment at great location
+            {title}
           </a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">
+          {type}
+        </p>
       </div>
     </article>
   );
 }
 
-export default StudioCard;
+export default RoomCard;
+export type {RoomCardProps};

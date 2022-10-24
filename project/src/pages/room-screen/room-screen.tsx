@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 
-function StudioScreen():JSX.Element {
+function RoomScreen():JSX.Element {
   return(
     <div className="page">
       <Header/>
@@ -385,4 +385,4 @@ function StudioScreen():JSX.Element {
   );
 }
 
-export default StudioScreen;
+export default RoomScreen;
