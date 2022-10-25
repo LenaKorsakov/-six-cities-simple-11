@@ -9,7 +9,7 @@ import type {RoomCardProps} from '../../components/room-card/room-card';
 
 type AppProps = {
   offersCount: number;
-  offers: RoomCardProps[];
+  offers: RoomCardProps[];//TODO как работать с такими типами?
 }
 
 function App({offersCount, offers}: AppProps): JSX.Element {
