@@ -1,8 +1,12 @@
+import {Helmet} from 'react-helmet-async';
 import HeaderLogo from '../../components/header/header-logo';
 
 function LoginScreen(): JSX.Element{
   return (
     <div className="page page--gray page--login">
+      <Helmet>
+        <title>Шесть городов. Страничка регистрации.</title>
+      </Helmet>
       <HeaderLogo />
       <main className="page__main page__main--login">
         <div className="page__login-container container">

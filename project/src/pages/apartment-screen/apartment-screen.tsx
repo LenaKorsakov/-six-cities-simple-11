@@ -1,8 +1,12 @@
+import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 
-function RoomScreen():JSX.Element {
+function ApartmentScreen():JSX.Element {
   return(
     <div className="page">
+      <Helmet>
+        <title>Шесть городов.Страничка апартаментов.</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--property">
         <section className="property">
@@ -385,4 +389,4 @@ function RoomScreen():JSX.Element {
   );
 }
 
-export default RoomScreen;
+export default ApartmentScreen;

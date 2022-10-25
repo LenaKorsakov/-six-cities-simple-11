@@ -1,4 +1,4 @@
-type RoomCardProps = {
+type ApartmentCardProps = {
   id: number;
   src: string;
   premium: boolean;
@@ -7,7 +7,7 @@ type RoomCardProps = {
   type: string;
   rating: number;
 }
-function RoomCard({id, src, premium, price, title, type, rating}: RoomCardProps): JSX.Element{
+function ApartmentCard({id, src, premium, price, title, type, rating}: ApartmentCardProps): JSX.Element{
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -52,5 +52,5 @@ function RoomCard({id, src, premium, price, title, type, rating}: RoomCardProps)
   );
 }
 
-export default RoomCard;
-export type {RoomCardProps};
+export default ApartmentCard;
+export type {ApartmentCardProps};
