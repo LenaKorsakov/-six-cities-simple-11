@@ -1,4 +1,5 @@
 type RoomCardProps = {
+  id: number;
   src: string;
   premium: boolean;
   price: number;
@@ -6,14 +7,14 @@ type RoomCardProps = {
   type: string;
   rating: number;
 }
-function RoomCard({src, premium, price, title, type, rating}: RoomCardProps): JSX.Element{
+function RoomCard({id, src, premium, price, title, type, rating}: RoomCardProps): JSX.Element{
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <a href="/">
           <img
             className="place-card__image"
             src={src}
@@ -39,7 +40,7 @@ function RoomCard({src, premium, price, title, type, rating}: RoomCardProps): JS
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">
+          <a href="/">
             {title}
           </a>
         </h2>

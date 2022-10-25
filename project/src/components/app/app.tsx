@@ -5,17 +5,20 @@ import RoomScreen from '../../pages/room-screen/room-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import {AppRout} from '../../enum/app-rout';
 
+import type {RoomCardProps} from '../../components/room-card/room-card';
+
 type AppProps = {
   offersCount: number;
+  offers: RoomCardProps[];
 }
 
-function App({offersCount}: AppProps): JSX.Element {
+function App({offersCount, offers}: AppProps): JSX.Element {
   return(
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRout.Main}
-          element={<WelcomeScreen offersCount = {offersCount}/>}
+          element={<WelcomeScreen offersCount = {offersCount} offers = {offers}/>}
         />
         <Route
           path={AppRout.Login}
