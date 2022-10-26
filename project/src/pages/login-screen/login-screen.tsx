@@ -1,9 +1,13 @@
-import Header from '../../components/header/header';
+import {Helmet} from 'react-helmet-async';
+import HeaderLogo from '../../components/header/header-logo';
 
-function AuthScreen(): JSX.Element{
+function LoginScreen(): JSX.Element{
   return (
     <div className="page page--gray page--login">
-      <Header />
+      <Helmet>
+        <title>Шесть городов. Страничка регистрации.</title>
+      </Helmet>
+      <HeaderLogo />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -36,7 +40,7 @@ function AuthScreen(): JSX.Element{
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <a className="locations__item-link" href="/">
                 <span>Amsterdam</span>
               </a>
             </div>
@@ -47,4 +51,4 @@ function AuthScreen(): JSX.Element{
   );
 }
 
-export default AuthScreen;
+export default LoginScreen;

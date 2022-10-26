@@ -1,57 +1,21 @@
 import { PropsWithChildren } from 'react';
-import Header from '../components/header/header';
-import RoomCard from '../components/room-card/room-card';
+import {Helmet} from 'react-helmet-async';
+import Header from '../../components/header/header';
+import ApartmentCard from '../../components/apartment-card/apartment-card';
+
+import type {ApartmentCardProps} from '../../components/apartment-card/apartment-card';
 
 type WelcomeScreenProps = PropsWithChildren <{
   offersCount: number;
+  offers: ApartmentCardProps[];
 }>;
 
-const rooms = [
-  {
-    src: 'img/room.jpg',
-    premium: true,
-    price: 120,
-    title: 'Wood and stone place',
-    type: 'Apartment',
-    rating: 4
-  },
-  {
-    src: 'img/apartment-02.jpg',
-    premium: true,
-    price: 80,
-    title: 'Wood and stone place',
-    type: 'Private room',
-    rating: 3
-  },
-  {
-    src: 'img/apartment-01.jpg',
-    premium: true,
-    price: 665,
-    title: 'Nice place',
-    type: 'Apartment',
-    rating: 4
-  },
-  {
-    src: 'img/room.jpg',
-    premium: true,
-    price: 399,
-    title: 'Wood and stone place',
-    type: 'Apartment',
-    rating: 2
-  },
-  {
-    src: 'img/apartment-01',
-    premium: true,
-    price: 10,
-    title: 'Nice place',
-    type: 'Private room',
-    rating: 1
-  },
-];
-
-function WelcomeScreen({offersCount}: WelcomeScreenProps): JSX.Element {
+function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>Шесть городов.Добро пожаловать!</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -59,17 +23,17 @@ function WelcomeScreen({offersCount}: WelcomeScreenProps): JSX.Element {
           <section className="locations container">
             <ul className="locations__list tabs__list">
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a className="locations__item-link tabs__item" href="TODO">
                   <span>Paris</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a className="locations__item-link tabs__item" href="TODO">
                   <span>Cologne</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a className="locations__item-link tabs__item" href="TODO">
                   <span>Brussels</span>
                 </a>
               </li>
@@ -79,12 +43,12 @@ function WelcomeScreen({offersCount}: WelcomeScreenProps): JSX.Element {
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a className="locations__item-link tabs__item" href="TODO">
                   <span>Hamburg</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
+                <a className="locations__item-link tabs__item" href="TODO">
                   <span>Dusseldorf</span>
                 </a>
               </li>
@@ -125,10 +89,11 @@ function WelcomeScreen({offersCount}: WelcomeScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {rooms.map((item) =>
+                {offers.map((item) =>
                   (
-                    <RoomCard
-                      key = {1}
+                    <ApartmentCard
+                      key = {item.id}
+                      id = {item.id}
                       src = {item.src}
                       premium = {item.premium}
                       price = {item.price}

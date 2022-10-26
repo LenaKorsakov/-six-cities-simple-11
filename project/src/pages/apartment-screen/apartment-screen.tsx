@@ -1,9 +1,13 @@
+import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 
-function RoomScreen():JSX.Element {
+function ApartmentScreen():JSX.Element {
   return(
     <div className="page">
-      <Header/>
+      <Helmet>
+        <title>Шесть городов.Страничка апартаментов.</title>
+      </Helmet>
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -283,7 +287,7 @@ function RoomScreen():JSX.Element {
             <div className="near-places__list places__list">
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
+                  <a href="TODO">
                     <img
                       className="place-card__image"
                       src="img/room.jpg"
@@ -348,7 +352,7 @@ function RoomScreen():JSX.Element {
                   <span>Premium</span>
                 </div>
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
+                  <a href="/">
                     <img
                       className="place-card__image"
                       src="img/apartment-03.jpg"
@@ -372,7 +376,7 @@ function RoomScreen():JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Nice, cozy, warm big bed apartment</a>
+                    <a href="/">Nice, cozy, warm big bed apartment</a>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
@@ -385,4 +389,4 @@ function RoomScreen():JSX.Element {
   );
 }
 
-export default RoomScreen;
+export default ApartmentScreen;
