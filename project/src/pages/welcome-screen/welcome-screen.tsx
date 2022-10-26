@@ -1,13 +1,13 @@
 import { PropsWithChildren } from 'react';
 import {Helmet} from 'react-helmet-async';
-import Header from '../../components/header/header';
-import ApartmentCard from '../../components/apartment-card/apartment-card';
+import HeaderNav from '../../components/header/header-nav';
+import OfferCard from '../../components/offer-card/offer-card';
 
-import type {ApartmentCardProps} from '../../components/apartment-card/apartment-card';
+import type {OfferProps} from '../../@types/offer-type';
 
 type WelcomeScreenProps = PropsWithChildren <{
   offersCount: number;
-  offers: ApartmentCardProps[];
+  offers: OfferProps[];
 }>;
 
 function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
@@ -16,7 +16,7 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
       <Helmet>
         <title>Шесть городов.Добро пожаловать!</title>
       </Helmet>
-      <Header />
+      <HeaderNav />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -91,11 +91,11 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
               <div className="cities__places-list places__list tabs__content">
                 {offers.map((item) =>
                   (
-                    <ApartmentCard
+                    <OfferCard
                       key = {item.id}
                       id = {item.id}
                       src = {item.src}
-                      premium = {item.premium}
+                      isPremium = {item.isPremium}
                       price = {item.price}
                       title = {item.title}
                       type = {item.type}

@@ -4,13 +4,13 @@ import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 import NotFoundScreen from '../../pages/not-found-screen//not-found-screen';
 import ApartmentScreen from '../../pages/apartment-screen/apartment-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
-import {AppRout} from '../../enum/app-rout';
+import {AppRoute} from '../../enum/app-route';
 
-import type {ApartmentCardProps} from '../apartment-card/apartment-card';
+import type {OfferProps} from '../../@types/offer-type';
 
 type AppProps = {
   offersCount: number;
-  offers: ApartmentCardProps[];//TODO как работать с такими типами?
+  offers: OfferProps[];
 }
 
 function App({offersCount, offers}: AppProps): JSX.Element {
@@ -19,19 +19,19 @@ function App({offersCount, offers}: AppProps): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route
-            path={AppRout.Main}
+            path={AppRoute.Main}
             element={<WelcomeScreen offersCount = {offersCount} offers = {offers}/>}
           />
           <Route
-            path={AppRout.Login}
+            path={AppRoute.Login}
             element={<LoginScreen />}
           />
           <Route
-            path={AppRout.Room}
+            path={AppRoute.Room}
             element={<ApartmentScreen />}
           />
           <Route
-            path={AppRout.NotFound}
+            path={AppRoute.NotFound}
             element={<NotFoundScreen />}
           />
         </Routes>

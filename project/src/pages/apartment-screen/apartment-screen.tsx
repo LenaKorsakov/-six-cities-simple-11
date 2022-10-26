@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import Header from '../../components/header/header';
+import HeaderNav from '../../components/header/header-nav';
 
 function ApartmentScreen():JSX.Element {
   return(
@@ -7,7 +7,7 @@ function ApartmentScreen():JSX.Element {
       <Helmet>
         <title>Шесть городов.Страничка апартаментов.</title>
       </Helmet>
-      <Header />
+      <HeaderNav />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">

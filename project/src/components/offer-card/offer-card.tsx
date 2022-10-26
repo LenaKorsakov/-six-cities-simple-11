@@ -1,18 +1,13 @@
-type ApartmentCardProps = {
-  id: number;
-  src: string;
-  premium: boolean;
-  price: number;
-  title: string;
-  type: string;
-  rating: number;
-}
-function ApartmentCard({id, src, premium, price, title, type, rating}: ApartmentCardProps): JSX.Element{
+import type {OfferProps} from '../../@types/offer-type';
+
+function OfferCard({id, src, isPremium, price, title, type, rating}: OfferProps): JSX.Element{
   return (
     <article className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {isPremium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+        : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="/">
           <img
@@ -52,5 +47,4 @@ function ApartmentCard({id, src, premium, price, title, type, rating}: Apartment
   );
 }
 
-export default ApartmentCard;
-export type {ApartmentCardProps};
+export default OfferCard;

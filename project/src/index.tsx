@@ -12,7 +12,7 @@ const data = {
     {
       id: 1,
       src: 'img/room.jpg',
-      premium: true,
+      isPremium: true,
       price: 120,
       title: 'Wood and stone place',
       type: 'Apartment',
@@ -21,7 +21,7 @@ const data = {
     {
       id: 2,
       src: 'img/apartment-02.jpg',
-      premium: true,
+      isPremium: false,
       price: 80,
       title: 'Wood and stone place',
       type: 'Private room',
@@ -30,7 +30,7 @@ const data = {
     {
       id: 3,
       src: 'img/apartment-01.jpg',
-      premium: true,
+      isPremium: false,
       price: 665,
       title: 'Nice place',
       type: 'Apartment',
@@ -39,7 +39,7 @@ const data = {
     {
       id: 4,
       src: 'img/room.jpg',
-      premium: true,
+      isPremium: true,
       price: 399,
       title: 'Wood and stone place',
       type: 'Apartment',
@@ -47,9 +47,9 @@ const data = {
     },
     {
       id: 5,
-      src: 'img/apartment-01',
-      premium: true,
-      price: 10,
+      src: 'img/room.jpg',
+      isPremium: false,
+      price: 100,
       title: 'Nice place',
       type: 'Private room',
       rating: 1
