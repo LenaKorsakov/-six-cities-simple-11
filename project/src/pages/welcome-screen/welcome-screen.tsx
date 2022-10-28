@@ -3,11 +3,11 @@ import {Helmet} from 'react-helmet-async';
 import HeaderNav from '../../components/header/header-nav';
 import OfferCard from '../../components/offer-card/offer-card';
 
-import type {OfferProps} from '../../@types/offer-type';
+import type {Offer} from '../../@types/offer-types';
 
 type WelcomeScreenProps = PropsWithChildren <{
   offersCount: number;
-  offers: OfferProps[];
+  offers: Offer[];
 }>;
 
 function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
@@ -94,12 +94,12 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
                     <OfferCard
                       key = {item.id}
                       id = {item.id}
-                      src = {item.src}
                       isPremium = {item.isPremium}
+                      previewImage = {item.previewImage}
                       price = {item.price}
                       title = {item.title}
-                      type = {item.type}
                       rating = {item.rating}
+                      type = {item.type}
                     />
                   )
                 )}

@@ -1,6 +1,6 @@
-import type {OfferProps} from '../../@types/offer-type';
+import type {Offer} from '../../@types/offer-types';
 
-function OfferCard({id, src, isPremium, price, title, type, rating}: OfferProps): JSX.Element{
+function OfferCard({isPremium, previewImage, price, rating, title, type}: Offer): JSX.Element{
   return (
     <article className="cities__card place-card">
       {isPremium ?
@@ -12,7 +12,7 @@ function OfferCard({id, src, isPremium, price, title, type, rating}: OfferProps)
         <a href="/">
           <img
             className="place-card__image"
-            src={src}
+            src={previewImage}
             width={260}
             height={200}
             alt="Place to live"

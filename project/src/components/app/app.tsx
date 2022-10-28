@@ -6,11 +6,11 @@ import ApartmentScreen from '../../pages/apartment-screen/apartment-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import {AppRoute} from '../../enum/app-route';
 
-import type {OfferProps} from '../../@types/offer-type';
+import type {Offer} from '../../@types/offer-types';
 
 type AppProps = {
   offersCount: number;
-  offers: OfferProps[];
+  offers: Offer[];
 }
 
 function App({offersCount, offers}: AppProps): JSX.Element {
