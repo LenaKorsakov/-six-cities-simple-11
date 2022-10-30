@@ -9,13 +9,14 @@ const root = ReactDOM.createRoot(
 
 const data = {
   offersCount: 300,
+  offers: offers,
 };
 
 root.render(
   <React.StrictMode>
     <App
       offersCount = {data.offersCount}
-      offers = {offers}
+      offers = {data.offers}
     />
   </React.StrictMode>,
 );

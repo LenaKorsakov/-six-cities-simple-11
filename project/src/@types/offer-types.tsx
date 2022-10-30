@@ -16,6 +16,8 @@ export type Offer = {
     type: string;
 }
 
+export type OfferPreview = Pick<Offer, 'id'|'isPremium'|'previewImage'|'price'|'rating'|'title'|'type'>
+
 type City = {
   location: Location;
 name: string;

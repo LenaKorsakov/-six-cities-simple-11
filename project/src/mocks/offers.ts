@@ -32,7 +32,7 @@ const offers: Offer[] = [
     price: 200,
     rating: 5,
     title: 'Nice and cosy place',
-    type: 'apartment'
+    type: 'Apartment'
   },
   {
     bedrooms: 1,
@@ -54,7 +54,7 @@ const offers: Offer[] = [
     },
     id: 2,
     images: ['img/apartment-03.jpg', 'img/apartment-02.jpg'],
-    isPremium: true,
+    isPremium: false,
     location: {
       latitude: 52.9683067306,
       longitude: 4.8787995950,

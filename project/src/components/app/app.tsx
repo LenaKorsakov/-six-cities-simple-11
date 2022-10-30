@@ -2,7 +2,7 @@ import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 import NotFoundScreen from '../../pages/not-found-screen//not-found-screen';
-import ApartmentScreen from '../../pages/apartment-screen/apartment-screen';
+import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import {AppRoute} from '../../enum/app-route';
 
@@ -27,8 +27,8 @@ function App({offersCount, offers}: AppProps): JSX.Element {
             element={<LoginScreen />}
           />
           <Route
-            path={AppRoute.Room}
-            element={<ApartmentScreen />}
+            path={AppRoute.Offer}
+            element={<OfferScreen />}
           />
           <Route
             path={AppRoute.NotFound}

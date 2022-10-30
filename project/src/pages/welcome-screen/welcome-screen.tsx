@@ -1,9 +1,10 @@
 import { PropsWithChildren } from 'react';
 import {Helmet} from 'react-helmet-async';
 import HeaderNav from '../../components/header/header-nav';
-import OfferCard from '../../components/offer-card/offer-card';
+import OffersList from '../../components/offers-list/offers-list';
 
 import type {Offer} from '../../@types/offer-types';
+
 
 type WelcomeScreenProps = PropsWithChildren <{
   offersCount: number;
@@ -88,22 +89,9 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((item) =>
-                  (
-                    <OfferCard
-                      key = {item.id}
-                      id = {item.id}
-                      isPremium = {item.isPremium}
-                      previewImage = {item.previewImage}
-                      price = {item.price}
-                      title = {item.title}
-                      rating = {item.rating}
-                      type = {item.type}
-                    />
-                  )
-                )}
-              </div>
+              <OffersList
+                offers={offers}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
