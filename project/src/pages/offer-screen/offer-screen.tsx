@@ -1,7 +1,16 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import {Helmet} from 'react-helmet-async';
 import HeaderNav from '../../components/header/header-nav';
+import ReviewsForm from '../../components/reviews-form/reviews-form';
+import { StarNumber } from '../../enum/star-number';
+import { StarTitle } from '../../enum/star-title';
 
-function ApartmentScreen():JSX.Element {
+const starPickerOptions = Object.keys(StarNumber).map((key: string) => ({
+  rating: StarNumber[key as keyof typeof StarNumber],
+  title: StarTitle[key as keyof typeof StarTitle]
+}));
+
+function OfferScreen():JSX.Element {
   return(
     <div className="page">
       <Helmet>
@@ -167,115 +176,7 @@ function ApartmentScreen():JSX.Element {
                     </div>
                   </li>
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">
-              Your review
-                  </label>
-                  <div className="reviews__rating-form form__rating">
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={5}
-                      id="5-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="5-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="perfect"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={4}
-                      id="4-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="4-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="good"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={3}
-                      id="3-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="3-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="not bad"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={2}
-                      id="2-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="2-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="badly"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      defaultValue={1}
-                      id="1-star"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="1-star"
-                      className="reviews__rating-label form__rating-label"
-                      title="terribly"
-                    >
-                      <svg className="form__star-image" width={37} height={33}>
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                  </div>
-                  <textarea
-                    className="reviews__textarea form__textarea"
-                    id="review"
-                    name="review"
-                    placeholder="Tell how was your stay, what you like and what can be improved"
-                    defaultValue={''}
-                  />
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                To submit review please make sure to set{' '}
-                      <span className="reviews__star">rating</span> and describe your
-                stay with at least{' '}
-                      <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button
-                      className="reviews__submit form__submit button"
-                      type="submit"
-                      disabled
-                    >
-                Submit
-                    </button>
-                  </div>
-                </form>
+                <ReviewsForm options={starPickerOptions}/>
               </section>
             </div>
           </div>
@@ -311,14 +212,14 @@ function ApartmentScreen():JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Wood and stone place</a>
+                    <a href="#TODO">Wood and stone place</a>
                   </h2>
                   <p className="place-card__type">Private room</p>
                 </div>
               </article>
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
+                  <a href="#TODO">
                     <img
                       className="place-card__image"
                       src="img/apartment-02.jpg"
@@ -342,7 +243,7 @@ function ApartmentScreen():JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Canal View Prinsengracht</a>
+                    <a href="#TODO">Canal View Prinsengracht</a>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
@@ -389,4 +290,4 @@ function ApartmentScreen():JSX.Element {
   );
 }
 
-export default ApartmentScreen;
+export default OfferScreen;
