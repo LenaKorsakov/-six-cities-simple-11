@@ -1,18 +1,39 @@
 import StarPicker from './star-picker';
+import { ChangeEvent, useState } from 'react';
 
 import type {Star} from '../../@types/component-types';
+import type {Review} from '../../@types/review-types';
 
 type ReviewsFormProps = {
   options: Star[];
 }
 
-
 function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
+
+  const [formData, setFormData] = useState<Review>({
+    comment: '',
+    date: '',
+    id: 0,
+    rating: 0,
+    user: {
+      avatarUrl: '',
+      id: 0,
+      isPro: false,
+      name: ''
+    }
+  });
+
+  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    setFormData({
+      ...formData,
+      comment: event.target.value
+    });
+  }
 
   return(
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">
-Your review
+        Your review
       </label>
       <div className="reviews__rating-form form__rating">
 
@@ -32,12 +53,14 @@ Your review
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={''}
+        value={formData.comment}
+        onChange = {handleChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-To submit review please make sure to set{' '}
-          <span className="reviews__star">rating</span> and describe your
-stay with at least{' '}
+          To submit review please make sure to set{' '}
+          <span className="reviews__star">rating</span>
+            and describe your stay with at least{' '}
           <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
@@ -45,7 +68,7 @@ stay with at least{' '}
           type="submit"
           disabled
         >
-Submit
+          Submit
         </button>
       </div>
     </form>

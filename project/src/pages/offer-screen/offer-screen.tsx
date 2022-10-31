@@ -7,10 +7,12 @@ import { StarNumber } from '../../enum/star-number';
 import { StarTitle } from '../../enum/star-title';
 import type { Offer } from '../../@types/offer-types';
 
-const starPickerOptions = Object.keys(StarNumber).map((key: string) => ({
-  rating: StarNumber[key as keyof typeof StarNumber],
-  title: StarTitle[key as keyof typeof StarTitle]
-}));
+const starPickerOptions = (Object.keys(StarNumber)
+  .filter((v) => isNaN(Number(v))) as (keyof typeof StarNumber)[])
+  .map((key: string) => ({
+    rating: StarNumber[key as keyof typeof StarNumber],
+    title: StarTitle[key as keyof typeof StarTitle]
+  }));
 
 type OfferScreenProps = {
   offers:Offer[];
@@ -43,13 +45,16 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
+              {offer?.images.map((item: string) => (
+                <div className="property__image-wrapper" key={item}>
+                  <img
+                    className="property__image"
+                    src={item}
+                    alt="Photo studio"
+                  />
+                </div>
+              ))}
+
             </div>
           </div>
           <div className="property__container container">
@@ -79,7 +84,7 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
                   {offer?.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-            Max {offer?.maxAdults} adults
+                    Max {offer?.maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -87,18 +92,11 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
-                <h2 className="property__inside-title">What/&apos;s inside</h2>
+                <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">Wi-Fi</li>
-                  <li className="property__inside-item">Washing machine</li>
-                  <li className="property__inside-item">Towels</li>
-                  <li className="property__inside-item">Heating</li>
-                  <li className="property__inside-item">Coffee machine</li>
-                  <li className="property__inside-item">Baby seat</li>
-                  <li className="property__inside-item">Kitchen</li>
-                  <li className="property__inside-item">Dishwasher</li>
-                  <li className="property__inside-item">Cabel TV</li>
-                  <li className="property__inside-item">Fridge</li>
+                  {offer?.goods.map((item)=>(
+                    <li key = {item} className="property__inside-item">{item}</li>
+                  ))}
                 </ul>
               </div>
               <div className="property__host">
@@ -119,11 +117,6 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
                 <div className="property__description">
                   <p className="property__text">
                     {offer?.description}
-                  </p>
-                  <p className="property__text">
-              An independent House, strategically located between Rembrand
-              Square and National Opera, but where the bustle of the city comes
-              to rest in this alley flowery and colorful.
                   </p>
                 </div>
               </div>
@@ -202,71 +195,6 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
                     <a href="#TODO">Wood and stone place</a>
                   </h2>
                   <p className="place-card__type">Private room</p>
-                </div>
-              </article>
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#TODO">
-                    <img
-                      className="place-card__image"
-                      src="img/apartment-02.jpg"
-                      width={260}
-                      height={200}
-                      alt="Place image"
-                    />
-                  </a>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">€132</b>
-                      <span className="place-card__price-text">/&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '80%' }} />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <a href="#TODO">Canal View Prinsengracht</a>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
-              <article className="near-places__card place-card">
-                <div className="place-card__mark">
-                  <span>Premium</span>
-                </div>
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="/">
-                    <img
-                      className="place-card__image"
-                      src="img/apartment-03.jpg"
-                      width={260}
-                      height={200}
-                      alt="Place image"
-                    />
-                  </a>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">€{offer?.price}</b>
-                      <span className="place-card__price-text">/&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '100%' }} />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <a href="/">Nice, cozy, warm big bed apartment</a>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
                 </div>
               </article>
             </div>

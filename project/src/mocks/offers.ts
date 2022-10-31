@@ -111,7 +111,7 @@ const offers: Offer[] = [
       name: 'Paris',
     },
     description: 'Beautiful and luxurious studio at great location.',
-    goods: ['Heating', 'Air Conditioner', 'Boiler', 'Kitchen'],
+    goods: ['Heating', 'Air Conditioner', 'Boiler', 'Kitchen', 'Heating', 'Air Conditioner', 'Boiler', 'Kitchen'],
     host: {
       avatarUrl: 'img/avatar-angelina.jpg',
       id: 4,
@@ -119,7 +119,7 @@ const offers: Offer[] = [
       name: 'Elena'
     },
     id: 4,
-    images: ['img/apartment-03.jpg', 'img/apartment-02.jpg'],
+    images: ['img/apartment-03.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-02.jpg', 'img/apartment-01.jpg'],
     isPremium: false,
     location: {
       latitude: 48.3576868699,
