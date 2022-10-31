@@ -1,16 +1,38 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import {Helmet} from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 import HeaderNav from '../../components/header/header-nav';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import { StarNumber } from '../../enum/star-number';
 import { StarTitle } from '../../enum/star-title';
+import type { Offer } from '../../@types/offer-types';
 
 const starPickerOptions = Object.keys(StarNumber).map((key: string) => ({
   rating: StarNumber[key as keyof typeof StarNumber],
   title: StarTitle[key as keyof typeof StarTitle]
 }));
 
-function OfferScreen():JSX.Element {
+type OfferScreenProps = {
+  offers:Offer[];
+}
+
+function OfferScreen({offers}: OfferScreenProps):JSX.Element {
+  const {id} = useParams();
+  // eslint-disable-next-line no-console
+  console.log({id});
+
+  function findOffer(items: Offer[], itemId: string | undefined) {
+    if (itemId) {
+      return items.find((item) => (item.id.toString() === itemId));
+    }
+  }
+
+  //TODO : если введена строка с неизвестным id?
+
+  const offer = findOffer(offers, id);
+  // eslint-disable-next-line no-console
+  console.log(offer);
+
   return(
     <div className="page">
       <Helmet>
@@ -28,51 +50,18 @@ function OfferScreen():JSX.Element {
                   alt="Photo studio"
                 />
               </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {offer?.isPremium ?
+                <div className="property__mark">
+                  <span>Premium</span>
+                </div>
+                : ''}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-            Beautiful &amp; luxurious studio at great location
+                  {offer?.title}
                 </h1>
               </div>
               <div className="property__rating rating">
@@ -84,17 +73,17 @@ function OfferScreen():JSX.Element {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-            Apartment
+                  {offer?.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-            3 Bedrooms
+                  {offer?.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-            Max 4 adults
+            Max {offer?.maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">€120</b>{' '}
+                <b className="property__price-value">€{offer?.price}</b>{' '}
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -118,20 +107,18 @@ function OfferScreen():JSX.Element {
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="property__avatar user__avatar"
-                      src="img/avatar-angelina.jpg"
+                      src={offer?.host.avatarUrl}
                       width={74}
                       height={74}
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="property__user-name">Angelina</span>
-                  <span className="property__user-status">Pro</span>
+                  <span className="property__user-name">{offer?.host.name}</span>
+                  <span className="property__user-status">{offer?.host.isPro}</span>
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-              A quiet cozy and picturesque that hides behind a a river by the
-              unique lightness of Amsterdam. The building is green and from 18th
-              century.
+                    {offer?.description}
                   </p>
                   <p className="property__text">
               An independent House, strategically located between Rembrand
@@ -266,7 +253,7 @@ function OfferScreen():JSX.Element {
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
                     <div className="place-card__price">
-                      <b className="place-card__price-value">€180</b>
+                      <b className="place-card__price-value">€{offer?.price}</b>
                       <span className="place-card__price-text">/&nbsp;night</span>
                     </div>
                   </div>

@@ -28,7 +28,7 @@ function App({offersCount, offers}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen />}
+            element={<OfferScreen offers = {offers}/>}
           />
           <Route
             path={AppRoute.NotFound}

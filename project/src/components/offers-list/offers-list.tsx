@@ -2,7 +2,6 @@ import OfferCard from '../offer-card/offer-card';
 import { useState } from 'react';
 
 import type {OfferPreview} from '../../@types/offer-types';
-import { useNavigate } from 'react-router-dom';
 
 type OffersListProps = {
   offers: OfferPreview[];
@@ -10,7 +9,8 @@ type OffersListProps = {
 
 function OffersList({offers}: OffersListProps): JSX.Element{
   const [activeCard, setActiveCard] = useState<number>(0);
-  const navigate = useNavigate();
+  // eslint-disable-next-line no-console
+  console.log(activeCard);
 
   function handleMouseEnter(id: number) {
     setActiveCard(id);
@@ -20,10 +20,6 @@ function OffersList({offers}: OffersListProps): JSX.Element{
     setActiveCard(0);
   }
 
-  function handleClick() {
-    navigate(`/offer/${activeCard}}`);
-  }
-
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) =>
@@ -31,9 +27,8 @@ function OffersList({offers}: OffersListProps): JSX.Element{
           <OfferCard
             key = {offer.id}
             offer = {offer}
-            handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}
-            handleClick={handleClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           />
         )
       )}

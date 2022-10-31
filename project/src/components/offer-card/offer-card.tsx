@@ -1,22 +1,30 @@
 import { Link } from 'react-router-dom';
 import type {OfferPreview} from '../../@types/offer-types';
+import {AppRoute} from '../../enum/app-route';
 
 type OfferCardProps = {
   offer: OfferPreview;
-  handleMouseEnter: (id: number) => void;
-  handleMouseLeave: () => void;
-  handleClick: () => void;
+  onMouseEnter: (id: number) => void;//или хендлеры описывать?
+  onMouseLeave: () => void;
 }
 
 function OfferCard(props: OfferCardProps): JSX.Element{
-  const {offer, handleMouseEnter, handleMouseLeave, handleClick} = props;
+  const {offer, onMouseEnter, onMouseLeave} = props;
   const {id, isPremium, previewImage, price, rating, title, type} = offer;
+
+  function handleMouseEnter() {
+    onMouseEnter(id);
+  }
+
+  function handleMouseLeave() {
+    onMouseLeave();
+  }
 
   return (
     <article
       className="cities__card place-card"
-      onMouseEnter = {() => handleMouseEnter(id)}
-      onMouseLeave = {() => handleMouseLeave()}
+      onMouseEnter = {handleMouseEnter}
+      onMouseLeave = {handleMouseLeave}
     >
       {isPremium ?
         <div className="place-card__mark">
@@ -50,11 +58,14 @@ function OfferCard(props: OfferCardProps): JSX.Element{
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}}`}
-            onClick={() => handleClick()}
-          >
-            {title}
-          </Link>
+          {id ?
+            <Link to={`/offer/${id}`}>
+              {title}
+            </Link>
+            :
+            <Link to={AppRoute.NotFound}>
+              {title}
+            </Link>}
         </h2>
         <p className="place-card__type">
           {type}

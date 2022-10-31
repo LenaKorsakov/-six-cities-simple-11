@@ -14,7 +14,7 @@ const offers: Offer[] = [
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Air Conditioner'],
     host: {
-      avatarUrl: 'avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 1,
       isPro: true,
       name: 'Anne'
@@ -47,7 +47,7 @@ const offers: Offer[] = [
     description: 'Wood and stone place.',
     goods: ['Heating', 'Air Conditioner', 'Boiler'],
     host: {
-      avatarUrl: 'avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 2,
       isPro: false,
       name: 'Angelina'
@@ -75,12 +75,12 @@ const offers: Offer[] = [
         longitude: 2.2055,
         zoom: 10,
       },
-      name: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris.',
+      name: 'Paris',
     },
     description: 'Wood and stone place.',
     goods: ['Heating', 'Air Conditioner', 'Boiler', 'Kitchen'],
     host: {
-      avatarUrl: 'avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 3,
       isPro: true,
       name: 'John'
@@ -108,12 +108,12 @@ const offers: Offer[] = [
         longitude: 2.2055,
         zoom: 8,
       },
-      name: 'Wonderfull, spacious, great furnished appartment near the Tour Eiffel',
+      name: 'Paris',
     },
     description: 'Beautiful and luxurious studio at great location.',
     goods: ['Heating', 'Air Conditioner', 'Boiler', 'Kitchen'],
     host: {
-      avatarUrl: 'avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 4,
       isPro: true,
       name: 'Elena'
