@@ -3,39 +3,32 @@ import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import HeaderNav from '../../components/header/header-nav';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { StarNumber } from '../../enum/star-number';
 import { StarTitle } from '../../enum/star-title';
 import type { Offer } from '../../@types/offer-types';
 
 const starPickerOptions = (Object.keys(StarNumber)
-  .filter((v) => isNaN(Number(v))) as (keyof typeof StarNumber)[])
   .map((key: string) => ({
     rating: StarNumber[key as keyof typeof StarNumber],
     title: StarTitle[key as keyof typeof StarTitle]
-  }));
+  })));
 
 type OfferScreenProps = {
   offers:Offer[];
 }
 
 function OfferScreen({offers}: OfferScreenProps):JSX.Element {
-  const {id} = useParams();
-  // eslint-disable-next-line no-console
-  console.log({id});
+  const {id} = useParams() as {id: string};
+  const propId = +id;
 
-  function findOffer(items: Offer[], itemId: string | undefined) {
-    if (itemId) {
-      return items.find((item) => (item.id.toString() === itemId));
-    }
-  }
+  const offer = offers.find((item) => (item.id) === propId) ?? null;
 
-  //TODO : если введена строка с неизвестным id?
-
-  const offer = findOffer(offers, id);
-  // eslint-disable-next-line no-console
-  console.log(offer);
-
-  return(
+  if (offer === null) {
+    return (
+      <NotFoundScreen/>
+    );
+  } return(
     <div className="page">
       <Helmet>
         <title>Шесть городов.Страничка апартаментов.</title>
@@ -45,7 +38,7 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer?.images.map((item: string) => (
+              {offer.images.map((item: string) => (
                 <div className="property__image-wrapper" key={item}>
                   <img
                     className="property__image"
@@ -59,32 +52,31 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer?.isPremium ?
+              {offer.isPremium &&
                 <div className="property__mark">
                   <span>Premium</span>
-                </div>
-                : ''}
+                </div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  {offer?.title}
+                  {offer.title}
                 </h1>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: '80%' }} />
+                  <span style={{ width: `${offer.rating * 20}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">4.8</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer?.type}
+                  {offer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {offer?.bedrooms} Bedrooms
+                  {offer.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                    Max {offer?.maxAdults} adults
+                    Max {offer.maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -94,7 +86,7 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {offer?.goods.map((item)=>(
+                  {offer.goods.map((item)=>(
                     <li key = {item} className="property__inside-item">{item}</li>
                   ))}
                 </ul>
@@ -116,13 +108,13 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    {offer?.description}
+                    {offer.description}
                   </p>
                 </div>
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">
-            Reviews · <span className="reviews__amount">1</span>
+                      Reviews · <span className="reviews__amount">1</span>
                 </h2>
                 <ul className="reviews__list">
                   <li className="reviews__item">

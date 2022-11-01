@@ -23,13 +23,19 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
     }
   });
 
-  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
+  function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setFormData({
       ...formData,
       comment: event.target.value
     });
   }
 
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    setFormData({
+      ...formData,
+      rating: +event.target.value
+    });
+  }
   return(
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">
@@ -37,11 +43,11 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
 
-        {options.map(({rating, title}) => (
+        {options.map((item) => (
           <StarPicker
-            rating={rating}
-            title={title}
-            key={`${rating}-${title}`}
+            option={item}
+            key={`${item.rating}-${item.title}`}
+            onChange={handleInputChange}
           />
         )
         )}
@@ -54,7 +60,7 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={''}
         value={formData.comment}
-        onChange = {handleChange}
+        onChange = {handleTextAreaChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

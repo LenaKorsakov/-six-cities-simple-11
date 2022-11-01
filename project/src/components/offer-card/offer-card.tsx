@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import type {OfferPreview} from '../../@types/offer-types';
-import {AppRoute} from '../../enum/app-route';
 
 type OfferCardProps = {
   offer: OfferPreview;
-  onMouseEnter: (id: number) => void;//или хендлеры описывать?
+  onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
@@ -26,11 +25,10 @@ function OfferCard(props: OfferCardProps): JSX.Element{
       onMouseEnter = {handleMouseEnter}
       onMouseLeave = {handleMouseLeave}
     >
-      {isPremium ?
+      {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div>
-        : ''}
+        </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="/">
           <img
@@ -58,14 +56,9 @@ function OfferCard(props: OfferCardProps): JSX.Element{
           </div>
         </div>
         <h2 className="place-card__name">
-          {id ?
-            <Link to={`/offer/${id}`}>
-              {title}
-            </Link>
-            :
-            <Link to={AppRoute.NotFound}>
-              {title}
-            </Link>}
+          <Link to={`/offer/${id}`}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">
           {type}
