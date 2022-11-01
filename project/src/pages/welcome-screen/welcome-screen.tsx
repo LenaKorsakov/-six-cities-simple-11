@@ -1,13 +1,14 @@
 import { PropsWithChildren } from 'react';
 import {Helmet} from 'react-helmet-async';
-import Header from '../../components/header/header';
-import ApartmentCard from '../../components/apartment-card/apartment-card';
+import HeaderNav from '../../components/header/header-nav';
+import OffersList from '../../components/offers-list/offers-list';
 
-import type {ApartmentCardProps} from '../../components/apartment-card/apartment-card';
+import type {Offer} from '../../@types/offer-types';
+
 
 type WelcomeScreenProps = PropsWithChildren <{
   offersCount: number;
-  offers: ApartmentCardProps[];
+  offers: Offer[];
 }>;
 
 function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
@@ -16,7 +17,7 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
       <Helmet>
         <title>Шесть городов.Добро пожаловать!</title>
       </Helmet>
-      <Header />
+      <HeaderNav />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -88,22 +89,9 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((item) =>
-                  (
-                    <ApartmentCard
-                      key = {item.id}
-                      id = {item.id}
-                      src = {item.src}
-                      premium = {item.premium}
-                      price = {item.price}
-                      title = {item.title}
-                      type = {item.type}
-                      rating = {item.rating}
-                    />
-                  )
-                )}
-              </div>
+              <OffersList
+                offers={offers}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />

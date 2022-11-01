@@ -2,7 +2,7 @@ import Logo from './logo';
 import UserName from './user-name';
 import SignOut from './sign-out';
 
-function Header(): JSX.Element {
+function HeaderNav(): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -20,4 +20,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default HeaderNav;

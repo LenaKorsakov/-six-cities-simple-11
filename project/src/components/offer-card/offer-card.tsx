@@ -1,23 +1,39 @@
-type ApartmentCardProps = {
-  id: number;
-  src: string;
-  premium: boolean;
-  price: number;
-  title: string;
-  type: string;
-  rating: number;
+import { Link } from 'react-router-dom';
+import type {OfferPreview} from '../../@types/offer-types';
+
+type OfferCardProps = {
+  offer: OfferPreview;
+  onMouseEnter: (id: number) => void;
+  onMouseLeave: () => void;
 }
-function ApartmentCard({id, src, premium, price, title, type, rating}: ApartmentCardProps): JSX.Element{
+
+function OfferCard(props: OfferCardProps): JSX.Element{
+  const {offer, onMouseEnter, onMouseLeave} = props;
+  const {id, isPremium, previewImage, price, rating, title, type} = offer;
+
+  function handleMouseEnter() {
+    onMouseEnter(id);
+  }
+
+  function handleMouseLeave() {
+    onMouseLeave();
+  }
+
   return (
-    <article className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+    <article
+      className="cities__card place-card"
+      onMouseEnter = {handleMouseEnter}
+      onMouseLeave = {handleMouseLeave}
+    >
+      {isPremium &&
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="/">
           <img
             className="place-card__image"
-            src={src}
+            src={previewImage}
             width={260}
             height={200}
             alt="Place to live"
@@ -35,14 +51,14 @@ function ApartmentCard({id, src, premium, price, title, type, rating}: Apartment
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }} />
+            <span style={{ width: `${rating * 20}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">
+          <Link to={`/offer/${id}`}>
             {title}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">
           {type}
@@ -52,5 +68,4 @@ function ApartmentCard({id, src, premium, price, title, type, rating}: Apartment
   );
 }
 
-export default ApartmentCard;
-export type {ApartmentCardProps};
+export default OfferCard;
