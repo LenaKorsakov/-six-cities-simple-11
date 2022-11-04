@@ -5,15 +5,15 @@ import type {OfferPreview} from '../../@types/offer-types';
 
 type OffersListProps = {
   offers: OfferPreview[];
+  onOfferHover: (id: number | undefined) => void;
 }
 
-function OffersList({offers}: OffersListProps): JSX.Element{
-  const [activeCard, setActiveCard] = useState<number>(0);
-  // eslint-disable-next-line no-console
-  console.log(activeCard);
+function OffersList({offers, onOfferHover}: OffersListProps): JSX.Element{
+  const [activeCard, setActiveCard] = useState<number | undefined>(0);
 
-  function handleMouseEnter(id: number) {
+  function handleMouseEnter(id: number | undefined) {
     setActiveCard(id);
+    onOfferHover(activeCard);
   }
 
   function handleMouseLeave() {
