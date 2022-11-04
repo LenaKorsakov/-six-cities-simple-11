@@ -23,8 +23,8 @@ const offers: Offer[] = [
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
     isPremium: true,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     maxAdults: 5,
@@ -56,8 +56,8 @@ const offers: Offer[] = [
     images: ['img/apartment-03.jpg', 'img/apartment-02.jpg'],
     isPremium: false,
     location: {
-      latitude: 52.9683067306,
-      longitude: 4.8787995950,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     maxAdults: 2,
@@ -71,11 +71,11 @@ const offers: Offer[] = [
     bedrooms: 2,
     city: {
       location: {
-        latitude: 48.5112,
-        longitude: 2.2055,
+        latitude: 52.370216,
+        longitude: 4.895168,
         zoom: 10,
       },
-      name: 'Paris',
+      name: 'Amsterdam',
     },
     description: 'Wood and stone place.',
     goods: ['Heating', 'Air Conditioner', 'Boiler', 'Kitchen'],
@@ -89,8 +89,8 @@ const offers: Offer[] = [
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
     isPremium: true,
     location: {
-      latitude: 48.3453535353,
-      longitude: 2.2055757575,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 5,
     },
     maxAdults: 3,
@@ -104,11 +104,11 @@ const offers: Offer[] = [
     bedrooms: 4,
     city: {
       location: {
-        latitude: 48.5112,
-        longitude: 2.2055,
+        latitude: 52.370216,
+        longitude: 4.895168,
         zoom: 8,
       },
-      name: 'Paris',
+      name: 'Amsterdam',
     },
     description: 'Beautiful and luxurious studio at great location.',
     goods: ['Heating', 'Air Conditioner', 'Boiler', 'Kitchen', 'Heating', 'Air Conditioner', 'Boiler', 'Kitchen'],
@@ -122,8 +122,8 @@ const offers: Offer[] = [
     images: ['img/apartment-03.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-02.jpg', 'img/apartment-01.jpg'],
     isPremium: false,
     location: {
-      latitude: 48.3576868699,
-      longitude: 2.2075575755,
+      latitude: 52.3809553943508,
+      longitude: 52.3809553943508,
       zoom: 8,
     },
     maxAdults: 6,
