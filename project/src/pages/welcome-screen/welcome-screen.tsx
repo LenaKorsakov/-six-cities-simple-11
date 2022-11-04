@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import {Helmet} from 'react-helmet-async';
-import HeaderNav from '../../components/header/header-nav';
+import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
 
 import type {Offer} from '../../@types/offer-types';
@@ -17,7 +17,7 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
       <Helmet>
         <title>Шесть городов.Добро пожаловать!</title>
       </Helmet>
-      <HeaderNav />
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

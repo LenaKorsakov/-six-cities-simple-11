@@ -1,5 +1,5 @@
-import StarPicker from './star-picker';
 import { ChangeEvent, useState } from 'react';
+import StarPicker from './star-picker';
 
 import type {Star} from '../../@types/component-types';
 import type {Review} from '../../@types/review-types';
@@ -47,7 +47,7 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
           <StarPicker
             option={item}
             key={`${item.rating}-${item.title}`}
-            onChange={handleInputChange}
+            onInputChange={handleInputChange}
           />
         )
         )}
