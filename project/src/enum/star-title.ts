@@ -1,8 +1,8 @@
 export const StarTitle = {
-  PERFECT: 'perfect',
-  GOOD: 'good',
-  NOT_BAD: 'not bad',
-  BADLY: 'badly',
-  TERRIBLY: 'terrybly'
+  Perfect: 'perfect',
+  Good: 'good',
+  NotBad: 'not bad',
+  Badly: 'badly',
+  Terrybly: 'terrybly'
 } as const;
 
