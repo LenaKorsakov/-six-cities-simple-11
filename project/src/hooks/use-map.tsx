@@ -6,14 +6,17 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
   const [map, setMap] = useState<Map | null>(null);
   const isRenderRef = useRef<boolean>(false);
 
+  const{latitude, longitude, zoom} = city.location;
+
   useEffect(() => {
     if(mapRef.current !== null && !isRenderRef.current) {
+
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.location.latitude,
-          lng: city.location.longitude
+          lat: latitude,
+          lng: longitude
         },
-        zoom: city.location.zoom
+        zoom: zoom
       });
 
 

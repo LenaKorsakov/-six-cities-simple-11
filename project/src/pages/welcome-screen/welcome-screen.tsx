@@ -12,7 +12,7 @@ type WelcomeScreenProps = PropsWithChildren <{
 }>;
 
 function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
-  const city = offers[0].city;
+  const city = offers[0].city;//TODO нужен другой способ выбора города
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 
   const onOfferMarkerHover = (offerId: number | undefined) => {
@@ -104,13 +104,11 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={city}
-                  offers={offers}
-                  currentOffer={activeOffer}
-                />
-              </section>
+              <Map
+                city={city}
+                offers={offers}
+                currentOffer={activeOffer}
+              />
             </div>
           </div>
         </div>

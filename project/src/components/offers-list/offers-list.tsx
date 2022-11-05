@@ -1,5 +1,5 @@
 import OfferCard from '../offer-card/offer-card';
-import { useState } from 'react';
+//import { useState } from 'react';
 
 import type {OfferPreview} from '../../@types/offer-types';
 
@@ -9,15 +9,13 @@ type OffersListProps = {
 }
 
 function OffersList({offers, onOfferHover}: OffersListProps): JSX.Element{
-  const [activeCard, setActiveCard] = useState<number | undefined>(0);
 
   function handleMouseEnter(id: number | undefined) {
-    setActiveCard(id);
-    onOfferHover(activeCard);
+    onOfferHover(id);
   }
 
   function handleMouseLeave() {
-    setActiveCard(0);
+    onOfferHover(0);
   }
 
   return (
