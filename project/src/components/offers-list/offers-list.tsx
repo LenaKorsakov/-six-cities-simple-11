@@ -1,23 +1,21 @@
 import OfferCard from '../offer-card/offer-card';
-import { useState } from 'react';
+//import { useState } from 'react';
 
 import type {OfferPreview} from '../../@types/offer-types';
 
 type OffersListProps = {
   offers: OfferPreview[];
+  onOfferHover: (id: number | undefined) => void;
 }
 
-function OffersList({offers}: OffersListProps): JSX.Element{
-  const [activeCard, setActiveCard] = useState<number>(0);
-  // eslint-disable-next-line no-console
-  console.log(activeCard);
+function OffersList({offers, onOfferHover}: OffersListProps): JSX.Element{
 
-  function handleMouseEnter(id: number) {
-    setActiveCard(id);
+  function handleMouseEnter(id: number | undefined) {
+    onOfferHover(id);
   }
 
   function handleMouseLeave() {
-    setActiveCard(0);
+    onOfferHover(0);
   }
 
   return (

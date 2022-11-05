@@ -1,23 +1,32 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import {Helmet} from 'react-helmet-async';
-import HeaderNav from '../../components/header/header-nav';
+import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
+import Map from '../../components/map/map';
 
 import type {Offer} from '../../@types/offer-types';
 
 
 type WelcomeScreenProps = PropsWithChildren <{
-  offersCount: number;
   offers: Offer[];
 }>;
 
-function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
+function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
+  const city = offers[0].city;//TODO нужен другой способ выбора города
+  const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
+
+  const onOfferMarkerHover = (offerId: number | undefined) => {
+    const currentOffer = offers.find((offer) => offer.id === offerId);
+
+    setActiveOffer(currentOffer);
+  };
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>Шесть городов.Добро пожаловать!</title>
       </Helmet>
-      <HeaderNav />
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -39,7 +48,7 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
+                <a className="locations__item-link tabs__item tabs__item--active" href="TODO">
                   <span>Amsterdam</span>
                 </a>
               </li>
@@ -60,7 +69,7 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {offersCount} places to stay in Amsterdam</b>
+              <b className="places__found"> {offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">
                   Sort by
@@ -90,11 +99,16 @@ function WelcomeScreen({offersCount, offers}: WelcomeScreenProps): JSX.Element {
                 </ul>
               </form>
               <OffersList
+                onOfferHover={onOfferMarkerHover}
                 offers={offers}
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map
+                city={city}
+                offers={offers}
+                currentOffer={activeOffer}
+              />
             </div>
           </div>
         </div>

@@ -3,6 +3,6 @@ export const StarTitle = {
   Good: 'good',
   NotBad: 'not bad',
   Badly: 'badly',
-  Terribly: 'terrybly'
+  Terrybly: 'terrybly'
 } as const;
 

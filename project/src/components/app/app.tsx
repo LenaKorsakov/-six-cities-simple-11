@@ -9,18 +9,17 @@ import {AppRoute} from '../../enum/app-route';
 import type {Offer} from '../../@types/offer-types';
 
 type AppProps = {
-  offersCount: number;
   offers: Offer[];
 }
 
-function App({offersCount, offers}: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<WelcomeScreen offersCount = {offersCount} offers = {offers}/>}
+            element={<WelcomeScreen offers = {offers}/>}
           />
           <Route
             path={AppRoute.Login}

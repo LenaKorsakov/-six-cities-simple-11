@@ -15,7 +15,6 @@ const data = {
 root.render(
   <React.StrictMode>
     <App
-      offersCount = {data.offersCount}
       offers = {data.offers}
     />
   </React.StrictMode>,

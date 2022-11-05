@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import HeaderNav from '../../components/header/header-nav';
+import Header from '../../components/header/header';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { StarNumber } from '../../enum/star-number';
@@ -33,7 +33,7 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
       <Helmet>
         <title>Шесть городов.Страничка апартаментов.</title>
       </Helmet>
-      <HeaderNav />
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">

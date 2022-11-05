@@ -3,10 +3,10 @@ import { ChangeEvent} from 'react';
 
 type StarPickerProps = {
   option: Star;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;//Д9. Колбэки, переданные в props названы через on
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;//Д9. Колбэки, переданные в props названы через on
 };
 
-function StarPicker({option, onChange}: StarPickerProps): JSX.Element {
+function StarPicker({option, onInputChange}: StarPickerProps): JSX.Element {
   const {rating, title} = option;
 
   return(
@@ -18,7 +18,7 @@ function StarPicker({option, onChange}: StarPickerProps): JSX.Element {
         defaultValue={rating}
         id={`${rating}-stars`}
         type="radio"
-        onChange={onChange}//делаю что-то не так? Так можно работать с колбэками, переданными в props? Не нарушаю Д2. Методы-обработчики классов названы через handle?
+        onChange={onInputChange}// Так можно работать с колбэками, переданными в props? Не нарушаю Д2? Методы-обработчики классов названы через handle?
       />
       <label
         htmlFor={`${rating}-stars`}
