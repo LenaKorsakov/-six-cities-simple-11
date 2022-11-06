@@ -6,9 +6,9 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
   const [map, setMap] = useState<Map | null>(null);
   const isRenderRef = useRef<boolean>(false);
 
-  const{latitude, longitude, zoom} = city.location;
-
   useEffect(() => {
+    const{latitude, longitude, zoom} = city.location;
+
     if(mapRef.current !== null && !isRenderRef.current) {
 
       const instance = new Map(mapRef.current, {

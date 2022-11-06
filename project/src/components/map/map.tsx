@@ -27,15 +27,16 @@ const currentCustomIcon = new Icon({
 
 function Map(props: MapProps): JSX.Element {
   const {city, offers, currentOffer} = props;
-  const { latitude: lat, longitude: lng, zoom } = city.location;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    let isMapMounted = true;
+    const markerGroup = new LayerGroup();
 
-    if(isMapMounted && map) {
+    if(map) {
+      const { latitude: lat, longitude: lng, zoom } = city.location;
+
       map.setView({ lat, lng }, zoom, { animate: true });
 
       offers.forEach((offer) => {
@@ -43,8 +44,6 @@ function Map(props: MapProps): JSX.Element {
           lat: offer.location.latitude,
           lng: offer.location.longitude
         });
-
-        const markerGroup = new LayerGroup();
 
         marker.setIcon(
           (currentOffer !== undefined) && (offer.id === currentOffer.id)
@@ -58,9 +57,9 @@ function Map(props: MapProps): JSX.Element {
     }
 
     return () => {
-      isMapMounted = false;
+      map?.removeLayer(markerGroup);
     };
-  }, [map, offers, currentOffer]);
+  }, [map, offers, currentOffer, city]);
 
   return (
     <section
