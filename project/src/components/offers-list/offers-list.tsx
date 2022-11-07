@@ -1,5 +1,4 @@
 import OfferCard from '../offer-card/offer-card';
-//import { useState } from 'react';
 
 import type {OfferPreview} from '../../@types/offer-types';
 

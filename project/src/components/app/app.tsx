@@ -6,13 +6,15 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import {AppRoute} from '../../enum/app-route';
 
-import type {Offer} from '../../@types/offer-types';
+import type { Offer } from '../../@types/offer-types';
+import { Review } from '../../@types/review-types';
 
 type AppProps = {
   offers: Offer[];
+  reviews: Review[];
 }
 
-function App({offers}: AppProps): JSX.Element {
+function App({offers, reviews}: AppProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
@@ -27,7 +29,12 @@ function App({offers}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen offers = {offers}/>}
+            element={
+              <OfferScreen
+                offers={offers}
+                reviews={reviews}
+              />
+            }
           />
           <Route
             path={AppRoute.NotFound}

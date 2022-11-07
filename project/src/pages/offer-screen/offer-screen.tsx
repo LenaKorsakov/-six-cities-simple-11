@@ -1,25 +1,22 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import Header from '../../components/header/header';
-import ReviewsForm from '../../components/reviews-form/reviews-form';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import Header from '../../components/header/header';
 import OfferHost from '../../components/offer-host/offer-host';
-import { StarNumber } from '../../enum/star-number';
-import { StarTitle } from '../../enum/star-title';
-import type { Offer } from '../../@types/offer-types';
+import ReviewList from '../../components/review-list/review-list';
+import { makeRatingWidth } from '../../utiles';
 
-const starPickerOptions = (Object.keys(StarNumber)
-  .map((key: string) => ({
-    rating: StarNumber[key as keyof typeof StarNumber],
-    title: StarTitle[key as keyof typeof StarTitle]
-  })));
+import type { Offer } from '../../@types/offer-types';
+import type { Review } from '../../@types/review-types';
+
 
 type OfferScreenProps = {
   offers:Offer[];
+  reviews: Review[];
 }
 
-function OfferScreen({offers}: OfferScreenProps):JSX.Element {
+function OfferScreen({offers, reviews}: OfferScreenProps):JSX.Element {
   const {id} = useParams() as {id: string};
   const propId = +id;
 
@@ -64,7 +61,7 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: `${offer.rating * 20}%` }} />
+                  <span style={{ width: `${makeRatingWidth(offer.rating)}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">4.8</span>
@@ -96,44 +93,9 @@ function OfferScreen({offers}: OfferScreenProps):JSX.Element {
                 host={offer.host}
                 description={offer.description}
               />
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">
-                      Reviews · <span className="reviews__amount">1</span>
-                </h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img
-                          className="reviews__avatar user__avatar"
-                          src="img/avatar-max.jpg"
-                          width={54}
-                          height={54}
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">Max</span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }} />
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                  A quiet cozy and picturesque that hides behind a a river by
-                  the unique lightness of Amsterdam. The building is green and
-                  from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">
-                  April 2019
-                      </time>
-                    </div>
-                  </li>
-                </ul>
-                <ReviewsForm options={starPickerOptions}/>
-              </section>
+              <ReviewList
+                reviews={reviews}
+              />
             </div>
           </div>
           <section className="property__map map" />

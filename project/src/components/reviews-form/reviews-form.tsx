@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from 'react';
 import StarPicker from './star-picker';
-
 import type {Star} from '../../@types/component-types';
 import type {Review} from '../../@types/review-types';
 
