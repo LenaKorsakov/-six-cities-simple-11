@@ -57,7 +57,6 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
         value={formData.comment}
         onChange = {handleTextAreaChange}
       />
