@@ -12,9 +12,10 @@ import { Review } from '../../@types/review-types';
 type AppProps = {
   offers: Offer[];
   reviews: Review[];
+  nearOffers: Offer[];
 }
 
-function App({offers, reviews}: AppProps): JSX.Element {
+function App({offers, reviews, nearOffers}: AppProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
@@ -33,6 +34,7 @@ function App({offers, reviews}: AppProps): JSX.Element {
               <OfferScreen
                 offers={offers}
                 reviews={reviews}
+                nearOffers={nearOffers}
               />
             }
           />

@@ -8,9 +8,12 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+const nearOffers = offers.slice(0, 3);
+
 const data = {
   offers: offers,
-  reviews: reviews
+  reviews: reviews,
+  nearOffers: nearOffers
 };
 
 root.render(
@@ -18,6 +21,7 @@ root.render(
     <App
       offers={data.offers}
       reviews={data.reviews}
+      nearOffers={nearOffers}
     />
   </React.StrictMode>,
 );
