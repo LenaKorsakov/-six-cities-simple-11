@@ -1,16 +1,21 @@
 import {useRef, useEffect} from 'react';
+
+import cn from 'classnames';
+
 import {Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
 import { MarkerUrl } from '../../enum/marker-url';
 import { MarkerShape } from '../../enum/marker-shape';
-import useMap from '../../hooks/use-map';
 
+import useMap from '../../hooks/use-map';
 import type {City, Offer} from '../../@types/offer-types';
 
 type MapProps = {
   city: City;
   offers: Offer[];
   currentOffer: Offer | undefined;
+  isCityMap: boolean;
 }
 
 const defaultCustomIcon = new Icon({
@@ -26,7 +31,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {city, offers, currentOffer} = props;
+  const {city, offers, currentOffer, isCityMap} = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -63,7 +68,11 @@ function Map(props: MapProps): JSX.Element {
 
   return (
     <section
-      className="cities__map"//TODO как передавать нужные классы? нужен ли класс map?
+      className={cn('map',{
+        'cities__map': isCityMap,
+        'property__map': !isCityMap
+      })}
+
       style={{height: '100%'}}
       ref={mapRef}
     >
