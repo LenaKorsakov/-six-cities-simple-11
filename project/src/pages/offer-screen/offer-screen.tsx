@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import {Helmet} from 'react-helmet-async';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Header from '../../components/header/header';
@@ -7,10 +8,12 @@ import OfferHost from '../../components/offer-host/offer-host';
 import OfferProperty from '../../components/offer-property/offer-property';
 import ReviewList from '../../components/review-list/review-list';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
+import Map from '../../components/map/map';
 
 
 import type { Offer } from '../../@types/offer-types';
 import type { Review } from '../../@types/review-types';
+import OffersList from '../../components/offers-list/offers-list';
 
 
 type OfferScreenProps = {
@@ -20,10 +23,19 @@ type OfferScreenProps = {
 }
 
 function OfferScreen({offers, reviews, nearOffers}: OfferScreenProps):JSX.Element {
+  const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
+
+  const onOfferCardHover = (offerId: number | undefined) => {
+    const currentOffer = nearOffers.find((offer) => offer.id === offerId);
+
+    setActiveCard(currentOffer);
+  };
+
   const {id} = useParams() as {id: string};
   const propId = +id;
 
   const offer = offers.find((item) => (item.id) === propId) ?? null;
+
 
   if (offer === null) {
     return (
@@ -51,44 +63,22 @@ function OfferScreen({offers, reviews, nearOffers}: OfferScreenProps):JSX.Elemen
             </div>
           </div>
 
-          <section className="property__map map" />
+          <Map
+            city={offer.city}
+            offers={nearOffers}
+            currentOffer={activeCard}
+            isCityMap={false}
+          />
         </section>
+
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="TODO">
-                    <img
-                      className="place-card__image"
-                      src="img/room.jpg"
-                      width={260}
-                      height={200}
-                      alt="Place image"
-                    />
-                  </a>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">€80</b>
-                      <span className="place-card__price-text">/&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '80%' }} />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <a href="#TODO">Wood and stone place</a>
-                  </h2>
-                  <p className="place-card__type">Private room</p>
-                </div>
-              </article>
-            </div>
+            <OffersList
+              offers={nearOffers}
+              onOfferHover={onOfferCardHover}
+              isListMain={false}
+            />
           </section>
         </div>
       </main>
