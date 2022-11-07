@@ -15,7 +15,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
   const city = offers[0].city;//TODO нужен другой способ выбора города
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 
-  const onOfferMarkerHover = (offerId: number | undefined) => {
+  const onOfferCardHover = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
 
     setActiveOffer(currentOffer);
@@ -99,8 +99,9 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <OffersList
-                onOfferHover={onOfferMarkerHover}
+                onOfferHover={onOfferCardHover}
                 offers={offers}
+                isListMain
               />
             </section>
             <div className="cities__right-section">
@@ -108,6 +109,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                 city={city}
                 offers={offers}
                 currentOffer={activeOffer}
+                isCityMap
               />
             </div>
           </div>

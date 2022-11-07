@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import OfferCard from '../offer-card/offer-card';
 
 import type {OfferPreview} from '../../@types/offer-types';
@@ -5,9 +6,10 @@ import type {OfferPreview} from '../../@types/offer-types';
 type OffersListProps = {
   offers: OfferPreview[];
   onOfferHover: (id: number | undefined) => void;
+  isListMain: boolean;
 }
 
-function OffersList({offers, onOfferHover}: OffersListProps): JSX.Element{
+function OffersList({offers, onOfferHover, isListMain}: OffersListProps): JSX.Element{
 
   function handleMouseEnter(id: number | undefined) {
     onOfferHover(id);
@@ -18,7 +20,13 @@ function OffersList({offers, onOfferHover}: OffersListProps): JSX.Element{
   }
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div
+      className={cn('places__list',{
+        'cities__places-list': isListMain,
+        'tabs__content': isListMain,
+        'near-places__list': !isListMain
+      })}
+    >
       {offers.map((offer) =>
         (
           <OfferCard
@@ -26,6 +34,7 @@ function OffersList({offers, onOfferHover}: OffersListProps): JSX.Element{
             offer = {offer}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            isCityCard={isListMain}
           />
         )
       )}
