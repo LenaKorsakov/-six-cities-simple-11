@@ -7,11 +7,11 @@ import Map from '../../components/map/map';
 import type {Offer} from '../../@types/offer-types';
 
 
-type WelcomeScreenProps = PropsWithChildren <{
+type MainScreenProps = PropsWithChildren <{
   offers: Offer[];
 }>;
 
-function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
+function MainScreen({offers}: MainScreenProps): JSX.Element {
   const city = offers[0].city;//TODO нужен другой способ выбора города
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 
@@ -117,4 +117,4 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
   );
 }
 
-export default WelcomeScreen;
+export default MainScreen;
