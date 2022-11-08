@@ -13,10 +13,10 @@ type MainScreenProps = PropsWithChildren <{
 
 function MainScreen({offers}: MainScreenProps): JSX.Element {
   const city = offers[0].city;//TODO нужен другой способ выбора города
-  const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
+  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
 
   const onOfferCardHover = (offerId: number | undefined) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
+    const currentOffer = offers.find((offer) => offer.id === offerId) ?? null;
 
     setActiveOffer(currentOffer);
   };

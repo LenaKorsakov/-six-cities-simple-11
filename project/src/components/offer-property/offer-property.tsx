@@ -24,7 +24,7 @@ function OfferProperty({offer}: OfferPropertyProps): JSX.Element {
           <span style={{ width: `${makeRatingWidth(rating)}%` }} />
           <span className="visually-hidden">Rating</span>
         </div>
-        <span className="property__rating-value rating__value">4.8</span>
+        <span className="property__rating-value rating__value">{rating}</span>
       </div>
       <ul className="property__features">
         <li className="property__feature property__feature--entire">
@@ -38,7 +38,7 @@ function OfferProperty({offer}: OfferPropertyProps): JSX.Element {
         </li>
       </ul>
       <div className="property__price">
-        <b className="property__price-value">€{formatNumber(price)}</b>{' '}
+        <b className="property__price-value">&euro; {formatNumber(price)}</b>{' '}
         <span className="property__price-text">&nbsp;night</span>
       </div>
       <div className="property__inside">

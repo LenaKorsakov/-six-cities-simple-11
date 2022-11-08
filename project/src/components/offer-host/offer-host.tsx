@@ -21,7 +21,7 @@ function OfferHost({host, description}: HostProps): JSX.Element {
           />
         </div>
         <span className="property__user-name">{name}</span>
-        <span className="property__user-status">{isPro}</span>
+        <span className="property__user-status">{isPro && 'Pro'}</span>
       </div>
       <div className="property__description">
         <p className="property__text">

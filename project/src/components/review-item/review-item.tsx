@@ -1,5 +1,5 @@
 import type { Review, User } from '../../@types/review-types';
-import { formatDate, makeRatingWidth } from '../../utiles';
+import { formatDate, makeRatingWidth, convertDate} from '../../utiles';
 
 type ReviewItemProps = {
  review: Review;
@@ -33,7 +33,7 @@ function ReviewItem({review, user}: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date}>
+        <time className="reviews__time" dateTime={convertDate(date)}>
           {formatDate(date)}
         </time>
       </div>
