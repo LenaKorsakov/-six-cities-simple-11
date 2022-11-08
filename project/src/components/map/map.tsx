@@ -14,7 +14,7 @@ import type {City, Offer} from '../../@types/offer-types';
 type MapProps = {
   city: City;
   offers: Offer[];
-  currentOffer: Offer | undefined;
+  currentOffer: Offer | null;
   isCityMap: boolean;
 }
 
@@ -51,14 +51,14 @@ function Map(props: MapProps): JSX.Element {
         });
 
         marker.setIcon(
-          (currentOffer !== undefined) && (offer.id === currentOffer.id)
+          (currentOffer !== null) && (offer.id === currentOffer.id)
             ? currentCustomIcon
             : defaultCustomIcon
         )
           .addTo(markerGroup);
-
-        markerGroup.addTo(map);
       });
+
+      markerGroup.addTo(map);
     }
 
     return () => {

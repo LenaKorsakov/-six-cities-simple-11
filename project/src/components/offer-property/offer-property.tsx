@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key *///TODO как создавать ключи, не используя индекс? ошибки в консоли, если просто item (повторяется)
 import type { Offer} from '../../@types/offer-types';
 import { makeRatingWidth, formatNumber} from '../../utiles';
 
@@ -45,9 +44,13 @@ function OfferProperty({offer}: OfferPropertyProps): JSX.Element {
       <div className="property__inside">
         <h2 className="property__inside-title">What&apos;s inside</h2>
         <ul className="property__inside-list">
-          {goods.map((item, index)=>(
-            <li key = {`${item}-${index}`} className="property__inside-item">{item}</li>
-          ))}
+          {goods.map((item, index)=> {
+            const keyValue = `${item}-${index}`;
+
+            return (
+              <li key = {keyValue} className="property__inside-item">{item}</li>
+            );
+          })}
         </ul>
       </div>
     </>

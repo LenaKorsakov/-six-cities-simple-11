@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import {Helmet} from 'react-helmet-async';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -23,10 +22,10 @@ type OfferScreenProps = {
 }
 
 function OfferScreen({offers, reviews, nearOffers}: OfferScreenProps):JSX.Element {
-  const [activeCard, setActiveCard] = useState<Offer | undefined>(undefined);
+  const [activeCard, setActiveCard] = useState<Offer | null>(null);
 
   const onOfferCardHover = (offerId: number | undefined) => {
-    const currentOffer = nearOffers.find((offer) => offer.id === offerId);
+    const currentOffer = nearOffers.find((offer) => offer.id === offerId) ?? null;
 
     setActiveCard(currentOffer);
   };
