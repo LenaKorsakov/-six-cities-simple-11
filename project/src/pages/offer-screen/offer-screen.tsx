@@ -1,5 +1,4 @@
 import {Helmet} from 'react-helmet-async';
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Header from '../../components/header/header';
@@ -22,13 +21,12 @@ type OfferScreenProps = {
 }
 
 function OfferScreen({offers, reviews, nearOffers}: OfferScreenProps):JSX.Element {
-  const [activeCard, setActiveCard] = useState<Offer | null>(null);
 
   const onOfferCardHover = (offerId: number | undefined) => {
-    const currentOffer = nearOffers.find((offer) => offer.id === offerId) ?? null;
-
-    setActiveCard(currentOffer);
+    // eslint-disable-next-line no-console
+    console.log(offerId);
   };
+
 
   const {id} = useParams() as {id: string};
   const propId = +id;
@@ -64,8 +62,8 @@ function OfferScreen({offers, reviews, nearOffers}: OfferScreenProps):JSX.Elemen
 
           <Map
             city={offer.city}
-            offers={nearOffers}
-            currentOffer={activeCard}
+            offers={[...nearOffers, offer]}
+            currentOffer={offer}
             isCityMap={false}
           />
         </section>
