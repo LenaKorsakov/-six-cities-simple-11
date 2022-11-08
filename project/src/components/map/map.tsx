@@ -73,7 +73,7 @@ function Map(props: MapProps): JSX.Element {
         'property__map': !isCityMap
       })}
 
-      style={{height: '100%'}}
+      style={{height: '700px'}}//не совсем годится, потому что на main лучше отрабатывает при 100%, но это не подходит для страницы отзыва
       ref={mapRef}
     >
     </section>);
