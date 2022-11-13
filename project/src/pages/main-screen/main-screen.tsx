@@ -2,7 +2,9 @@ import { useState } from 'react';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
+import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
+import { cities } from '../../enum/city-names';
 
 import type {Offer} from '../../@types/offer-types';
 
@@ -11,7 +13,7 @@ type MainScreenProps = {
 };
 
 function MainScreen({offers}: MainScreenProps): JSX.Element {
-  const city = offers[0].city;//TODO нужен другой способ выбора города
+  const DEFAULT_CITY = cities[3];
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
 
   const onOfferCardHover = (offerId: number | undefined) => {
@@ -30,38 +32,10 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="TODO">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="TODO">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="TODO">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href="TODO">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="TODO">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="TODO">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList
+              cities={cities}
+              selectCity={DEFAULT_CITY}
+            />
           </section>
         </div>
         <div className="cities">
@@ -105,7 +79,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
-                city={city}
+                city={DEFAULT_CITY}
                 offers={offers}
                 currentOffer={activeOffer}
                 isCityMap
