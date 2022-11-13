@@ -24,15 +24,17 @@ function OfferScreen({offers, reviews, nearOffers}: OfferScreenProps):JSX.Elemen
 
   const onOfferCardHover = (offerId: number | undefined) => {
     // eslint-disable-next-line no-console
-    console.log(offerId);
+    console.log(offerId);//TODO временное решение,чтобы запускался сайт. пока не пойму как сделать пропс onOfferHover в OfferList необязательым
   };
-
 
   const {id} = useParams() as {id: string};
   const propId = +id;
 
   const offer = offers.find((item) => (item.id) === propId) ?? null;
 
+  function handleOfferClick() {
+    window.scroll(0,0);
+  }
 
   if (offer === null) {
     return (
@@ -71,11 +73,13 @@ function OfferScreen({offers, reviews, nearOffers}: OfferScreenProps):JSX.Elemen
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OffersList
-              offers={nearOffers}
-              onOfferHover={onOfferCardHover}
-              isListMain={false}
-            />
+            <div onClick={handleOfferClick}>
+              <OffersList
+                offers={nearOffers}
+                onOfferHover={onOfferCardHover}
+                isListMain={false}
+              />
+            </div>
           </section>
         </div>
       </main>
