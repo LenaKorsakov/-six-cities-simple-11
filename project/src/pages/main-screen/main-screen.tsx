@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
@@ -6,10 +6,9 @@ import Map from '../../components/map/map';
 
 import type {Offer} from '../../@types/offer-types';
 
-
-type MainScreenProps = PropsWithChildren <{
+type MainScreenProps = {
   offers: Offer[];
-}>;
+};
 
 function MainScreen({offers}: MainScreenProps): JSX.Element {
   const city = offers[0].city;//TODO нужен другой способ выбора города

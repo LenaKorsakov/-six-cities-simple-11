@@ -10,7 +10,7 @@ type OfferCardProps = {
 }
 
 function OfferCard(props: OfferCardProps): JSX.Element{
-  const {offer, onMouseEnter, onMouseLeave, isCityCard} = props;
+  const {offer, isCityCard, onMouseEnter, onMouseLeave} = props;
   const {id, isPremium, previewImage, price, rating, title, type} = offer;
 
   function handleMouseEnter() {

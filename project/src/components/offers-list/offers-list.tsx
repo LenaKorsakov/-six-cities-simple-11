@@ -9,7 +9,7 @@ type OffersListProps = {
   isListMain: boolean;
 }
 
-function OffersList({offers, onOfferHover, isListMain}: OffersListProps): JSX.Element{
+function OffersList({offers, isListMain, onOfferHover}: OffersListProps): JSX.Element{
 
   function handleMouseEnter(id: number | undefined) {
     onOfferHover(id);

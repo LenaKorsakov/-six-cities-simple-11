@@ -52,7 +52,7 @@ const nearOffers: Offer[] = [
       isPro: true,
       name: 'John'
     },
-    id: 8,
+    id: 3,
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
     isPremium: true,
     location: {
