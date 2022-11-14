@@ -61,3 +61,4 @@ export const cities: City[] = [
 ];
 
 
+export const DEFAULT_CITY = cities[0];
