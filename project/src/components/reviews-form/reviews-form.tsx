@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from 'react';
 import StarPicker from './star-picker';
-
 import type {Star} from '../../@types/component-types';
 import type {Review} from '../../@types/review-types';
 
@@ -58,7 +57,6 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
         value={formData.comment}
         onChange = {handleTextAreaChange}
       />

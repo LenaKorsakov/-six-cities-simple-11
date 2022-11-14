@@ -1,16 +1,21 @@
 import {useRef, useEffect} from 'react';
+
+import cn from 'classnames';
+
 import {Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
 import { MarkerUrl } from '../../enum/marker-url';
 import { MarkerShape } from '../../enum/marker-shape';
-import useMap from '../../hooks/use-map';
 
+import useMap from '../../hooks/use-map';
 import type {City, Offer} from '../../@types/offer-types';
 
 type MapProps = {
   city: City;
   offers: Offer[];
-  currentOffer: Offer | undefined;
+  currentOffer: Offer | null;
+  isCityMap: boolean;
 }
 
 const defaultCustomIcon = new Icon({
@@ -26,16 +31,17 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {city, offers, currentOffer} = props;
-  const { latitude: lat, longitude: lng, zoom } = city.location;
+  const {city, offers, currentOffer, isCityMap} = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    let isMapMounted = true;
+    const markerGroup = new LayerGroup();
 
-    if(isMapMounted && map) {
+    if(map) {
+      const { latitude: lat, longitude: lng, zoom } = city.location;
+
       map.setView({ lat, lng }, zoom, { animate: true });
 
       offers.forEach((offer) => {
@@ -44,28 +50,30 @@ function Map(props: MapProps): JSX.Element {
           lng: offer.location.longitude
         });
 
-        const markerGroup = new LayerGroup();
-
         marker.setIcon(
-          (currentOffer !== undefined) && (offer.id === currentOffer.id)
+          (currentOffer !== null) && (offer.id === currentOffer.id)
             ? currentCustomIcon
             : defaultCustomIcon
         )
           .addTo(markerGroup);
-
-        markerGroup.addTo(map);
       });
+
+      markerGroup.addTo(map);
     }
 
     return () => {
-      isMapMounted = false;
+      map?.removeLayer(markerGroup);
     };
-  }, [map, offers, currentOffer]);
+  }, [map, offers, currentOffer, city]);
 
   return (
     <section
-      className="cities__map"//TODO как передавать нужные классы? нужен ли класс map?
-      style={{height: '100%'}}
+      className={cn('map',{
+        'cities__map': isCityMap,
+        'property__map': !isCityMap
+      })}
+
+      style={{ height: `${isCityMap ? '100%' : '700px'}` }}
       ref={mapRef}
     >
     </section>);

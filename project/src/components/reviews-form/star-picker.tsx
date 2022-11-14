@@ -15,7 +15,6 @@ function StarPicker({option, onInputChange}: StarPickerProps): JSX.Element {
         className="form__rating-input visually-hidden"
         name="rating"
         value={rating}
-        defaultValue={rating}
         id={`${rating}-stars`}
         type="radio"
         onChange={onInputChange}// Так можно работать с колбэками, переданными в props? Не нарушаю Д2? Методы-обработчики классов названы через handle?

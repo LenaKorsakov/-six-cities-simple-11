@@ -6,7 +6,7 @@ export type Review = {
     user: User;
 }
 
-type User = {
+export type User = {
   avatarUrl: string;
     id: number;
     isPro: boolean;

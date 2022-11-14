@@ -29,7 +29,7 @@ type Location = {
   zoom: number;
 }
 
-type Host = {
+export type Host = {
   avatarUrl: string;
   id: number;
   isPro: boolean;
