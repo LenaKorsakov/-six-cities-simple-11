@@ -15,4 +15,4 @@ export const changeCity = createAction(
   })
 );
 
-//TODO  логика для фильтров и сортировки
+//TODO  логика для сортировки, офферов рядом?
