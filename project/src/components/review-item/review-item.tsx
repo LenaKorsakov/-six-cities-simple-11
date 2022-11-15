@@ -1,5 +1,5 @@
 import type { Review, User } from '../../@types/review-types';
-import { formatDate, makeRatingWidth} from '../../utiles';
+import { formatReviewDate, createRatingWidth} from '../../utiles';
 
 type ReviewItemProps = {
  review: Review;
@@ -26,15 +26,15 @@ function ReviewItem({review, user}: ReviewItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${makeRatingWidth(rating)}%` }} />
+            <span style={{ width: `${createRatingWidth(rating)}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date}>
-          {formatDate(date)}
+        <time className="reviews__time" dateTime={date.toISOString()}>
+          {formatReviewDate(date)}
         </time>
       </div>
     </li>

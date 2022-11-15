@@ -3,7 +3,7 @@ import type { Review } from '../@types/review-types';
 const reviews: Review[] = [
   {
     comment: 'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
-    date: '2022-11-13T16:15:36Z',
+    date: new Date('2022-11-13T16:15:36Z'),
     id: 1,
     rating: 4.5,
     user: {
@@ -15,7 +15,7 @@ const reviews: Review[] = [
   },
   {
     comment: 'Flowery and colorful.',
-    date: '2022-08-11T16:15:36Z',
+    date: new Date('2022-08-11T16:15:36Z'),
     id: 2,
     rating: 3,
     user: {
@@ -27,7 +27,7 @@ const reviews: Review[] = [
   },
   {
     comment: 'Too small',
-    date: '2022-09-15T16:15:36Z',
+    date: new Date('2022-09-15T16:15:36Z'),
     id: 3,
     rating: 2,
     user: {
