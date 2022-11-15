@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
-import OffersList from '../../components/offers-list/offers-list';
+import OffersListCity from '../../components/offers-list-city/offers-list-city';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
@@ -51,10 +51,9 @@ function MainScreen({cities}: MainScreenProps): JSX.Element {
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found"> {offersCount} places to stay in {selectedCity.name}</b>
                 <Sort/>
-                <OffersList
+                <OffersListCity
                   onOfferHover={onOfferCardHover}
                   offers={offers}
-                  isListMain
                 />
               </section>
               <div className="cities__right-section">

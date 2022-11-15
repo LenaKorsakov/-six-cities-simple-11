@@ -8,16 +8,15 @@ import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 import {AppRoute} from '../../const/app-route';
 
-import type { City, Offer } from '../../@types/offer-types';
+import type { City} from '../../@types/offer-types';
 import { Review } from '../../@types/review-types';
 
 type AppProps = {
   cities: City[];
   reviews: Review[];
-  nearOffers: Offer[];
 }
 
-function App({cities, reviews, nearOffers}: AppProps): JSX.Element {
+function App({cities, reviews}: AppProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
@@ -36,7 +35,6 @@ function App({cities, reviews, nearOffers}: AppProps): JSX.Element {
             element={
               <OfferScreen
                 reviews={reviews}
-                nearOffers={nearOffers}
               />
             }
           />

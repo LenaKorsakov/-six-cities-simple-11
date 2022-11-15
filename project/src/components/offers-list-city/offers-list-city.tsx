@@ -1,15 +1,13 @@
-import cn from 'classnames';
-import OfferCard from '../offer-card/offer-card';
+import OfferCardCity from '../offer-card-city/offer-card-city';
 
 import type {OfferPreview} from '../../@types/offer-types';
 
-type OffersListProps = {
+type OffersListCityProps = {
   offers: OfferPreview[];
   onOfferHover: (id: number | undefined) => void;
-  isListMain: boolean;
 }
 
-function OffersList({offers, isListMain, onOfferHover}: OffersListProps): JSX.Element{
+function OffersListCity({offers, onOfferHover}: OffersListCityProps): JSX.Element{
 
   function handleMouseEnter(id: number | undefined) {
     onOfferHover(id);
@@ -21,20 +19,15 @@ function OffersList({offers, isListMain, onOfferHover}: OffersListProps): JSX.El
 
   return (
     <div
-      className={cn('places__list',{
-        'cities__places-list': isListMain,
-        'tabs__content': isListMain,
-        'near-places__list': !isListMain
-      })}
+      className="places__list cities__places-list tabs__content"
     >
       {offers.map((offer) =>
         (
-          <OfferCard
+          <OfferCardCity
             key = {offer.id}
             offer = {offer}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            isCityCard={isListMain}
           />
         )
       )}
@@ -42,4 +35,4 @@ function OffersList({offers, isListMain, onOfferHover}: OffersListProps): JSX.El
   );
 }
 
-export default OffersList;
+export default OffersListCity;

@@ -6,36 +6,25 @@ import OfferHost from '../../components/offer-host/offer-host';
 import OfferProperty from '../../components/offer-property/offer-property';
 import ReviewList from '../../components/review-list/review-list';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
+import OffersListNearby from '../../components/offers-list-nearby/offers-list-nearby';
 import Map from '../../components/map/map';
 
 import { useAppSelector } from '../../hooks';
-import type { Offer } from '../../@types/offer-types';
 import type { Review } from '../../@types/review-types';
-import OffersList from '../../components/offers-list/offers-list';
-
 
 type OfferScreenProps = {
   reviews: Review[];
-  nearOffers: Offer[];
 }
 
-function OfferScreen({reviews, nearOffers}: OfferScreenProps):JSX.Element {
+function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
 
+  const nearbyOffers = useAppSelector((state)=> state.nearbyOffers);
   const offers = useAppSelector((state)=> state.offers);
-
-  const onOfferCardHover = (offerId: number | undefined) => {
-    // eslint-disable-next-line no-console
-    console.log(offerId);//TODO временное решение,чтобы запускался сайт. пока не пойму как сделать пропс onOfferHover в OfferList необязательым
-  };
 
   const {id} = useParams() as {id: string};
   const propId = +id;
 
   const offer = offers.find((item) => (item.id) === propId) ?? null;
-
-  // function handleOfferClick() {
-  //   window.scroll(0,0);
-  // }
 
   if (offer === null) {
     return (
@@ -65,7 +54,7 @@ function OfferScreen({reviews, nearOffers}: OfferScreenProps):JSX.Element {
 
           <Map
             city={offer.city}
-            offers={[...nearOffers, offer]}
+            offers={[...nearbyOffers, offer]}
             currentOffer={offer}
             isCityMap={false}
           />
@@ -74,10 +63,8 @@ function OfferScreen({reviews, nearOffers}: OfferScreenProps):JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OffersList
-              offers={nearOffers}
-              onOfferHover={onOfferCardHover}
-              isListMain={false}
+            <OffersListNearby
+              offers={nearbyOffers}
             />
           </section>
         </div>

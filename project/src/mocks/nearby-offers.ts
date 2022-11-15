@@ -1,6 +1,6 @@
 import type { Offer } from '../@types/offer-types';
 
-const nearOffers: Offer[] = [
+const nearbyOffers: Offer[] = [
   {
     bedrooms: 1,
     city: {
@@ -102,4 +102,4 @@ const nearOffers: Offer[] = [
   }
 ];
 
-export default nearOffers;
+export default nearbyOffers;

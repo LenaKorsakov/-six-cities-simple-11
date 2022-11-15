@@ -8,6 +8,13 @@ export const listAllOffers = createAction(
   })
 );
 
+export const listNearbyOffers = createAction(
+  'offers/listNearbyOffers',
+  (nearbyOffers: Offer[]) => ({
+    payload: nearbyOffers
+  })
+);
+
 export const changeCity = createAction(
   'offers/changeCity',
   (city: City) => ({
