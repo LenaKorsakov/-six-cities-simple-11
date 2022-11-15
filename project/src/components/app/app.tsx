@@ -4,6 +4,7 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen//not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 import {AppRoute} from '../../const/app-route';
 
@@ -20,6 +21,7 @@ function App({cities, reviews, nearOffers}: AppProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop/>
         <Routes>
           <Route
             path={AppRoute.Main}

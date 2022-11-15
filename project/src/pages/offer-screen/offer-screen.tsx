@@ -33,9 +33,9 @@ function OfferScreen({reviews, nearOffers}: OfferScreenProps):JSX.Element {
 
   const offer = offers.find((item) => (item.id) === propId) ?? null;
 
-  function handleOfferClick() {
-    window.scroll(0,0);
-  }
+  // function handleOfferClick() {
+  //   window.scroll(0,0);
+  // }
 
   if (offer === null) {
     return (
@@ -74,13 +74,11 @@ function OfferScreen({reviews, nearOffers}: OfferScreenProps):JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div onClick={handleOfferClick}>
-              <OffersList
-                offers={nearOffers}
-                onOfferHover={onOfferCardHover}
-                isListMain={false}
-              />
-            </div>
+            <OffersList
+              offers={nearOffers}
+              onOfferHover={onOfferCardHover}
+              isListMain={false}
+            />
           </section>
         </div>
       </main>
