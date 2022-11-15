@@ -49,6 +49,9 @@ function Map(props: MapProps): JSX.Element {
       });
     });
 
+    const {latitude: lat, longitude: lng, zoom} = city.location;
+    map.setView({lat, lng}, zoom, {animate: true}, );
+
     const markerGroup = new LayerGroup(markers);
 
     markerGroup.addTo(map);

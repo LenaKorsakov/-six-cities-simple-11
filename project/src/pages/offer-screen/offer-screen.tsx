@@ -8,19 +8,20 @@ import ReviewList from '../../components/review-list/review-list';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import Map from '../../components/map/map';
 
-
+import { useAppSelector } from '../../hooks';
 import type { Offer } from '../../@types/offer-types';
 import type { Review } from '../../@types/review-types';
 import OffersList from '../../components/offers-list/offers-list';
 
 
 type OfferScreenProps = {
-  offers:Offer[];
   reviews: Review[];
   nearOffers: Offer[];
 }
 
-function OfferScreen({offers, reviews, nearOffers}: OfferScreenProps):JSX.Element {
+function OfferScreen({reviews, nearOffers}: OfferScreenProps):JSX.Element {
+
+  const offers = useAppSelector((state)=> state.offers);
 
   const onOfferCardHover = (offerId: number | undefined) => {
     // eslint-disable-next-line no-console

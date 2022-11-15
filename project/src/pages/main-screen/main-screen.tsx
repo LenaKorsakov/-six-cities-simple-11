@@ -4,16 +4,18 @@ import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
-import { cities } from '../../const/city-names';
 
-import type {Offer} from '../../@types/offer-types';
+import type {City, Offer} from '../../@types/offer-types';
+import { useAppSelector } from '../../hooks';
 
 type MainScreenProps = {
-  offers: Offer[];
+  cities: City[];
 };
 
-function MainScreen({offers}: MainScreenProps): JSX.Element {
-  const DEFAULT_CITY = cities[3];
+function MainScreen({cities}: MainScreenProps): JSX.Element {
+  const selectedCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state)=> state.offers).filter((offer)=> offer.city.name === selectedCity.name);
+
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
 
   const onOfferCardHover = (offerId: number | undefined) => {
@@ -34,7 +36,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
           <section className="locations container">
             <CitiesList
               cities={cities}
-              selectCity={DEFAULT_CITY}
+              selectedCity={selectedCity}
             />
           </section>
         </div>
@@ -42,7 +44,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {offers.length} places to stay in Amsterdam</b>
+              <b className="places__found"> {offers.length} places to stay in {selectedCity.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">
                   Sort by
@@ -79,7 +81,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
-                city={DEFAULT_CITY}
+                city={selectedCity}
                 offers={offers}
                 currentOffer={activeOffer}
                 isCityMap
