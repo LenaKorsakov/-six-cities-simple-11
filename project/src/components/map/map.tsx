@@ -37,29 +37,21 @@ function Map(props: MapProps): JSX.Element {
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    const markerGroup = new LayerGroup();
-
-    if(map) {
-      const { latitude: lat, longitude: lng, zoom } = city.location;
-
-      map.setView({ lat, lng }, zoom, { animate: true });
-
-      offers.forEach((offer) => {
-        const marker = new Marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longitude
-        });
-
-        marker.setIcon(
-          (currentOffer !== null) && (offer.id === currentOffer.id)
-            ? currentCustomIcon
-            : defaultCustomIcon
-        )
-          .addTo(markerGroup);
-      });
-
-      markerGroup.addTo(map);
+    if(map === null) {
+      return;
     }
+
+    const markers = offers.map((offer) => {
+      const { latitude: lat, longitude: lng } = offer.location;
+
+      return new Marker({ lat, lng }, {
+        icon: offer.id === currentOffer?.id ? currentCustomIcon : defaultCustomIcon,
+      });
+    });
+
+    const markerGroup = new LayerGroup(markers);
+
+    markerGroup.addTo(map);
 
     return () => {
       map?.removeLayer(markerGroup);

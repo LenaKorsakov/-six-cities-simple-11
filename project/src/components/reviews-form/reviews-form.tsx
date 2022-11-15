@@ -11,7 +11,7 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
 
   const [formData, setFormData] = useState<Review>({
     comment: '',
-    date: '',
+    date: new Date(),
     id: 0,
     rating: 0,
     user: {
