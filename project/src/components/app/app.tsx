@@ -5,7 +5,7 @@ import NotFoundScreen from '../../pages/not-found-screen//not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 
-import {AppRoute} from '../../enum/app-route';
+import {AppRoute} from '../../const/app-route';
 
 import type { Offer } from '../../@types/offer-types';
 import { Review } from '../../@types/review-types';

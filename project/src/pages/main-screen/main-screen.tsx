@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
-import { cities } from '../../enum/city-names';
+import { cities } from '../../const/city-names';
 
 import type {Offer} from '../../@types/offer-types';
 

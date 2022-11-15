@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import {AppRoute} from '../../enum/app-route';
+import {AppRoute} from '../../const/app-route';
 
 function Logo(): JSX.Element {
   return (

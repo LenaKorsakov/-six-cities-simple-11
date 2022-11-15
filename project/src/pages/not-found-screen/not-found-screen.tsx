@@ -1,7 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import {Link} from 'react-router-dom';
 import HeaderLogo from '../../components/header/header-logo';
-import {AppRoute} from '../../enum/app-route';
+import {AppRoute} from '../../const/app-route';
 
 function NotFoundScreen(): JSX.Element {
   return (
