@@ -1,5 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import type { City, Offer } from '../@types/offer-types';
+import { Sort } from '../const/sort';
 
 export const listAllOffers = createAction(
   'offers/listAllOffers',
@@ -22,4 +23,10 @@ export const changeCity = createAction(
   })
 );
 
-//TODO  логика для сортировки, офферов рядом?
+export const changeSort = createAction(
+  'offers/changeSort',
+  (sortOption: Sort ) => ({
+    payload: sortOption
+  })
+);
+

@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 import OffersListCity from '../../components/offers-list-city/offers-list-city';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
-import Sort from '../../components/sort/sort';
+import Sort from '../../components/sort/sort-options';
 import OffersListEmpty from '../../components/offers-list-empty/offers-list-empty';
 
 import type {City, Offer} from '../../@types/offer-types';
