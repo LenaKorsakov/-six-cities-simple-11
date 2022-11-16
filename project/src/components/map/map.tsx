@@ -57,7 +57,7 @@ function Map(props: MapProps): JSX.Element {
     markerGroup.addTo(map);
 
     return () => {
-      map?.removeLayer(markerGroup);
+      map.removeLayer(markerGroup);
     };
   }, [map, offers, currentOffer, city]);
 

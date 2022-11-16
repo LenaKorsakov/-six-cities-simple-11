@@ -6,3 +6,5 @@ export enum Sort {
 }
 
 export const DEFAULT_SORT = Sort.Popular;
+
+export const SORT_OPTIONS = Object.values(Sort);

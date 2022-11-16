@@ -21,7 +21,7 @@ function CitiesList({cities, selectedCity}: CitiesListProps): JSX.Element {
             className="locations__item"
             onClick={()=> dispatch(changeCity(city))}
           >
-            <Link to={`${AppRoute.Main}`}
+            <Link to={AppRoute.Main}
               className={`locations__item-link tabs__item ${(city.name === selectedCity.name) ? 'tabs__item--active' : ''}`}//не получилось написать при помощи &&
             >
               <span>{city.name}</span>
