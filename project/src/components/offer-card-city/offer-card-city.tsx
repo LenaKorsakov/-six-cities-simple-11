@@ -21,7 +21,7 @@ function OfferCardCity(props: OfferCardCityProps): JSX.Element{
 
   return (
     <article
-      className='cities__card'
+      className='cities__card place-card'
       onMouseEnter = {handleMouseEnter}
       onMouseLeave = {handleMouseLeave}
     >

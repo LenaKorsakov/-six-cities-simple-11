@@ -9,7 +9,7 @@ function OfferCardNearby({offer}: OfferCardNearbyProps): JSX.Element{
 
 
   return (
-    <article className='near-places__card'>
+    <article className='near-places__card place-card'>
       <OfferCard offer={offer} />
     </article>
   );

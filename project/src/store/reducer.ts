@@ -7,8 +7,8 @@ import { DEFAULT_SORT } from '../const/sort';
 
 
 const initialState = {
-  offers: offers,
-  nearbyOffers: nearbyOffers,
+  offers,
+  nearbyOffers,
   city: DEFAULT_CITY,
   sortOption: DEFAULT_SORT
 };

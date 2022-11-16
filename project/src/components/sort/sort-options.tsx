@@ -24,11 +24,11 @@ function SortOptions(): JSX.Element {
     }
   }
 
-  function handleSortClick() {
+  function handleSpanClick() {
     setIsOpened(!isOpened);
   }
 
-  function handleSortOptionSelect(event: MouseEvent<HTMLUListElement>) {
+  function handleSortOptionClick(event: MouseEvent<HTMLUListElement>) {
     const selectedOption = event.target as HTMLLIElement;
     dispatch(changeSort(selectedOption.textContent as Sort));
 
@@ -44,7 +44,7 @@ function SortOptions(): JSX.Element {
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={handleSortClick}
+        onClick={handleSpanClick}
       >
         {selectedSortOption}
         <svg className="places__sorting-arrow" width={7} height={4}>
@@ -53,7 +53,7 @@ function SortOptions(): JSX.Element {
       </span>
       <ul
         className={`places__options places__options--custom ${isOpened ? 'places__options--opened' : ''}`}
-        onClick={handleSortOptionSelect}
+        onClick={handleSortOptionClick}
       >
 
         {SORT_OPTIONS.map((option, index)=> {

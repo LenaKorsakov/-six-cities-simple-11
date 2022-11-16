@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import StarPicker from './star-picker';
 import type {Star} from '../../@types/component-types';
-import type {Review} from '../../@types/review-types';
+import type {ReviewPost} from '../../@types/review-types';
 
 type ReviewsFormProps = {
   options: Star[];
@@ -9,18 +9,10 @@ type ReviewsFormProps = {
 
 function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
 
-  const [formData, setFormData] = useState<Review>({
+  const [formData, setFormData] = useState<ReviewPost>({
     comment: '',
-    date: new Date(),
-    id: 0,
-    rating: 0,
-    user: {
-      avatarUrl: '',
-      id: 0,
-      isPro: false,
-      name: ''
-    }
-  });
+    rating: 0}
+  );
 
   function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setFormData({

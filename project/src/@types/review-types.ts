@@ -6,6 +6,8 @@ export type Review = {
     user: User;
 }
 
+export type ReviewPost = Pick<Review, 'comment' | 'rating'>
+
 export type User = {
   avatarUrl: string;
     id: number;
