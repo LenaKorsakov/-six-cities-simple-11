@@ -1,12 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, listAllOffers } from './actions';
+import { changeCity, changeSort, listAllOffers, listNearbyOffers } from './actions';
 import offers from '../mocks/offers';
-import { DEFAULT_CITY } from '../enum/city-names';
+import nearbyOffers from '../mocks/nearby-offers';
+import { DEFAULT_CITY } from '../const/city-names';
+import { DEFAULT_SORT } from '../const/sort';
 
 
 const initialState = {
-  offers: offers,
-  city: DEFAULT_CITY
+  offers,
+  nearbyOffers,
+  city: DEFAULT_CITY,
+  sortOption: DEFAULT_SORT
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -14,8 +18,14 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(listAllOffers, (state, action) => {
       state.offers = action.payload;
     })
+    .addCase(listNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
+    })
     .addCase(changeCity, (state, action) => {
       state.city = action.payload;
+    })
+    .addCase(changeSort, (state, action) => {
+      state.sortOption = action.payload;
     });
 });
 

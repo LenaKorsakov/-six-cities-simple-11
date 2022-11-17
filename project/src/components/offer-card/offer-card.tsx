@@ -1,36 +1,15 @@
 import { Link } from 'react-router-dom';
-import cn from 'classnames';
 import type {OfferPreview} from '../../@types/offer-types';
 
 type OfferCardProps = {
   offer: OfferPreview;
-  onMouseEnter: (id: number) => void;
-  onMouseLeave: () => void;
-  isCityCard: boolean;
 }
 
-function OfferCard(props: OfferCardProps): JSX.Element{
-  const {offer, isCityCard, onMouseEnter, onMouseLeave} = props;
+function OfferCard({offer}: OfferCardProps): JSX.Element{
   const {id, isPremium, previewImage, price, rating, title, type} = offer;
 
-  function handleMouseEnter() {
-    onMouseEnter(id);
-  }
-
-  function handleMouseLeave() {
-    onMouseLeave();
-  }
-
   return (
-    <article
-      className={cn('place-card',{
-        'cities__card': isCityCard,
-        'near-places__card': !isCityCard
-      })}
-
-      onMouseEnter = {handleMouseEnter}
-      onMouseLeave = {handleMouseLeave}
-    >
+    <>
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -70,7 +49,7 @@ function OfferCard(props: OfferCardProps): JSX.Element{
           {type}
         </p>
       </div>
-    </article>
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
 import ReviewItem from '../review-item/review-item';
-import { StarNumber } from '../../enum/star-number';
-import { StarTitle } from '../../enum/star-title';
+import { StarNumber } from '../../const/star-number';
+import { StarTitle } from '../../const/star-title';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import type { Review} from '../../@types/review-types';
 

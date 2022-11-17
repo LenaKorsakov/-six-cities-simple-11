@@ -1,5 +1,5 @@
 import type { Offer} from '../../@types/offer-types';
-import { makeRatingWidth, formatNumber} from '../../utiles';
+import { createRatingWidth, formatPrice} from '../../utiles/format';
 
 type OfferPropertyProps = {
  offer: Offer;
@@ -21,7 +21,7 @@ function OfferProperty({offer}: OfferPropertyProps): JSX.Element {
       </div>
       <div className="property__rating rating">
         <div className="property__stars rating__stars">
-          <span style={{ width: `${makeRatingWidth(rating)}%` }} />
+          <span style={{ width: `${createRatingWidth(rating)}%` }} />
           <span className="visually-hidden">Rating</span>
         </div>
         <span className="property__rating-value rating__value">{rating}</span>
@@ -38,7 +38,7 @@ function OfferProperty({offer}: OfferPropertyProps): JSX.Element {
         </li>
       </ul>
       <div className="property__price">
-        <b className="property__price-value">&euro; {formatNumber(price)}</b>{' '}
+        <b className="property__price-value">&euro; {formatPrice(price)}</b>{' '}
         <span className="property__price-text">&nbsp;night</span>
       </div>
       <div className="property__inside">

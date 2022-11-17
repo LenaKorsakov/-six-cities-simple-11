@@ -7,33 +7,30 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
   const isRenderRef = useRef<boolean>(false);
 
   useEffect(() => {
-    const{latitude, longitude, zoom} = city.location;
-
-    if(mapRef.current !== null && !isRenderRef.current) {
-
-      const instance = new Map(mapRef.current, {
-        center: {
-          lat: latitude,
-          lng: longitude
-        },
-        zoom: zoom
-      });
-
-
-      const layer = new TileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        {
-          attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        }
-      );
-
-      instance.addLayer(layer);
-
-      setMap(instance);
-      isRenderRef.current = true;
+    if(mapRef.current === null || isRenderRef.current) {
+      return;
     }
-  },[mapRef, city]);
+    const {latitude: lat, longitude: lng, zoom} = city.location;
+
+    if (map !== null) {
+      map.setView({lat, lng}, zoom, {animate: true});
+      return;
+    }
+
+    const tile = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    });
+
+    const instance = new Map(mapRef.current, {
+      zoom,
+      center: {lat,lng},
+      layers: [tile],
+    });
+
+    setMap(instance);
+    isRenderRef.current = true;
+
+  },[mapRef, city, map]);
 
   return map;
 }

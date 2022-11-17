@@ -4,26 +4,27 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen//not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
-import {AppRoute} from '../../enum/app-route';
+import {AppRoute} from '../../const/app-route';
 
-import type { Offer } from '../../@types/offer-types';
+import type { City} from '../../@types/offer-types';
 import { Review } from '../../@types/review-types';
 
 type AppProps = {
-  offers: Offer[];
+  cities: City[];
   reviews: Review[];
-  nearOffers: Offer[];
 }
 
-function App({offers, reviews, nearOffers}: AppProps): JSX.Element {
+function App({cities, reviews}: AppProps): JSX.Element {
   return(
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop/>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainScreen offers = {offers}/>}
+            element={<MainScreen cities = {cities}/>}
           />
           <Route
             path={AppRoute.Login}
@@ -33,9 +34,7 @@ function App({offers, reviews, nearOffers}: AppProps): JSX.Element {
             path={AppRoute.Offer}
             element={
               <OfferScreen
-                offers={offers}
                 reviews={reviews}
-                nearOffers={nearOffers}
               />
             }
           />

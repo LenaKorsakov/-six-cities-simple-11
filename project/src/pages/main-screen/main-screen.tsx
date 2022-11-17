@@ -1,19 +1,48 @@
 import { useState } from 'react';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
-import OffersList from '../../components/offers-list/offers-list';
+import OffersListCity from '../../components/offers-list-city/offers-list-city';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
-import { cities } from '../../enum/city-names';
+import SortOptions from '../../components/sort/sort-options';
+import OffersListEmpty from '../../components/offers-list-empty/offers-list-empty';
+import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';
+import { Sort } from '../../const/sort';
 
-import type {Offer} from '../../@types/offer-types';
+import type {City, Offer} from '../../@types/offer-types';
+import { useAppSelector } from '../../hooks';
 
 type MainScreenProps = {
-  offers: Offer[];
+  cities: City[];
 };
 
-function MainScreen({offers}: MainScreenProps): JSX.Element {
-  const DEFAULT_CITY = cities[3];
+function MainScreen({cities}: MainScreenProps): JSX.Element {
+  const selectedCity = useAppSelector((state) => state.city);
+  const selectedSortOption = useAppSelector((state) => state.sortOption);
+
+  function findOffersByCityName(offer: Offer) {
+    return offer.city.name === selectedCity.name;
+  }
+
+  function getSortCompare(sortOption: string) {
+    switch(sortOption) {
+      case Sort.PRICE_LOW_TO_HIGHT:
+        return sortPriceLowToHight;
+      case Sort.PRICE_HIGHT_TO_LOW:
+        return sortPriceHightToLow;
+      case Sort.TOP_RATED_FIRST:
+        return sortRatingHightToLow;
+      case Sort.POPULAR:
+        return sortDefault;
+
+      default:
+        return sortDefault;
+    }
+  }
+
+  const offers = useAppSelector((state)=> state.offers).filter(findOffersByCityName).sort(getSortCompare(selectedSortOption));
+  const offersCount = offers.length;
+
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
 
   const onOfferCardHover = (offerId: number | undefined) => {
@@ -34,58 +63,32 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
           <section className="locations container">
             <CitiesList
               cities={cities}
-              selectCity={DEFAULT_CITY}
+              selectedCity={selectedCity}
             />
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {offers.length} places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">
-                  Sort by
-                </span> {' '}
-                <span className="places__sorting-type" tabIndex={0}>
-                Popular
-                  <svg className="places__sorting-arrow" width={7} height={4}>
-                    <use xlinkHref="#icon-arrow-select" />
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li
-                    className="places__option places__option--active"
-                    tabIndex={0}
-                  >
-                  Popular
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                  Price: low to high
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                  Price: high to low
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                  Top rated first
-                  </li>
-                </ul>
-              </form>
-              <OffersList
-                onOfferHover={onOfferCardHover}
-                offers={offers}
-                isListMain
-              />
-            </section>
-            <div className="cities__right-section">
-              <Map
-                city={DEFAULT_CITY}
-                offers={offers}
-                currentOffer={activeOffer}
-                isCityMap
-              />
-            </div>
-          </div>
+          {!offersCount ?
+            <OffersListEmpty/> :
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found"> {offersCount} places to stay in {selectedCity.name}</b>
+                <SortOptions/>
+                <OffersListCity
+                  onOfferHover={onOfferCardHover}
+                  offers={offers}
+                />
+              </section>
+              <div className="cities__right-section">
+                <Map
+                  city={selectedCity}
+                  offers={offers}
+                  currentOffer={activeOffer}
+                  isCityMap
+                />
+              </div>
+            </div>}
         </div>
       </main>
     </div>
