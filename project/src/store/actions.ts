@@ -1,32 +1,32 @@
 import {createAction} from '@reduxjs/toolkit';
 import type { City, Offer } from '../@types/offer-types';
-import { Sort } from '../const/sort';
-import { ActionsNames } from '../const/actions-names';
+import { Action } from '../const/actions-names';
+import type { SortEnum } from '../const/@types';
 
 export const listAllOffers = createAction(
-  ActionsNames.ListAllOffers,
+  Action.LIST_ALL_OFFERS,
   (offers: Offer[]) => ({
     payload: offers
   })
 );
 
 export const listNearbyOffers = createAction(
-  ActionsNames.listNearbyOffers,
+  Action.LIST_NEARBY_OFFERS,
   (nearbyOffers: Offer[]) => ({
     payload: nearbyOffers
   })
 );
 
 export const changeCity = createAction(
-  ActionsNames.changeCity,
+  Action.CHANGE_CITY,
   (city: City) => ({
     payload: city
   })
 );
 
 export const changeSort = createAction(
-  ActionsNames.changeSort,
-  (sortOption: Sort ) => ({
+  Action.CHANGE_SORT,
+  (sortOption: SortEnum) => ({
     payload: sortOption
   })
 );

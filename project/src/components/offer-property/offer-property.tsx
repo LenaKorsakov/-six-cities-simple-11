@@ -1,5 +1,5 @@
 import type { Offer} from '../../@types/offer-types';
-import { createRatingWidth, formatPrice} from '../../utiles';
+import { createRatingWidth, formatPrice} from '../../utiles/format';
 
 type OfferPropertyProps = {
  offer: Offer;

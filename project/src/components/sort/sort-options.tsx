@@ -1,7 +1,9 @@
 import { useState, useEffect, MouseEvent} from 'react';
-import { Sort, SORT_OPTIONS } from '../../const/sort';
+import { SORT_OPTIONS } from '../../const/sort';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeSort } from '../../store/actions';
+
+import type { SortEnum } from '../../const/@types';
 
 function SortOptions(): JSX.Element {
 
@@ -30,7 +32,7 @@ function SortOptions(): JSX.Element {
 
   function handleSortOptionClick(event: MouseEvent<HTMLUListElement>) {
     const selectedOption = event.target as HTMLLIElement;
-    dispatch(changeSort(selectedOption.textContent as Sort));
+    dispatch(changeSort(selectedOption.textContent as SortEnum));
 
     setIsOpened(false);
 
@@ -73,6 +75,5 @@ function SortOptions(): JSX.Element {
     </form>
   );
 }
-//TODO добавить функции для канждого варианта сортировки, сортировать через них offers. Где хранить такие функции? в константном перечислении под теми же ключами?
 //TODO закрытие по клику вне меню
 export default SortOptions;

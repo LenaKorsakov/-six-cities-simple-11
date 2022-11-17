@@ -4,8 +4,10 @@ import Header from '../../components/header/header';
 import OffersListCity from '../../components/offers-list-city/offers-list-city';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
-import Sort from '../../components/sort/sort-options';
+import SortOptions from '../../components/sort/sort-options';
 import OffersListEmpty from '../../components/offers-list-empty/offers-list-empty';
+import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';
+import { Sort } from '../../const/sort';
 
 import type {City, Offer} from '../../@types/offer-types';
 import { useAppSelector } from '../../hooks';
@@ -16,7 +18,29 @@ type MainScreenProps = {
 
 function MainScreen({cities}: MainScreenProps): JSX.Element {
   const selectedCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state)=> state.offers).filter((offer)=> offer.city.name === selectedCity.name);
+  const selectedSortOption = useAppSelector((state) => state.sortOption);
+
+  function findOffersByCityName(offer: Offer) {
+    return offer.city.name === selectedCity.name;
+  }
+
+  function getSortCompare(sortOption: string) {
+    switch(sortOption) {
+      case Sort.PRICE_LOW_TO_HIGHT:
+        return sortPriceLowToHight;
+      case Sort.PRICE_HIGHT_TO_LOW:
+        return sortPriceHightToLow;
+      case Sort.TOP_RATED_FIRST:
+        return sortRatingHightToLow;
+      case Sort.POPULAR:
+        return sortDefault;
+
+      default:
+        return sortDefault;
+    }
+  }
+
+  const offers = useAppSelector((state)=> state.offers).filter(findOffersByCityName).sort(getSortCompare(selectedSortOption));
   const offersCount = offers.length;
 
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
@@ -50,7 +74,7 @@ function MainScreen({cities}: MainScreenProps): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found"> {offersCount} places to stay in {selectedCity.name}</b>
-                <Sort/>
+                <SortOptions/>
                 <OffersListCity
                   onOfferHover={onOfferCardHover}
                   offers={offers}
