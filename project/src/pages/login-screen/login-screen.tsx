@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import HeaderLogo from '../../components/header/header-logo';
+import Header from '../../components/header/header';
 
 function LoginScreen(): JSX.Element{
   return (
@@ -7,7 +7,7 @@ function LoginScreen(): JSX.Element{
       <Helmet>
         <title>Шесть городов. Страничка регистрации.</title>
       </Helmet>
-      <HeaderLogo />
+      <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

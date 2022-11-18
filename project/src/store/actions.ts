@@ -4,28 +4,28 @@ import { Action } from '../const/actions-names';
 import type { SortEnum } from '../const/@types';
 
 export const listAllOffers = createAction(
-  Action.LIST_ALL_OFFERS,
+  Action.ListAllOffers,
   (offers: Offer[]) => ({
     payload: offers
   })
 );
 
 export const listNearbyOffers = createAction(
-  Action.LIST_NEARBY_OFFERS,
+  Action.ListNearbyOffers,
   (nearbyOffers: Offer[]) => ({
     payload: nearbyOffers
   })
 );
 
 export const changeCity = createAction(
-  Action.CHANGE_CITY,
+  Action.ChangeCity,
   (city: City) => ({
     payload: city
   })
 );
 
 export const changeSort = createAction(
-  Action.CHANGE_SORT,
+  Action.ChangeSort,
   (sortOption: SortEnum) => ({
     payload: sortOption
   })

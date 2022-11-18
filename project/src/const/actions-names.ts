@@ -1,6 +1,6 @@
 export const Action = {
-  LIST_ALL_OFFERS: 'offers/listAllOffers',
-  LIST_NEARBY_OFFERS: 'offers/listNearbyOffers',
-  CHANGE_CITY: 'offers/changeCity',
-  CHANGE_SORT: 'offers/changeSort'
-};
+  ListAllOffers: 'offers/listAllOffers',
+  ListNearbyOffers: 'offers/listNearbyOffers',
+  ChangeCity: 'offers/changeCity',
+  ChangeSort: 'offers/changeSort'
+} as const;

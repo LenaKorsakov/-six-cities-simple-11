@@ -1,3 +1,3 @@
-import { Sort } from './sort';
+import { SortType } from './sort-type';
 
-export type SortEnum = typeof Sort[keyof typeof Sort];
+export type SortEnum = typeof SortType[keyof typeof SortType];

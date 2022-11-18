@@ -1,5 +1,5 @@
 import { useState, useEffect, MouseEvent} from 'react';
-import { SORT_OPTIONS } from '../../const/sort';
+import { SORT_OPTIONS } from '../../const/sort-type';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeSort } from '../../store/actions';
 

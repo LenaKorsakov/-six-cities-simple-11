@@ -3,7 +3,7 @@ import { changeCity, changeSort, listAllOffers, listNearbyOffers } from './actio
 import offers from '../mocks/offers';
 import nearbyOffers from '../mocks/nearby-offers';
 import { DEFAULT_CITY } from '../const/city-names';
-import { DEFAULT_SORT } from '../const/sort';
+import { DEFAULT_SORT } from '../const/sort-type';
 
 
 const initialState = {
