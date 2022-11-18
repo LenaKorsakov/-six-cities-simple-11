@@ -4,7 +4,7 @@ import {AppRoute} from '../../const/app-route';
 function Logo(): JSX.Element {
   return (
     <div className="header__left">
-      <Link className="header__logo-link header__logo-link--active" title = "На главную" to={AppRoute.Main}>
+      <Link className="header__logo-link header__logo-link--active" title = "To the main page" to={AppRoute.Main}>
         <img
           className="header__logo"
           src="img/logo.svg"

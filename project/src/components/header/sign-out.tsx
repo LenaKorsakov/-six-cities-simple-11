@@ -4,7 +4,7 @@ import {AppRoute} from '../../const/app-route';
 function SignOut(): JSX.Element {
   return (
     <li className="header__nav-item">
-      <Link className="header__nav-link" title="На главную" to={AppRoute.Main}>
+      <Link className="header__nav-link" title="To the login page" to={AppRoute.Login}>
         <span className="header__signout">Sign out</span>
       </Link>
     </li>
