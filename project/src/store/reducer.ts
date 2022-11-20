@@ -4,7 +4,7 @@ import {
   changeSort,
   listAllOffers,
   listNearbyOffers,
-  setOffersLoadingStatus
+  setOffersDataLoadingStatus
 } from './actions';
 import nearbyOffers from '../mocks/nearby-offers';
 import { DEFAULT_CITY } from '../const/city-names';
@@ -18,7 +18,7 @@ type InitialState = {
   nearbyOffers: Offer[];
   city: City;
   sortOption: SortEnum;
-  isOffersLoading: boolean;
+  isOffersDataLoading: boolean;
 }
 
 const initialState: InitialState = {
@@ -26,7 +26,7 @@ const initialState: InitialState = {
   nearbyOffers,
   city: DEFAULT_CITY,
   sortOption: DEFAULT_SORT,
-  isOffersLoading: false
+  isOffersDataLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -43,8 +43,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeSort, (state, action) => {
       state.sortOption = action.payload;
     })
-    .addCase(setOffersLoadingStatus, (state, action) => {
-      state.isOffersLoading = action.payload;
+    .addCase(setOffersDataLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
     });
 });
 
