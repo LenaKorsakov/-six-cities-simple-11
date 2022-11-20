@@ -4,6 +4,7 @@ import {
   changeSort,
   listAllOffers,
   listNearbyOffers,
+  requireAuthorication,
   setOffersDataLoadingStatus
 } from './actions';
 import nearbyOffers from '../mocks/nearby-offers';
@@ -11,6 +12,7 @@ import { DEFAULT_CITY } from '../const/city-names';
 import { DEFAULT_SORT } from '../const/sort-type';
 import { City, Offer } from '../@types/offer-types';
 import { SortEnum } from '../const/@types';
+import { AuthorizationStatus } from '../const/authorization-status';
 
 
 type InitialState = {
@@ -19,6 +21,7 @@ type InitialState = {
   city: City;
   sortOption: SortEnum;
   isOffersDataLoading: boolean;
+  authorizationStatus: string;
 }
 
 const initialState: InitialState = {
@@ -26,7 +29,8 @@ const initialState: InitialState = {
   nearbyOffers,
   city: DEFAULT_CITY,
   sortOption: DEFAULT_SORT,
-  isOffersDataLoading: false
+  isOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -45,6 +49,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorication, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 

@@ -4,5 +4,6 @@ export const Actions = {
   ChangeCity: 'offers/changeCity',
   ChangeSort: 'offers/changeSort',
   FetchAllOffers: 'data/fetchOffers',
-  SetOffersDataLoadingStatus: 'data/setOffersDataLoadingStatus'
+  SetOffersDataLoadingStatus: 'data/setOffersDataLoadingStatus',
+  SetAuthorizationStatus: 'data/setAuthorizationStatus'
 } as const;

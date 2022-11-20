@@ -12,3 +12,5 @@ export const changeCity = createAction<City>(Actions.ChangeCity);
 export const changeSort = createAction<SortEnum>(Actions.ChangeSort);
 
 export const setOffersDataLoadingStatus = createAction<boolean>(Actions.SetOffersDataLoadingStatus);
+
+export const requireAuthorication = createAction<string>(Actions.SetAuthorizationStatus);
