@@ -5,5 +5,8 @@ export const Actions = {
   ChangeSort: 'offers/changeSort',
   FetchAllOffers: 'data/fetchOffers',
   SetOffersDataLoadingStatus: 'data/setOffersDataLoadingStatus',
-  SetAuthorizationStatus: 'data/setAuthorizationStatus'
+  SetAuthorizationStatus: 'data/setAuthorizationStatus',
+  CheckAuth:'user/checkAuth',
+  UserLogIn: 'user/login',
+  UserLogOut: 'user/logout'
 } as const;
