@@ -3,31 +3,12 @@ import type { City, Offer } from '../@types/offer-types';
 import { Actions } from '../const/actions';
 import type { SortEnum } from '../const/@types';
 
-export const listAllOffers = createAction(
-  Actions.listAllOffers,
-  (offers: Offer[]) => ({
-    payload: offers
-  })
-);
+export const listAllOffers = createAction<Offer[]>(Actions.ListAllOffers);
 
-export const listNearbyOffers = createAction(
-  Actions.ListNearbyOffers,
-  (nearbyOffers: Offer[]) => ({
-    payload: nearbyOffers
-  })
-);
+export const listNearbyOffers = createAction<Offer[]>(Actions.ListNearbyOffers);
 
-export const changeCity = createAction(
-  Actions.ChangeCity,
-  (city: City) => ({
-    payload: city
-  })
-);
+export const changeCity = createAction<City>(Actions.ChangeCity);
 
-export const changeSort = createAction(
-  Actions.ChangeSort,
-  (sortOption: SortEnum) => ({
-    payload: sortOption
-  })
-);
+export const changeSort = createAction<SortEnum>(Actions.ChangeSort);
 
+export const setOffersLoadingStatus = createAction<boolean>(Actions.SetOffersDataLoadingStatus);

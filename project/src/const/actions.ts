@@ -1,7 +1,8 @@
 export const Actions = {
-  listAllOffers: 'offers/listAllOffers',
+  ListAllOffers: 'offers/listAllOffers',
   ListNearbyOffers: 'offers/listNearbyOffers',
   ChangeCity: 'offers/changeCity',
   ChangeSort: 'offers/changeSort',
-  FetchAllOffers: 'data/fetchOffers'
+  FetchAllOffers: 'data/fetchOffers',
+  SetOffersDataLoadingStatus: 'data/setOffersDataLoadingStatus'
 } as const;
