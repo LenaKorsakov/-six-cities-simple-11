@@ -1,13 +1,26 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, changeSort, listAllOffers, listNearbyOffers } from './actions';
-import offers from '../mocks/offers';
+import {
+  changeCity,
+  changeSort,
+  listAllOffers,
+  listNearbyOffers
+} from './actions';
 import nearbyOffers from '../mocks/nearby-offers';
 import { DEFAULT_CITY } from '../const/city-names';
 import { DEFAULT_SORT } from '../const/sort-type';
+import { City, Offer } from '../@types/offer-types';
+import { SortEnum } from '../const/@types';
 
 
-const initialState = {
-  offers,
+type InitialState = {
+  offers: Offer[];
+  nearbyOffers: Offer[];
+  city: City;
+  sortOption: SortEnum;
+}
+
+const initialState: InitialState = {
+  offers: [],
   nearbyOffers,
   city: DEFAULT_CITY,
   sortOption: DEFAULT_SORT
