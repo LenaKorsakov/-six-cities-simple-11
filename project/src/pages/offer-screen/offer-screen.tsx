@@ -1,11 +1,12 @@
 import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import HeaderSignOut from '../../components/header/header-sign-out';
+import Header from '../../components/header/header';
 import OfferMain from '../../components/offer-main/offer-main';
 
 import { useAppSelector } from '../../hooks';
 import type { Review } from '../../@types/review-types';
+
 
 type OfferScreenProps = {
   reviews: Review[];
@@ -30,7 +31,7 @@ function OfferScreenNotLogged({reviews}: OfferScreenProps):JSX.Element {
       <Helmet>
         <title>Шесть городов.Страничка апартаментов.</title>
       </Helmet>
-      <HeaderSignOut />
+      <Header />
       <OfferMain
         reviews={reviews}
         offer={offer}
