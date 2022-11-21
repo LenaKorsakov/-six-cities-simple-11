@@ -12,7 +12,7 @@ type OfferScreenProps = {
   reviews: Review[];
 }
 
-function OfferScreenNotLogged({reviews}: OfferScreenProps):JSX.Element {
+function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
 
   const nearbyOffers = useAppSelector((state)=> state.nearbyOffers);
   const offers = useAppSelector((state)=> state.offers);
@@ -41,4 +41,4 @@ function OfferScreenNotLogged({reviews}: OfferScreenProps):JSX.Element {
   );
 }
 
-export default OfferScreenNotLogged;
+export default OfferScreen;

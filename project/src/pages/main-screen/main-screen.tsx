@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import {Helmet} from 'react-helmet-async';
 import type { MainScreenProps } from '../../components/main-content/main-content';
 
-function MainScreenNotLogged({cities}: MainScreenProps): JSX.Element {
+function MainScreen({cities}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -15,4 +15,4 @@ function MainScreenNotLogged({cities}: MainScreenProps): JSX.Element {
   );
 }
 
-export default MainScreenNotLogged;
+export default MainScreen;

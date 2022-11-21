@@ -12,11 +12,13 @@ function SortOptions(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  useEffect(()=> {
-    document.addEventListener('keydown', handleEventKeydown);
+  useEffect(() => {
+    if(isOpened) {
+      document.addEventListener('keydown', handleEventKeydown);
+    }
 
-    return ()=> document.removeEventListener('keydown', handleEventKeydown);
-  }, []);
+    return () => document.removeEventListener('keydown', handleEventKeydown);
+  }, [isOpened]);
 
   function handleEventKeydown(event: KeyboardEvent) {
     if(event.key.startsWith('Esc')) {

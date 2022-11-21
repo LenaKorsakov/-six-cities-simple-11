@@ -8,18 +8,12 @@ import SignIn from './sign-in';
 function Header(): JSX.Element {
   const authStatus = useAppSelector((state) => state.authorizationStatus);
 
-  function getHeadersChildren(): JSX.Element | null{
-    if (authStatus === AuthorizationStatus.Auth) {
-      return <SignOut />;
-    } if (authStatus === AuthorizationStatus.NoAuth) {
-      return <SignIn />;
-    }
-    return null;
-  }
-
   return (
-    //нужные компоненты не рендерятся в children, нужна подсказка
-    <HeaderLogoOnly {...getHeadersChildren()}/>
+    <HeaderLogoOnly>
+      { authStatus === AuthorizationStatus.Auth
+        ? <SignOut />
+        : <SignIn />}
+    </HeaderLogoOnly>
   );
 }
 
