@@ -7,6 +7,10 @@ import {
   requireAuthorication,
   setOffersDataLoadingStatus
 } from './actions';
+import {
+  fetchAllOffersAction
+} from './api-actions';
+
 import nearbyOffers from '../mocks/nearby-offers';
 import { DEFAULT_CITY } from '../const/city-names';
 import { DEFAULT_SORT } from '../const/sort-type';
@@ -52,6 +56,15 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorication, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(fetchAllOffersAction.pending, (state) => {
+      state.isOffersDataLoading = true;
+    })
+    .addCase(fetchAllOffersAction.fulfilled, (state) => {
+      state.isOffersDataLoading = false;
+    })
+    .addCase(fetchAllOffersAction.rejected, (state) => {
+      state.isOffersDataLoading = false;
     });
 });
 

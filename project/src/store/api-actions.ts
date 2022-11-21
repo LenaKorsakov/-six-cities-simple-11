@@ -3,8 +3,8 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import type {State, AppDispatch} from '../@types/state';
 import { Offer } from '../@types/offer-types';
 import { ApiRoute } from '../const/api-route';
-import { listAllOffers, requireAuthorication, setOffersDataLoadingStatus } from './actions';
-import { Actions } from '../const/actions';
+import { listAllOffers, requireAuthorication} from './actions';
+import { Action } from '../const/action';
 import { AuthorizationStatus } from '../const/authorization-status';
 import { AuthData, UserData } from './@types';
 import { dropToken, saveToken } from '../services/token';
@@ -17,14 +17,10 @@ export const fetchAllOffersAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->(Actions.FetchAllOffers,
+>(Action.FetchAllOffers,
   async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOffersDataLoadingStatus(true));
-
     const { data } = await api.get<Offer[]>(ApiRoute.Offers);
     dispatch(listAllOffers(data));
-
-    dispatch(setOffersDataLoadingStatus(false));
   }
 );
 
@@ -36,7 +32,7 @@ export const checkAuthAction = createAsyncThunk<
   state: State;
   extra: AxiosInstance;
 }
->(Actions.SetAuthorizationStatus,
+>(Action.SetAuthorizationStatus,
   async (_arg, {dispatch, extra: api}) => {
     try {
       await api.get(ApiRoute.Login);
@@ -55,7 +51,7 @@ export const loginAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
-  >(Actions.UserLogIn,
+  >(Action.UserLogIn,
     async({login: email, password}, {dispatch, extra: api}) => {
       const {data: {token}} = await api.post<UserData>(ApiRoute.Login, {email, password});
       saveToken(token);
@@ -71,7 +67,7 @@ export const logoutAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
-  >(Actions.UserLogOut,
+  >(Action.UserLogOut,
     async (_arg, { dispatch, extra: api}) => {
       await api.delete(ApiRoute.Logout);
       dropToken();
