@@ -1,33 +1,16 @@
 import {createAction} from '@reduxjs/toolkit';
 import type { City, Offer } from '../@types/offer-types';
-import { Action } from '../const/actions-names';
+import { Action } from '../const/action';
 import type { SortEnum } from '../const/@types';
 
-export const listAllOffers = createAction(
-  Action.LIST_ALL_OFFERS,
-  (offers: Offer[]) => ({
-    payload: offers
-  })
-);
+export const listAllOffers = createAction<Offer[]>(Action.ListAllOffers);
 
-export const listNearbyOffers = createAction(
-  Action.LIST_NEARBY_OFFERS,
-  (nearbyOffers: Offer[]) => ({
-    payload: nearbyOffers
-  })
-);
+export const listNearbyOffers = createAction<Offer[]>(Action.ListNearbyOffers);
 
-export const changeCity = createAction(
-  Action.CHANGE_CITY,
-  (city: City) => ({
-    payload: city
-  })
-);
+export const changeCity = createAction<City>(Action.ChangeCity);
 
-export const changeSort = createAction(
-  Action.CHANGE_SORT,
-  (sortOption: SortEnum) => ({
-    payload: sortOption
-  })
-);
+export const changeSort = createAction<SortEnum>(Action.ChangeSort);
 
+export const setOffersDataLoadingStatus = createAction<boolean>(Action.SetOffersDataLoadingStatus);
+
+export const requireAuthorication = createAction<string>(Action.SetAuthorizationStatus);

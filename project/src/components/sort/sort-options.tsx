@@ -1,5 +1,5 @@
 import { useState, useEffect, MouseEvent} from 'react';
-import { SORT_OPTIONS } from '../../const/sort';
+import { SORT_OPTIONS } from '../../const/sort-type';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeSort } from '../../store/actions';
 
@@ -12,11 +12,13 @@ function SortOptions(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  useEffect(()=> {
-    document.addEventListener('keydown', handleEventKeydown);
+  useEffect(() => {
+    if(isOpened) {
+      document.addEventListener('keydown', handleEventKeydown);
+    }
 
-    return ()=> document.removeEventListener('keydown', handleEventKeydown);
-  }, []);
+    return () => document.removeEventListener('keydown', handleEventKeydown);
+  }, [isOpened]);
 
   function handleEventKeydown(event: KeyboardEvent) {
     if(event.key.startsWith('Esc')) {

@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {Link} from 'react-router-dom';
-import HeaderLogo from '../../components/header/header-logo';
+import Header from '../../components/header/header';
 import {AppRoute} from '../../const/app-route';
 
 function NotFoundScreen(): JSX.Element {
@@ -9,11 +9,11 @@ function NotFoundScreen(): JSX.Element {
       <Helmet>
         <title>Шесть городов. Страница не найдена!</title>
       </Helmet>
-      <HeaderLogo />
+      <Header />
       <div className="container property__wrapper">
         <h1 className="property__name">404. Page not found</h1>
 
-        <Link title="На главную" to={AppRoute.Main}>
+        <Link title="To the main page" to={AppRoute.Main}>
           <div className="property__mark">Вернуться на главную</div>
         </Link>
       </div>

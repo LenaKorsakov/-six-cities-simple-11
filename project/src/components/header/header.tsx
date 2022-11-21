@@ -1,22 +1,19 @@
-import Logo from './logo';
-import UserName from './user-name';
+import { useAppSelector } from '../../hooks';
+import { AuthorizationStatus } from '../../const/authorization-status';
+import HeaderLogoOnly from './header-logo-only';
+
 import SignOut from './sign-out';
+import SignIn from './sign-in';
 
 function Header(): JSX.Element {
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
-    <header className="header">
-      <div className="container">
-        <div className="header__wrapper">
-          <Logo />
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <UserName />
-              <SignOut />
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
+    <HeaderLogoOnly>
+      { authStatus === AuthorizationStatus.Auth
+        ? <SignOut />
+        : <SignIn />}
+    </HeaderLogoOnly>
   );
 }
 

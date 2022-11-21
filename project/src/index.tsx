@@ -5,6 +5,9 @@ import App from './components/app/app';
 import reviews from './mocks/reviews';
 import { cities } from '../src/const/city-names';
 import {store} from '../src/store/index';
+import { fetchAllOffersAction } from './store/api-actions';
+
+store.dispatch(fetchAllOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
