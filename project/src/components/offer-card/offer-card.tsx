@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { capitalizeFirstLetter, formatPrice } from '../../utiles/format';
 import type {OfferPreview} from '../../@types/offer-types';
 
 type OfferCardProps = {
@@ -29,7 +30,7 @@ function OfferCard({offer}: OfferCardProps): JSX.Element{
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€
-              {price}
+              {formatPrice(price)}
             </b>{' '}
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
@@ -46,7 +47,7 @@ function OfferCard({offer}: OfferCardProps): JSX.Element{
           </Link>
         </h2>
         <p className="place-card__type">
-          {type}
+          {capitalizeFirstLetter(type)}
         </p>
       </div>
     </>
