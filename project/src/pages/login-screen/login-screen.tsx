@@ -31,7 +31,9 @@ function LoginScreen(): JSX.Element{
   }
 
   return (
-    (authorizationStatus === AuthorizationStatus.Auth) ? <Navigate to={AppRoute.Main} /> :
+    (authorizationStatus === AuthorizationStatus.Auth)
+      ? <Navigate to={AppRoute.Main} />//Подходит ли такой способ переадресации или нужно как в учебном проекте писать middleware redirect?
+      :
       <div className="page page--gray page--login">
         <Helmet>
           <title>Шесть городов. Страничка регистрации.</title>
@@ -73,7 +75,6 @@ function LoginScreen(): JSX.Element{
                 <button
                   className="login__submit form__submit button"
                   type="submit"
-                //onSubmit={handleFormSubmit}
                 >
               Sign in
                 </button>
