@@ -1,9 +1,12 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import NotFoundScreen from '../../pages/not-found-screen//not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
+
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 import {AppRoute} from '../../const/app-route';
 
@@ -19,7 +22,7 @@ type AppProps = {
 function App({cities, reviews}: AppProps): JSX.Element {
   return(
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <ScrollToTop/>
         <Routes>
           <Route
@@ -43,7 +46,7 @@ function App({cities, reviews}: AppProps): JSX.Element {
             element={<NotFoundScreen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

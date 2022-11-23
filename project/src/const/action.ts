@@ -9,5 +9,6 @@ export const Action = {
   CheckAuth:'user/checkAuth',
   UserLogIn: 'user/login',
   UserLogOut: 'user/logout',
-  SetUserData: 'user/setData'
+  SetUserData: 'user/setData',
+  RedirectToRoute: 'user/redirectToRoute'
 } as const;

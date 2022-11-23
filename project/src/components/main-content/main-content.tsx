@@ -39,7 +39,7 @@ function getSortCompare(sortOption: SortEnum) {
 function MainContent({cities}: MainContentProps): JSX.Element {
   useEffect(() => {
     store.dispatch(fetchAllOffersAction());
-    store.dispatch(checkAuthAction());
+    store.dispatch(checkAuthAction());//TODO На старте вызывается дважды! Не вижу почему
   }, []);
 
   const selectedCity = useAppSelector((state) => state.city);

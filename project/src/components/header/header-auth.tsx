@@ -15,7 +15,7 @@ function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
   function HandleLinkClick() {
     dispatch(logoutAction());
 
-    dispatch(setUserData(null));// нужно ли это действие на выходе? Если при следующей авторизации предыдущий login затрется?
+    dispatch(setUserData(null));// TODO нужно ли это действие на выходе? Если при следующей авторизации предыдущий login затрется?
   }
 
   return (
