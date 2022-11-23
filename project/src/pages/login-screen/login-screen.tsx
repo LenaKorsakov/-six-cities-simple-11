@@ -29,7 +29,7 @@ function LoginScreen(): JSX.Element{
       });
     }
   }
-
+  //TODO добавить валидацию. Какой способ выбрать?
   return (
     (authorizationStatus === AuthorizationStatus.Auth)
       ? <Navigate to={AppRoute.Main} />//Подходит ли такой способ переадресации или нужно как в учебном проекте писать middleware redirect?

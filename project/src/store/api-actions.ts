@@ -41,7 +41,7 @@ export const checkAuthAction = createAsyncThunk<
     } catch {
       dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
 
-      dispatch(redirectToRoute(AppRoute.Login));//TODO нужен ли этот редирект? + появляются ошибки от toasty
+      dispatch(redirectToRoute(AppRoute.Login));//TODO нужен ли этот редирект?
     }
   }
 );
