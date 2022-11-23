@@ -2,9 +2,10 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   changeCity,
   changeSort,
+  setUserData,
   listAllOffers,
   listNearbyOffers,
-  requireAuthorication,
+  setAuthorizationStatus,
   setOffersDataLoadingStatus
 } from './actions';
 import {
@@ -17,6 +18,7 @@ import { DEFAULT_SORT } from '../const/sort-type';
 import { City, Offer } from '../@types/offer-types';
 import { SortEnum } from '../const/@types';
 import { AuthorizationStatus } from '../const/authorization-status';
+import { UserData } from './@types';
 
 
 type InitialState = {
@@ -26,6 +28,7 @@ type InitialState = {
   sortOption: SortEnum;
   isOffersDataLoading: boolean;
   authorizationStatus: string;
+  user: UserData | null;
 }
 
 const initialState: InitialState = {
@@ -34,7 +37,8 @@ const initialState: InitialState = {
   city: DEFAULT_CITY,
   sortOption: DEFAULT_SORT,
   isOffersDataLoading: false,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  user: null
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -54,7 +58,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
     })
-    .addCase(requireAuthorication, (state, action) => {
+    .addCase(setAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(fetchAllOffersAction.pending, (state) => {
@@ -65,6 +69,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchAllOffersAction.rejected, (state) => {
       state.isOffersDataLoading = false;
+    })
+    .addCase(setUserData, (state, action) => {
+      state.user = action.payload;
     });
 });
 
