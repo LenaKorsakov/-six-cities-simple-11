@@ -7,13 +7,14 @@ import Map from '../map/map';
 import SortOptions from '../sort/sort-options';
 import OffersListEmpty from '../offers-list-empty/offers-list-empty';
 import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';
-import { fetchAllOffersAction } from '../../store/api-actions';
+import { checkAuthAction, fetchAllOffersAction } from '../../store/api-actions';
 import { store } from '../../store/index';
 
 import { SortType } from '../../const/sort-type';
 import type {City, Offer} from '../../@types/offer-types';
 import type { SortEnum } from '../../const/@types';
 import { useAppSelector } from '../../hooks';
+import { AuthorizationStatus } from '../../const/authorization-status';
 
 type MainContentProps = {
   cities: City[];
@@ -36,13 +37,15 @@ function getSortCompare(sortOption: SortEnum) {
 }
 
 function MainContent({cities}: MainContentProps): JSX.Element {
+  useEffect(() => {
+    store.dispatch(fetchAllOffersAction());
+    store.dispatch(checkAuthAction());
+  }, []);
+
   const selectedCity = useAppSelector((state) => state.city);
   const selectedSortOption = useAppSelector((state) => state.sortOption);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-
-  useEffect(() => {
-    store.dispatch(fetchAllOffersAction());
-  }, []);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   function findOffersByCityName(offer: Offer) {
     return offer.city.name === selectedCity.name;
@@ -60,7 +63,7 @@ function MainContent({cities}: MainContentProps): JSX.Element {
   };
 
   return(
-    isOffersDataLoading ? <LoadingScreen/> :
+    (isOffersDataLoading || authorizationStatus === AuthorizationStatus.Unknown) ? <LoadingScreen/> :
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
