@@ -8,10 +8,13 @@ import { cities } from '../src/const/city-names';
 import {store} from '../src/store/index';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { checkAuthAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+
+store.dispatch(checkAuthAction());
 
 const data = {
   cities: cities,

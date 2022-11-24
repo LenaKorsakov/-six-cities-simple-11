@@ -27,7 +27,7 @@ type InitialState = {
   city: City;
   sortOption: SortEnum;
   isOffersDataLoading: boolean;
-  authorizationStatus: string;
+  authorizationStatus: AuthorizationStatus;
   user: UserData | null;
 }
 
