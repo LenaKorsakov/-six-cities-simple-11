@@ -12,7 +12,7 @@ type HeaderAuthProps = {
 function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  function HandleLinkClick() {
+  function handleLinkClick() {
     dispatch(logoutAction());
 
     dispatch(setUserData(null));// TODO нужно ли это действие на выходе? Если при следующей авторизации предыдущий login затрется?
@@ -30,7 +30,7 @@ function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
       </li>
       <li
         className="header__nav-item"
-        onClick={HandleLinkClick}
+        onClick={handleLinkClick}
       >
         <Link
           className="header__nav-link"

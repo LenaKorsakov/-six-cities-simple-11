@@ -5,7 +5,7 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-route/history-router';
 import browserHistory from '../../browser-history';
 
 import {AppRoute} from '../../const/app-route';

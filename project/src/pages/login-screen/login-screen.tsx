@@ -5,7 +5,6 @@ import HeaderLogoOnly from '../../components/header/header-logo-only';
 import { AppRoute } from '../../const/app-route';
 import { AuthorizationStatus } from '../../const/authorization-status';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthData } from '../../store/@types';
 import { loginAction } from '../../store/api-actions';
 
 function LoginScreen(): JSX.Element{
@@ -15,18 +14,14 @@ function LoginScreen(): JSX.Element{
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const dispatch = useAppDispatch();
 
-  function onFormSubmit(authData: AuthData) {
-    dispatch(loginAction(authData));
-  }
-
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if(emailRef.current !== null && passwordRef.current !== null) {
-      onFormSubmit({
+      dispatch(loginAction({
         login: emailRef.current.value,
         password: passwordRef.current.value
-      });
+      }));
     }
   }
   //TODO добавить валидацию. Какой способ выбрать?

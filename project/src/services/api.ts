@@ -4,20 +4,15 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse
 } from 'axios';
-import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
 import { getToken } from './token';
-
-const StatusCodeMapping: Record<number, boolean> = {
-  [StatusCodes.BAD_REQUEST]: true,
-  //[StatusCodes.UNAUTHORIZED]: true, TODO нужно ли показывать эту ошибку, если в приложении нет приватных маршрутов? Отключила
-  [StatusCodes.NOT_FOUND]: true
-};
-
-const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+import { StatusCodeMapping } from '../const/status-code-mapping';
 
 const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
 const REQUEST_TIMEOUT = 5000;
+
+const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
