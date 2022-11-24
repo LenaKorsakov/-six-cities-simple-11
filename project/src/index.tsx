@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 import App from './components/app/app';
 import reviews from './mocks/reviews';
-import { cities } from '../src/const/city-names';
+import { cities } from './const/city-name';
 import {store} from '../src/store/index';
 
 import 'react-toastify/dist/ReactToastify.css';

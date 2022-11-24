@@ -13,7 +13,7 @@ import {
 } from './api-actions';
 
 import nearbyOffers from '../mocks/nearby-offers';
-import { DEFAULT_CITY } from '../const/city-names';
+import { DEFAULT_CITY } from '../const/city-name';
 import { DEFAULT_SORT } from '../const/sort-type';
 import { City, Offer } from '../@types/offer-types';
 import { SortEnum } from '../const/@types';

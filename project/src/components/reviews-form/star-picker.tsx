@@ -1,4 +1,4 @@
-import type {Star} from '../../@types/component-types';
+import type {Star} from '../../@types/star-types';
 import { ChangeEvent} from 'react';
 
 type StarPickerProps = {

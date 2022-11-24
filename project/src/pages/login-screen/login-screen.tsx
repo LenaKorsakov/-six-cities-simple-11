@@ -1,13 +1,21 @@
 import { FormEvent, useRef } from 'react';
 import {Helmet} from 'react-helmet-async';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import HeaderLogoOnly from '../../components/header/header-logo-only';
 import { AppRoute } from '../../const/app-route';
 import { AuthorizationStatus } from '../../const/authorization-status';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { City } from '../../@types/offer-types';
+import { cities } from '../../const/city-name';
+import { getRandomCity } from '../../utiles/get-random-city';
+import { changeCity } from '../../store/actions';
 
-function LoginScreen(): JSX.Element{
+type LoginScreenProps = {
+  locations: City[];
+}
+
+function LoginScreen({locations}: LoginScreenProps): JSX.Element{
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -24,6 +32,13 @@ function LoginScreen(): JSX.Element{
       }));
     }
   }
+
+  const randomCity = getRandomCity(cities);
+
+  function handleCityNameClick() {
+    dispatch(changeCity(randomCity));
+  }
+
   //TODO добавить валидацию. Какой способ выбрать?
   return (
     (authorizationStatus === AuthorizationStatus.Auth)
@@ -79,10 +94,16 @@ function LoginScreen(): JSX.Element{
               </form>
             </section>
             <section className="locations locations--login locations--current">
-              <div className="locations__item">
-                <a className="locations__item-link" href="/">
-                  <span>Amsterdam</span>
-                </a>
+              <div
+                className="locations__item"
+                onClick={handleCityNameClick}
+              >
+                <Link
+                  className="locations__item-link"
+                  to={AppRoute.Main}
+                >
+                  <span>{ randomCity.name }</span>
+                </Link>
               </div>
             </section>
           </div>

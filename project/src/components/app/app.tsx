@@ -42,7 +42,7 @@ function App({cities, reviews}: AppProps): JSX.Element {
               path={AppRoute.Login}
               element={
                 <PrivateRoute authorizationStatus={authorizationStatus}>
-                  <LoginScreen />
+                  <LoginScreen locations = {cities}/>
                 </PrivateRoute>
               }
             />
