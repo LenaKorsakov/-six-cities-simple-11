@@ -3,9 +3,11 @@ export const Action = {
   ListNearbyOffers: 'offers/listNearbyOffers',
   ChangeCity: 'offers/changeCity',
   ChangeSort: 'offers/changeSort',
+
   FetchAllOffers: 'data/fetchOffers',
-  SetOffersDataLoadingStatus: 'data/setOffersDataLoadingStatus',
+  FetchNearbyOffers: 'data/fetchNearbyOffers',
   SetAuthorizationStatus: 'data/setAuthorizationStatus',
+
   CheckAuth:'user/checkAuth',
   UserLogIn: 'user/login',
   UserLogOut: 'user/logout',

@@ -1,12 +1,11 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import type {State, AppDispatch} from '../@types/state';
 import { Offer } from '../@types/offer-types';
 import { ApiRoute } from '../const/api-route';
 import { setUserData, listAllOffers, setAuthorizationStatus, redirectToRoute} from './actions';
 import { Action } from '../const/action';
 import { AuthorizationStatus } from '../const/authorization-status';
-import { AuthData, UserData } from './@types';
+import { AuthData, UserData, State, AppDispatch} from './@types';
 import { dropToken, saveToken } from '../services/token';
 import { AppRoute } from '../const/app-route';
 

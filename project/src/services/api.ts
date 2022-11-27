@@ -6,12 +6,14 @@ import axios, {
 } from 'axios';
 import { toast } from 'react-toastify';
 import { getToken } from './token';
-import { StatusCodeMapping } from '../const/status-code-mapping';
+import { StatusCodes } from 'http-status-codes';
 
 const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
 const REQUEST_TIMEOUT = 5000;
 
-const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+const statusErrors = new Set([StatusCodes.BAD_REQUEST, StatusCodes.NOT_FOUND]);
+
+const shouldDisplayError = (response: AxiosResponse) => statusErrors.has(response.status);
 
 
 export const createAPI = (): AxiosInstance => {

@@ -6,13 +6,11 @@ import {
   listAllOffers,
   listNearbyOffers,
   setAuthorizationStatus,
-  setOffersDataLoadingStatus
 } from './actions';
 import {
   fetchAllOffersAction
 } from './api-actions';
 
-import nearbyOffers from '../mocks/nearby-offers';
 import { DEFAULT_CITY } from '../const/city-name';
 import { DEFAULT_SORT } from '../const/sort-type';
 import { City, Offer } from '../@types/offer-types';
@@ -33,7 +31,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   offers: [],
-  nearbyOffers,
+  nearbyOffers: [],
   city: DEFAULT_CITY,
   sortOption: DEFAULT_SORT,
   isOffersDataLoading: false,
@@ -54,9 +52,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeSort, (state, action) => {
       state.sortOption = action.payload;
-    })
-    .addCase(setOffersDataLoadingStatus, (state, action) => {
-      state.isOffersDataLoading = action.payload;
     })
     .addCase(setAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
