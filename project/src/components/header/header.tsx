@@ -4,10 +4,11 @@ import HeaderLogoOnly from './header-logo-only';
 
 import HeaderAuth from './header-auth';
 import HeaderNoAuth from './header-no-auth';
+import { getAuthorizationStatus, getUsersData } from '../../store/user-process/user-process-selectors';
 
 function Header(): JSX.Element {
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUsersData);
 
   return (
     <HeaderLogoOnly>

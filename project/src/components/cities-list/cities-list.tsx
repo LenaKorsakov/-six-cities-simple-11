@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import type { City } from '../../@types/offer-types';
 import { AppRoute } from '../../const/app-route';
 import { useAppDispatch } from '../../hooks';
-import { changeCity } from '../../store/actions';
+import { changeCity } from '../../store/offers-process/offers-process';
 
 type CitiesListProps ={
   cities: City[];
@@ -22,7 +22,7 @@ function CitiesList({cities, selectedCity}: CitiesListProps): JSX.Element {
             onClick={()=> dispatch(changeCity(city))}
           >
             <Link to={AppRoute.Main}
-              className={`locations__item-link tabs__item ${(city.name === selectedCity.name) ? 'tabs__item--active' : ''}`}//не получилось написать при помощи &&
+              className={`locations__item-link tabs__item ${(city.name === selectedCity.name) ? 'tabs__item--active' : ''}`}
             >
               <span>{city.name}</span>
             </Link>

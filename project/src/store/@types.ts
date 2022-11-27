@@ -24,6 +24,7 @@ export type UserProcess = {
 
 export type OffersData = {
   offers: Offer[];
+  selectedOffer: Offer;
   nearbyOffers:Offer[];
   isOffersDataLoading: boolean;
 };

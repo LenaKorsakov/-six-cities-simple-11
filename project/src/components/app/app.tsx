@@ -5,6 +5,7 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 import HistoryRoute from '../history-route/history-route';
 import browserHistory from '../../browser-history';
@@ -14,9 +15,10 @@ import {AppRoute} from '../../const/app-route';
 import type { City} from '../../@types/offer-types';
 import { Review } from '../../@types/review-types';
 import MainScreen from '../../pages/main-screen/main-screen';
+
 import { useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../const/authorization-status';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 type AppProps = {
   cities: City[];
@@ -24,7 +26,7 @@ type AppProps = {
 }
 
 function App({cities, reviews}: AppProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return(
     authorizationStatus === AuthorizationStatus.Unknown

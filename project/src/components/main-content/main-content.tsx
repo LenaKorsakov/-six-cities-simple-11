@@ -12,6 +12,8 @@ import { SortType } from '../../const/sort-type';
 import type {City, Offer} from '../../@types/offer-types';
 import type { SortEnum } from '../../const/@types';
 import { useAppSelector } from '../../hooks';
+import { getCity, getSort } from '../../store/offers-process/offers-process-selectors';
+import { getAllOffers, getOffersLoadingStatus } from '../../store/offers-data/offers-data-selectors';
 
 type MainContentProps = {
   cities: City[];
@@ -34,15 +36,16 @@ function getSortCompare(sortOption: SortEnum) {
 }
 
 function MainContent({cities}: MainContentProps): JSX.Element {
-  const selectedCity = useAppSelector((state) => state.city);
-  const selectedSortOption = useAppSelector((state) => state.sortOption);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const selectedCity = useAppSelector(getCity);
+  const selectedSortOption = useAppSelector(getSort);
+  const isOffersDataLoading = useAppSelector(getOffersLoadingStatus);
 
   function findOffersByCityName(offer: Offer) {
     return offer.city.name === selectedCity.name;
   }
+  const allOffers = useAppSelector(getAllOffers);
 
-  const offers = useAppSelector((state)=> state.offers).filter(findOffersByCityName).sort(getSortCompare(selectedSortOption));
+  const offers = allOffers.filter(findOffersByCityName).sort(getSortCompare(selectedSortOption));
   const offersCount = offers.length;
 
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);

@@ -23,3 +23,6 @@ export const offersProcess = createSlice({
     }
   }
 });
+
+
+export const {changeCity, changeSort} = offersProcess.actions;

@@ -1,13 +1,14 @@
 import { useState, useEffect, MouseEvent} from 'react';
 import { SORT_OPTIONS } from '../../const/sort-type';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeSort } from '../../store/actions';
+import { changeSort } from '../../store/offers-process/offers-process';
+import { getSort } from '../../store/offers-process/offers-process-selectors';
 
 import type { SortEnum } from '../../const/@types';
 
 function SortOptions(): JSX.Element {
 
-  const selectedSortOption = useAppSelector((state)=> state.sortOption);
+  const selectedSortOption = useAppSelector(getSort);
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();

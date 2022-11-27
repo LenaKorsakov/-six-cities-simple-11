@@ -8,7 +8,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { City } from '../../@types/offer-types';
 import { getRandomItem } from '../../utiles/get-random-item';
-import { changeCity } from '../../store/actions';
+import { changeCity } from '../../store/offers-process/offers-process';
+import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 type LoginScreenProps = {
   locations: City[];
@@ -18,7 +19,7 @@ function LoginScreen({locations}: LoginScreenProps): JSX.Element{
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
