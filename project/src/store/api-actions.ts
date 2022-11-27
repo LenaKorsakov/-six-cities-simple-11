@@ -19,7 +19,38 @@ export const fetchAllOffersAction = createAsyncThunk<
     const { data } = await api.get<Offer[]>(ApiRoute.Offers);
 
     return data;
-    //TODO нужно ли делать здесь try catch и при ощибке делать редирект на страницу ошибки? Или досточно перехвата в интерсепторе?
+  }
+);
+
+export const fetchNearbyOffersAction = createAsyncThunk<
+  Offer[],
+  number,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(Action.FetchNearbyOffers,
+  async (id, {dispatch, extra: api}) => {
+    const { data } = await api.get<Offer[]>(`${ApiRoute.Offers}/${id}/nearby`);
+
+    return data;
+  }
+);
+
+export const fetchOfferByIdAction = createAsyncThunk<
+  Offer,
+  number,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(Action.FetchOfferById,
+  async (id, {dispatch, extra: api}) => {
+    const { data } = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
+
+    return data;
   }
 );
 
