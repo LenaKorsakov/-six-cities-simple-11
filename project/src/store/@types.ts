@@ -1,5 +1,7 @@
 import { store } from './index';
 import { AuthorizationStatus } from '../const/authorization-status';
+import { City, Offer } from '../@types/offer-types';
+import { SortEnum } from '../const/@types';
 
 export type UserData = {
   avatarUrl: string;
@@ -17,6 +19,18 @@ export type AuthData = {
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  user: UserData;
+};
+
+export type OffersData = {
+  offers: Offer[];
+  nearbyOffers:Offer[];
+  isOffersDataLoading: boolean;
+};
+
+export type OffersProcess = {
+  city: City;
+  sortOption: SortEnum;
 };
 
 export type State = ReturnType<typeof store.getState>;
