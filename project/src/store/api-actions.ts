@@ -20,8 +20,12 @@ export const fetchAllOffersAction = createAsyncThunk<
   }
 >(Action.FetchAllOffers,
   async (_arg, {dispatch, extra: api}) => {
-    const { data } = await api.get<Offer[]>(ApiRoute.Offers);
-    dispatch(listAllOffers(data));
+    try { const { data } = await api.get<Offer[]>(ApiRoute.Offers);
+
+      dispatch(listAllOffers(data));
+    } catch {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+    }
   }
 );
 
@@ -36,12 +40,12 @@ export const checkAuthAction = createAsyncThunk<
 >(Action.SetAuthorizationStatus,
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(ApiRoute.Login);
+      const { data } = await api.get<UserData>(ApiRoute.Login);
+
       dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
+      dispatch(setUserData(data));
     } catch {
       dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
-
-      dispatch(redirectToRoute(AppRoute.Login));//TODO нужен ли этот редирект?
     }
   }
 );
