@@ -5,7 +5,6 @@ import {
   setUserData,
   listAllOffers,
   listNearbyOffers,
-  setAuthorizationStatus,
 } from './actions';
 import {
   fetchAllOffersAction
@@ -15,7 +14,6 @@ import { DEFAULT_CITY } from '../const/city-name';
 import { DEFAULT_SORT } from '../const/sort-type';
 import { City, Offer } from '../@types/offer-types';
 import { SortEnum } from '../const/@types';
-import { AuthorizationStatus } from '../const/authorization-status';
 import { UserData } from './@types';
 
 
@@ -25,7 +23,6 @@ type InitialState = {
   city: City;
   sortOption: SortEnum;
   isOffersDataLoading: boolean;
-  authorizationStatus: AuthorizationStatus;
   user: UserData;
 }
 
@@ -35,7 +32,6 @@ const initialState: InitialState = {
   city: DEFAULT_CITY,
   sortOption: DEFAULT_SORT,
   isOffersDataLoading: false,
-  authorizationStatus: AuthorizationStatus.Unknown,
   user: {} as UserData
 };
 
@@ -52,9 +48,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeSort, (state, action) => {
       state.sortOption = action.payload;
-    })
-    .addCase(setAuthorizationStatus, (state, action) => {
-      state.authorizationStatus = action.payload;
     })
     .addCase(fetchAllOffersAction.pending, (state) => {
       state.isOffersDataLoading = true;
