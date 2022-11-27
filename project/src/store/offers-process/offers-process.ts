@@ -11,7 +11,7 @@ const initialState: OffersProcess = {
   sortOption: DEFAULT_SORT
 };
 
-export const offersData = createSlice({
+export const offersProcess = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {
