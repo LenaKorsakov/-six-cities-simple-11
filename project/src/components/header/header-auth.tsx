@@ -1,3 +1,4 @@
+import './header-avatar-picture.css';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/app-route';
 import { useAppDispatch } from '../../hooks';
@@ -9,6 +10,7 @@ type HeaderAuthProps = {
 }
 
 function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
+  const {email, avatarUrl, name} = user;
   const dispatch = useAppDispatch();
 
   function handleNavigationItemClick() {
@@ -19,9 +21,17 @@ function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
     <>
       <li className="header__nav-item user">
         <div className="header__nav-profile">
-          <div className="header__avatar-wrapper user__avatar-wrapper" />
+          <div className="header__avatar-wrapper user__avatar-wrapper">
+            <img
+              className="header__avatar-picture"
+              src={avatarUrl}
+              width="20"
+              height="20"
+              alt={name}
+            />
+          </div>
           <span className="header__user-name user__name">
-            {user.email}
+            {email}
           </span>
         </div>
       </li>
