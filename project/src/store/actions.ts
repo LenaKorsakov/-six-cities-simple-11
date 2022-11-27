@@ -18,6 +18,6 @@ export const setOffersDataLoadingStatus = createAction<boolean>(Action.SetOffers
 
 export const setAuthorizationStatus = createAction<AuthorizationStatus>(Action.SetAuthorizationStatus);
 
-export const setUserData = createAction<UserData | null>(Action.SetUserData);
+export const setUserData = createAction<UserData>(Action.SetUserData);
 
 export const redirectToRoute = createAction<AppRoute>(Action.RedirectToRoute);

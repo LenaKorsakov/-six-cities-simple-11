@@ -7,8 +7,7 @@ import { AuthorizationStatus } from '../../const/authorization-status';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { City } from '../../@types/offer-types';
-import { cities } from '../../const/city-name';
-import { getRandomCity } from '../../utiles/get-random-city';
+import { getRandomItem } from '../../utiles/get-random-item';
 import { changeCity } from '../../store/actions';
 
 type LoginScreenProps = {
@@ -33,7 +32,7 @@ function LoginScreen({locations}: LoginScreenProps): JSX.Element{
     }
   }
 
-  const randomCity = getRandomCity(cities);
+  const randomCity = getRandomItem<City>(locations);
 
   function handleCityNameClick() {
     dispatch(changeCity(randomCity));
@@ -42,7 +41,7 @@ function LoginScreen({locations}: LoginScreenProps): JSX.Element{
   //TODO добавить валидацию. Какой способ выбрать?
   return (
     (authorizationStatus === AuthorizationStatus.Auth)
-      ? <Navigate to={AppRoute.Main} />//Подходит ли такой способ переадресации или нужно как в учебном проекте писать middleware redirect?
+      ? <Navigate to={AppRoute.Main} />
       :
       <div className="page page--gray page--login">
         <Helmet>

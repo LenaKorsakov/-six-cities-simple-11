@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import OffersListCity from '../offers-list-city/offers-list-city';
 import CitiesList from '../cities-list/cities-list';
@@ -7,8 +7,6 @@ import Map from '../map/map';
 import SortOptions from '../sort/sort-options';
 import OffersListEmpty from '../offers-list-empty/offers-list-empty';
 import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';
-import { fetchAllOffersAction } from '../../store/api-actions';
-import { store } from '../../store/index';
 
 import { SortType } from '../../const/sort-type';
 import type {City, Offer} from '../../@types/offer-types';
@@ -36,10 +34,6 @@ function getSortCompare(sortOption: SortEnum) {
 }
 
 function MainContent({cities}: MainContentProps): JSX.Element {
-  useEffect(() => {
-    store.dispatch(fetchAllOffersAction());
-  }, []);
-
   const selectedCity = useAppSelector((state) => state.city);
   const selectedSortOption = useAppSelector((state) => state.sortOption);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);

@@ -28,7 +28,7 @@ type InitialState = {
   sortOption: SortEnum;
   isOffersDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
-  user: UserData | null;
+  user: UserData;
 }
 
 const initialState: InitialState = {
@@ -38,7 +38,7 @@ const initialState: InitialState = {
   sortOption: DEFAULT_SORT,
   isOffersDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
-  user: null
+  user: {} as UserData
 };
 
 const reducer = createReducer(initialState, (builder) => {

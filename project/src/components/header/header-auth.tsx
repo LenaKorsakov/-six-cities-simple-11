@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/app-route';
 import { useAppDispatch } from '../../hooks';
 import { UserData } from '../../store/@types';
-import { setUserData } from '../../store/actions';
 import { logoutAction } from '../../store/api-actions';
 
 type HeaderAuthProps = {
@@ -14,8 +13,6 @@ function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
 
   function handleNavigationItemClick() {
     dispatch(logoutAction());
-
-    dispatch(setUserData(null));// TODO нужно ли это действие на выходе? Если при следующей авторизации предыдущий login затрется?
   }
 
   return (
