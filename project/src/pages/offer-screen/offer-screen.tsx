@@ -8,8 +8,9 @@ import { store } from '../../store';
 
 import { useAppSelector } from '../../hooks';
 import type { Review } from '../../@types/review-types';
-import { getAllOffers, getNearbyOffers } from '../../store/offers-data/offers-data-selectors';
+import { getAllOffers, getNearbyOffers, getOffersLoadingStatus } from '../../store/offers-data/offers-data-selectors';
 import { fetchNearbyOffersAction, fetchOfferByIdAction } from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 
 type OfferScreenProps = {
@@ -20,6 +21,7 @@ function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
 
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const offers = useAppSelector(getAllOffers);
+  const isDataLoading = useAppSelector(getOffersLoadingStatus);
 
   const {id} = useParams() as {id: string};
   const propId = +id;
@@ -36,7 +38,12 @@ function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
     return (
       <NotFoundScreen/>
     );
-  } return(
+  } else if (isDataLoading) {
+    return (
+      <LoadingScreen/>
+    );
+  }
+  return(
     <div className="page">
       <Helmet>
         <title>Шесть городов.Страничка апартаментов.</title>
