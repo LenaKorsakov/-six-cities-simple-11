@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import OfferCardCity from '../offer-card-city/offer-card-city';
 
 import type {OfferPreview} from '../../@types/offer-types';
@@ -9,9 +10,9 @@ type OffersListCityProps = {
 
 function OffersListCity({offers, onOfferHover}: OffersListCityProps): JSX.Element{
 
-  function handleMouseEnter(id: number | undefined) {
+  const handleMouseEnter = useCallback((id: number | undefined) => {
     onOfferHover(id);
-  }
+  },[onOfferHover]);
 
   function handleMouseLeave() {
     onOfferHover(0);
