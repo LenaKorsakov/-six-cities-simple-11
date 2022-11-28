@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../const/authorization-status';
 import HeaderLogoOnly from './header-logo-only';
@@ -19,4 +20,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

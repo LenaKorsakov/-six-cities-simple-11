@@ -1,5 +1,7 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { capitalizeFirstLetter, formatPrice } from '../../utiles/format';
+import { capitalizeFirstLetter, formatPrice, createRatingWidth } from '../../utiles/format';
+import { AppRoute } from '../../const/app-route';
 import type {OfferPreview} from '../../@types/offer-types';
 
 type OfferCardProps = {
@@ -22,7 +24,7 @@ function OfferCard({offer}: OfferCardProps): JSX.Element{
             src={previewImage}
             width={260}
             height={200}
-            alt="Place to live"
+            alt={title}
           />
         </a>
       </div>
@@ -37,12 +39,12 @@ function OfferCard({offer}: OfferCardProps): JSX.Element{
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * 20}%` }} />
+            <span style={{ width: `${createRatingWidth(rating)}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>
+          <Link to={`${AppRoute.Offer}/${id}`}>
             {title}
           </Link>
         </h2>
@@ -54,4 +56,4 @@ function OfferCard({offer}: OfferCardProps): JSX.Element{
   );
 }
 
-export default OfferCard;
+export default memo(OfferCard);

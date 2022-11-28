@@ -38,7 +38,7 @@ function App({cities, reviews}: AppProps): JSX.Element {
           <Routes>
             <Route
               path={AppRoute.Main}
-              element={<MainScreen cities = {cities}/>}
+              element={<MainScreen cities = {cities} />}
             />
             <Route
               path={AppRoute.Login}
@@ -49,7 +49,7 @@ function App({cities, reviews}: AppProps): JSX.Element {
               }
             />
             <Route
-              path={AppRoute.Offer}
+              path={`${AppRoute.Offer}/:id`}
               element={
                 <OfferScreen
                   reviews={reviews}

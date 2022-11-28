@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, useCallback, memo, useMemo} from 'react';
 
 import OffersListCity from '../offers-list-city/offers-list-city';
 import CitiesList from '../cities-list/cities-list';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import Map from '../map/map';
-import SortOptions from '../sort/sort-options';
+import SortOptions from '../sort-options/sort-options';
 import OffersListEmpty from '../offers-list-empty/offers-list-empty';
-import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';
 
 import { SortType } from '../../const/sort-type';
 import type {City, Offer} from '../../@types/offer-types';
 import type { SortEnum } from '../../const/@types';
+
+import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';
 import { useAppSelector } from '../../hooks';
 import { getCity, getSort } from '../../store/offers-process/offers-process-selectors';
 import { getAllOffers, getOffersLoadingStatus } from '../../store/offers-data/offers-data-selectors';
@@ -36,25 +37,25 @@ function getSortCompare(sortOption: SortEnum) {
 }
 
 function MainContent({cities}: MainContentProps): JSX.Element {
+  const allOffers = useAppSelector(getAllOffers);
   const selectedCity = useAppSelector(getCity);
   const selectedSortOption = useAppSelector(getSort);
   const isOffersDataLoading = useAppSelector(getOffersLoadingStatus);
 
-  function findOffersByCityName(offer: Offer) {
-    return offer.city.name === selectedCity.name;
-  }
-  const allOffers = useAppSelector(getAllOffers);
-
-  const offers = allOffers.filter(findOffersByCityName).sort(getSortCompare(selectedSortOption));
-  const offersCount = offers.length;
-
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
 
-  const onOfferCardHover = (offerId: number | undefined) => {
+  const findOffersByCityName = useCallback((offer: Offer) => offer.city.name === selectedCity.name,[selectedCity]);
+
+  const offers = useMemo(() => allOffers.filter(findOffersByCityName).sort(getSortCompare(selectedSortOption))
+    ,[allOffers, findOffersByCityName, selectedSortOption ]);
+
+  const offersCount = offers.length;
+
+  const onOfferCardHover = useCallback((offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId) ?? null;
 
     setActiveOffer(currentOffer);
-  };
+  }, [offers]);
 
   return(
     (isOffersDataLoading) ? <LoadingScreen/> :
@@ -95,5 +96,5 @@ function MainContent({cities}: MainContentProps): JSX.Element {
   );
 }
 
-export default MainContent;
+export default memo(MainContent);
 export type { MainContentProps as MainScreenProps };

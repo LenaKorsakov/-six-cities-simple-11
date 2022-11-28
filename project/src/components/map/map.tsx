@@ -1,4 +1,4 @@
-import {useRef, useEffect} from 'react';
+import {useRef, useEffect, memo} from 'react';
 
 import cn from 'classnames';
 
@@ -75,4 +75,4 @@ function Map(props: MapProps): JSX.Element {
     </section>);
 }
 
-export default Map;
+export default memo(Map);
