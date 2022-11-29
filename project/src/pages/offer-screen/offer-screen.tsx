@@ -32,13 +32,13 @@ function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
   }, [propId]);
 
 
-  const offer = offers.find((item) => (item.id) === propId) ?? null;
+  const offer = offers.find((item) => item.id === propId) ?? null;
 
   if (offer === null) {
     return (
       <NotFoundScreen/>
     );
-  } else if (isDataLoading) {
+  } if (isDataLoading) {
     return (
       <LoadingScreen/>
     );

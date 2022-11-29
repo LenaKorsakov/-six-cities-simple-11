@@ -25,8 +25,8 @@ function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
             <img
               className="header__avatar-picture"
               src={avatarUrl}
-              width="20"
-              height="20"
+              width={20}
+              height={20}
               alt={name}
             />
           </div>
