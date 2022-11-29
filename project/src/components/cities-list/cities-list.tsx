@@ -1,17 +1,16 @@
 import { memo, useCallback, MouseEvent} from 'react';
 import { Link } from 'react-router-dom';
-import type { City } from '../../@types/offer-types';
 import { AppRoute } from '../../const/app-route';
-import { CityName } from '../../const/city-name';
 import { useAppDispatch } from '../../hooks';
 import { changeCity } from '../../store/offers-process/offers-process';
+import type { City, CityName } from '../../@types/offer-types';
 
 type CitiesListProps ={
   cities: City[];
-  selectedCity: City;
+  selectedCityName: CityName;
 }
 
-function CitiesList({cities, selectedCity}: CitiesListProps): JSX.Element {
+function CitiesList({cities, selectedCityName}: CitiesListProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleCityClick = useCallback(
@@ -21,11 +20,11 @@ function CitiesList({cities, selectedCity}: CitiesListProps): JSX.Element {
       const currentCityName = event.currentTarget.textContent as CityName;
       const currentCity = cities.find((city) => city.name === currentCityName) as City;
 
-      if(currentCityName !== selectedCity.name) {
+      if(currentCityName !== selectedCityName) {
         dispatch(changeCity(currentCity));
       }
     },
-    [cities, dispatch, selectedCity],
+    [cities, dispatch, selectedCityName],
   );
 
   return(
@@ -38,7 +37,7 @@ function CitiesList({cities, selectedCity}: CitiesListProps): JSX.Element {
             onClick={handleCityClick}
           >
             <Link to={AppRoute.Main}
-              className={`locations__item-link tabs__item ${(city.name === selectedCity.name)
+              className={`locations__item-link tabs__item ${(city.name === selectedCityName)
                 ? 'tabs__item--active'
                 : ''}`}
             >

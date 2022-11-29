@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, memo } from 'react';
 import OfferCardCity from '../offer-card-city/offer-card-city';
 
 import type {OfferPreview} from '../../@types/offer-types';
@@ -14,9 +14,9 @@ function OffersListCity({offers, onOfferHover}: OffersListCityProps): JSX.Elemen
     onOfferHover(id);
   },[onOfferHover]);
 
-  function handleMouseLeave() {
+  const handleMouseLeave = useCallback(() => {
     onOfferHover(0);
-  }
+  },[onOfferHover]);
 
   return (
     <div
@@ -36,4 +36,4 @@ function OffersListCity({offers, onOfferHover}: OffersListCityProps): JSX.Elemen
   );
 }
 
-export default OffersListCity;
+export default memo(OffersListCity);

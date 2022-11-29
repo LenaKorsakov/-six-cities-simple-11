@@ -23,6 +23,8 @@ export type City = {
 name: string;
 }
 
+export type CityName = string;
+
 type Location = {
   latitude: number;
   longitude: number;

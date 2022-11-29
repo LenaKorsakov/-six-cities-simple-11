@@ -4,12 +4,12 @@ type OfferGalleryProps = {
  offer: Offer;
 }
 
-const GALLERY_MAXLENGTH = 6;
+const GALLERY_MAX_LENGTH = 6;
 
 function OfferGallery({offer}: OfferGalleryProps): JSX.Element {
   const {images, title} = offer;
 
-  const visibleImages = images?.slice(0, GALLERY_MAXLENGTH);
+  const visibleImages = images?.slice(0, GALLERY_MAX_LENGTH);
 
   return (
     <div className="property__gallery-container container">

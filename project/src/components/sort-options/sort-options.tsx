@@ -1,14 +1,17 @@
+import { memo } from 'react';
 import { useState, useEffect, MouseEvent} from 'react';
 import { SORT_OPTIONS } from '../../const/sort-type';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { changeSort } from '../../store/offers-process/offers-process';
-import { getSort } from '../../store/offers-process/offers-process-selectors';
 
 import type { SortEnum } from '../../const/@types';
 
-function SortOptions(): JSX.Element {
+type SortOptionsProps = {
+  selectedSortOption: SortEnum;
+}
 
-  const selectedSortOption = useAppSelector(getSort);
+function SortOptions({selectedSortOption}: SortOptionsProps): JSX.Element {
+
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -21,25 +24,24 @@ function SortOptions(): JSX.Element {
     return () => document.removeEventListener('keydown', handleEventKeydown);
   }, [isOpened]);
 
-  function handleEventKeydown(event: KeyboardEvent) {
+  const handleEventKeydown = (event: KeyboardEvent) => {
     if(event.key.startsWith('Esc')) {
       event.preventDefault();
 
       setIsOpened(false);
     }
-  }
+  };
 
-  function handleSpanClick() {
+  const handleSpanClick = () => {
     setIsOpened(!isOpened);
-  }
+  };
 
-  function handleSortOptionClick(event: MouseEvent<HTMLUListElement>) {
+  const handleSortOptionClick = (event: MouseEvent<HTMLUListElement>) => {
     const selectedOption = event.target as HTMLLIElement;
     dispatch(changeSort(selectedOption.textContent as SortEnum));
 
     setIsOpened(false);
-
-  }
+  };
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -79,4 +81,4 @@ function SortOptions(): JSX.Element {
   );
 }
 //TODO закрытие по клику вне меню
-export default SortOptions;
+export default memo(SortOptions);
