@@ -9,7 +9,6 @@ import OffersListEmpty from '../offers-list-empty/offers-list-empty';
 
 import { SortType } from '../../const/sort-type';
 import type {City, Offer} from '../../@types/offer-types';
-import type { SortEnum } from '../../const/@types';
 
 import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';
 import { useAppSelector } from '../../hooks';
@@ -20,36 +19,37 @@ type MainContentProps = {
   cities: City[];
 };
 
-function getSortCompare(sortOption: SortEnum) {
-  switch(sortOption) {
-    case SortType.PriseLowToHight:
-      return sortPriceLowToHight;
-    case SortType.PriceLowToHight:
-      return sortPriceHightToLow;
-    case SortType.TopRatedFirst:
-      return sortRatingHightToLow;
-    case SortType.Popular:
-      return sortDefault;
-
-    default:
-      return sortDefault;
-  }
-}
-
 function MainContent({cities}: MainContentProps): JSX.Element {
   const allOffers = useAppSelector(getAllOffers);
   const selectedCity = useAppSelector(getCity);
   const selectedSortOption = useAppSelector(getSort);
   const isOffersDataLoading = useAppSelector(getOffersLoadingStatus);
 
+  const selectedCityName = selectedCity.name;
+
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
 
   const findOffersByCityName = useCallback((offer: Offer) => offer.city.name === selectedCity.name,[selectedCity]);
 
-  const offers = useMemo(() => allOffers.filter(findOffersByCityName).sort(getSortCompare(selectedSortOption))
-    ,[allOffers, findOffersByCityName, selectedSortOption ]);
-
+  const offers = allOffers.filter(findOffersByCityName);
   const offersCount = offers.length;
+
+  const sortedOffers = useMemo(() => {
+    switch(selectedSortOption) {
+      case SortType.PriseLowToHight:
+        return offers.slice().sort(sortPriceLowToHight);
+      case SortType.PriceLowToHight:
+        return offers.slice().sort(sortPriceHightToLow);
+      case SortType.TopRatedFirst:
+        return offers.slice().sort(sortRatingHightToLow);
+      case SortType.Popular:
+        return offers.slice().sort(sortDefault);
+
+      default:
+        return offers.slice().sort(sortDefault);
+    }
+  },[offers, selectedSortOption]);
+
 
   const onOfferCardHover = useCallback((offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId) ?? null;
@@ -65,7 +65,7 @@ function MainContent({cities}: MainContentProps): JSX.Element {
           <section className="locations container">
             <CitiesList
               cities={cities}
-              selectedCity={selectedCity}
+              selectedCityName={selectedCityName}
             />
           </section>
         </div>
@@ -76,10 +76,12 @@ function MainContent({cities}: MainContentProps): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found"> {offersCount} places to stay in {selectedCity.name}</b>
-                <SortOptions/>
+                <SortOptions
+                  selectedSortOption={selectedSortOption}
+                />
                 <OffersListCity
                   onOfferHover={onOfferCardHover}
-                  offers={offers}
+                  offers={sortedOffers}
                 />
               </section>
               <div className="cities__right-section">
