@@ -79,8 +79,6 @@ function LoginScreen({locations}: LoginScreenProps): JSX.Element{
                     name="password"
                     autoComplete='off'
                     placeholder="Password"
-                    minLength={2}
-                    maxLength={10}
                     size={10}
                     required
                   />
