@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import OfferCard from '../offer-card/offer-card';
 import type {OfferPreview} from '../../@types/offer-types';
 
@@ -31,4 +31,4 @@ function OfferCardCity(props: OfferCardCityProps): JSX.Element{
   );
 }
 
-export default memo(OfferCardCity);
+export default OfferCardCity;

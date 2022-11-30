@@ -40,7 +40,7 @@ function SortOptions({selectedSortOption}: SortOptionsProps): JSX.Element {
     const selectedOption = event.target as HTMLLIElement;
     dispatch(changeSort(selectedOption.textContent as SortEnum));
 
-    setIsOpened(false);
+    //setIsOpened(false);
   };
 
   return (

@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import MainContent from '../../components/main-content/main-content';
 import Header from '../../components/header/header';
 import {Helmet} from 'react-helmet-async';
@@ -16,4 +15,4 @@ function MainScreen({cities}: MainScreenProps): JSX.Element {
   );
 }
 
-export default memo(MainScreen);
+export default MainScreen;
