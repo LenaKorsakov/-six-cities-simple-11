@@ -1,7 +1,8 @@
 import { memo } from 'react';
-import { useState, useEffect, MouseEvent} from 'react';
+import { useState, useEffect, MouseEvent, useRef} from 'react';
 import { SORT_OPTIONS } from '../../const/sort-type';
 import { useAppDispatch } from '../../hooks';
+import useOnClickOutside from '../../hooks/use-on-click-outside';
 import { changeSort } from '../../store/offers-process/offers-process';
 
 import type { SortEnum } from '../../const/@types';
@@ -11,12 +12,24 @@ type SortOptionsProps = {
 }
 
 function SortOptions({selectedSortOption}: SortOptionsProps): JSX.Element {
-
+  const sortRef = useRef(null);
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
+  const closeSortOptions = () => {
+    setIsOpened(false);
+  };
+
   useEffect(() => {
+    const handleEventKeydown = (event: KeyboardEvent) => {
+      if(event.key.startsWith('Esc')) {
+        event.preventDefault();
+
+        closeSortOptions();
+      }
+    };
+
     if(isOpened) {
       document.addEventListener('keydown', handleEventKeydown);
     }
@@ -24,27 +37,25 @@ function SortOptions({selectedSortOption}: SortOptionsProps): JSX.Element {
     return () => document.removeEventListener('keydown', handleEventKeydown);
   }, [isOpened]);
 
-  const handleEventKeydown = (event: KeyboardEvent) => {
-    if(event.key.startsWith('Esc')) {
-      event.preventDefault();
-
-      setIsOpened(false);
-    }
-  };
-
   const handleSpanClick = () => {
     setIsOpened(!isOpened);
   };
 
   const handleSortOptionClick = (event: MouseEvent<HTMLUListElement>) => {
     const selectedOption = event.target as HTMLLIElement;
-    dispatch(changeSort(selectedOption.textContent as SortEnum));
 
-    //setIsOpened(false);
+    dispatch(changeSort(selectedOption.textContent as SortEnum));
   };
 
+  useOnClickOutside(sortRef, closeSortOptions);
+
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form
+      className="places__sorting"
+      action="#"
+      method="get"
+      ref={sortRef}
+    >
       <span className="places__sorting-caption">
       Sort by
       </span> {' '}
