@@ -35,7 +35,7 @@ function OfferMain({reviews, offer, nearbyOffers}: OfferMainProps):JSX.Element {
         <Map
           city={offer.city}
           offers={[...nearbyOffers, offer]}
-          currentOffer={offer}
+          selectedOffer={offer}
           isCityMap={false}
         />
       </section>

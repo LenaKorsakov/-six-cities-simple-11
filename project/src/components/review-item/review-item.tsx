@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { Review, User } from '../../@types/review-types';
 import { formatReviewDate, createRatingWidth} from '../../utiles/format';
 
@@ -41,4 +42,4 @@ function ReviewItem({review, user}: ReviewItemProps): JSX.Element {
   );
 }
 
-export default ReviewItem;
+export default memo(ReviewItem);

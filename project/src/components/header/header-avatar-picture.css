@@ -1,0 +1,6 @@
+.header__avatar-picture {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}

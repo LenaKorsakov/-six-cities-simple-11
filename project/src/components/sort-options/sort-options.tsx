@@ -1,18 +1,35 @@
-import { useState, useEffect, MouseEvent} from 'react';
+import { memo } from 'react';
+import { useState, useEffect, MouseEvent, useRef} from 'react';
 import { SORT_OPTIONS } from '../../const/sort-type';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeSort } from '../../store/actions';
+import { useAppDispatch } from '../../hooks';
+import useOnClickOutside from '../../hooks/use-on-click-outside';
+import { changeSort } from '../../store/offers-process/offers-process';
 
 import type { SortEnum } from '../../const/@types';
 
-function SortOptions(): JSX.Element {
+type SortOptionsProps = {
+  selectedSortOption: SortEnum;
+}
 
-  const selectedSortOption = useAppSelector((state)=> state.sortOption);
+function SortOptions({selectedSortOption}: SortOptionsProps): JSX.Element {
+  const sortRef = useRef(null);
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
+  const closeSortOptions = () => {
+    setIsOpened(false);
+  };
+
   useEffect(() => {
+    const handleEventKeydown = (event: KeyboardEvent) => {
+      if(event.key.startsWith('Esc')) {
+        event.preventDefault();
+
+        closeSortOptions();
+      }
+    };
+
     if(isOpened) {
       document.addEventListener('keydown', handleEventKeydown);
     }
@@ -20,28 +37,25 @@ function SortOptions(): JSX.Element {
     return () => document.removeEventListener('keydown', handleEventKeydown);
   }, [isOpened]);
 
-  function handleEventKeydown(event: KeyboardEvent) {
-    if(event.key.startsWith('Esc')) {
-      event.preventDefault();
-
-      setIsOpened(false);
-    }
-  }
-
-  function handleSpanClick() {
+  const handleSpanClick = () => {
     setIsOpened(!isOpened);
-  }
+  };
 
-  function handleSortOptionClick(event: MouseEvent<HTMLUListElement>) {
+  const handleSortOptionClick = (event: MouseEvent<HTMLUListElement>) => {
     const selectedOption = event.target as HTMLLIElement;
+
     dispatch(changeSort(selectedOption.textContent as SortEnum));
+  };
 
-    setIsOpened(false);
-
-  }
+  useOnClickOutside(sortRef, closeSortOptions);
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form
+      className="places__sorting"
+      action="#"
+      method="get"
+      ref={sortRef}
+    >
       <span className="places__sorting-caption">
       Sort by
       </span> {' '}
@@ -77,5 +91,4 @@ function SortOptions(): JSX.Element {
     </form>
   );
 }
-//TODO закрытие по клику вне меню
-export default SortOptions;
+export default memo(SortOptions);

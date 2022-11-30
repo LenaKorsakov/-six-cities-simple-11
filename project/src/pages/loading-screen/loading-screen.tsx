@@ -1,9 +1,10 @@
+import { SpinnerCircular} from 'spinners-react';
+import './loading-screen.css';
+
 function LoadingScreen(): JSX.Element {
   return (
-    <div className="page">
-      <div className="container property__wrapper">
-        <h1 className="property__name">Loading...</h1>
-      </div>
+    <div className="loader">
+      <SpinnerCircular color="#4481c3" size="80"/>
     </div>
   );
 }

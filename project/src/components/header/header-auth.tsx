@@ -1,30 +1,41 @@
+import './header-avatar-picture.css';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/app-route';
 import { useAppDispatch } from '../../hooks';
 import { UserData } from '../../store/@types';
-import { setUserData } from '../../store/actions';
 import { logoutAction } from '../../store/api-actions';
+import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
 
 type HeaderAuthProps = {
   user: UserData;
 }
 
 function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
+  const {email, avatarUrl, name} = user;
+
+  const isLoginLoading = useSelector(getIsLoginLoading);
   const dispatch = useAppDispatch();
 
   function handleNavigationItemClick() {
     dispatch(logoutAction());
-
-    dispatch(setUserData(null));// TODO нужно ли это действие на выходе? Если при следующей авторизации предыдущий login затрется?
   }
 
   return (
     <>
       <li className="header__nav-item user">
         <div className="header__nav-profile">
-          <div className="header__avatar-wrapper user__avatar-wrapper" />
+          <div className="header__avatar-wrapper user__avatar-wrapper">
+            <img
+              className="header__avatar-picture"
+              src={avatarUrl}
+              width={20}
+              height={20}
+              alt={name}
+            />
+          </div>
           <span className="header__user-name user__name">
-            {user.email}
+            {email}
           </span>
         </div>
       </li>
@@ -36,7 +47,9 @@ function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
           className="header__nav-link"
           to={AppRoute.Main}
         >
-          <span className="header__signout">Sign out</span>
+          <span className="header__signout">
+            { isLoginLoading ? 'Sign out...' : 'Sign out' }
+          </span>
         </Link>
       </li>
     </>

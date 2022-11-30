@@ -1,16 +1,31 @@
+import { memo, useCallback, MouseEvent} from 'react';
 import { Link } from 'react-router-dom';
-import type { City } from '../../@types/offer-types';
 import { AppRoute } from '../../const/app-route';
 import { useAppDispatch } from '../../hooks';
-import { changeCity } from '../../store/actions';
+import { changeCity } from '../../store/offers-process/offers-process';
+import type { City, CityName } from '../../@types/offer-types';
 
 type CitiesListProps ={
   cities: City[];
-  selectedCity: City;
+  selectedCityName: CityName;
 }
 
-function CitiesList({cities, selectedCity}: CitiesListProps): JSX.Element {
+function CitiesList({cities, selectedCityName}: CitiesListProps): JSX.Element {
   const dispatch = useAppDispatch();
+
+  const handleCityClick = useCallback(
+    (event: MouseEvent<HTMLLIElement>) => {
+      event.preventDefault();
+
+      const currentCityName = event.currentTarget.textContent as CityName;
+      const currentCity = cities.find((city) => city.name === currentCityName) as City;
+
+      if(currentCityName !== selectedCityName) {
+        dispatch(changeCity(currentCity));
+      }
+    },
+    [cities, dispatch, selectedCityName],
+  );
 
   return(
     <ul className="locations__list tabs__list">
@@ -19,10 +34,12 @@ function CitiesList({cities, selectedCity}: CitiesListProps): JSX.Element {
           <li
             key={city.name}
             className="locations__item"
-            onClick={()=> dispatch(changeCity(city))}
+            onClick={handleCityClick}
           >
             <Link to={AppRoute.Main}
-              className={`locations__item-link tabs__item ${(city.name === selectedCity.name) ? 'tabs__item--active' : ''}`}//не получилось написать при помощи &&
+              className={`locations__item-link tabs__item ${(city.name === selectedCityName)
+                ? 'tabs__item--active'
+                : ''}`}
             >
               <span>{city.name}</span>
             </Link>
@@ -35,4 +52,4 @@ function CitiesList({cities, selectedCity}: CitiesListProps): JSX.Element {
 }
 
 
-export default CitiesList;
+export default memo(CitiesList);

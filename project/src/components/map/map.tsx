@@ -1,4 +1,4 @@
-import {useRef, useEffect} from 'react';
+import {useRef, useEffect, memo} from 'react';
 
 import cn from 'classnames';
 
@@ -14,7 +14,7 @@ import type {City, Offer} from '../../@types/offer-types';
 type MapProps = {
   city: City;
   offers: Offer[];
-  currentOffer: Offer | null;
+  selectedOffer: Offer | null;
   isCityMap: boolean;
 }
 
@@ -31,7 +31,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {city, offers, currentOffer, isCityMap} = props;
+  const {city, offers, selectedOffer, isCityMap} = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -45,7 +45,7 @@ function Map(props: MapProps): JSX.Element {
       const { latitude: lat, longitude: lng } = offer.location;
 
       return new Marker({ lat, lng }, {
-        icon: offer.id === currentOffer?.id ? currentCustomIcon : defaultCustomIcon,
+        icon: offer.id === selectedOffer?.id ? currentCustomIcon : defaultCustomIcon,
       });
       //TODO - проблема, каждый раз, когда происходит наведение мышки на новый оффер, предыдущее масштабирование сбрасывается ( потому что карта отрисовывается заново)
     });
@@ -60,7 +60,7 @@ function Map(props: MapProps): JSX.Element {
     return () => {
       map.removeLayer(markerGroup);
     };
-  }, [map, offers, currentOffer, city]);
+  }, [map, offers, selectedOffer, city]);
 
   return (
     <section
@@ -75,4 +75,4 @@ function Map(props: MapProps): JSX.Element {
     </section>);
 }
 
-export default Map;
+export default memo(Map);

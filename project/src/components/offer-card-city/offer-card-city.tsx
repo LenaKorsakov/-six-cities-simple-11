@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import OfferCard from '../offer-card/offer-card';
 import type {OfferPreview} from '../../@types/offer-types';
 
@@ -11,13 +12,13 @@ function OfferCardCity(props: OfferCardCityProps): JSX.Element{
   const {offer, onMouseEnter, onMouseLeave} = props;
   const {id} = offer;
 
-  function handleMouseEnter() {
+  const handleMouseEnter = useCallback(() => {
     onMouseEnter(id);
-  }
+  }, [onMouseEnter, id]);
 
-  function handleMouseLeave() {
+  const handleMouseLeave = useCallback(() => {
     onMouseLeave();
-  }
+  },[onMouseLeave]);
 
   return (
     <article

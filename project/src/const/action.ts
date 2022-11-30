@@ -1,14 +1,12 @@
 export const Action = {
-  ListAllOffers: 'offers/listAllOffers',
-  ListNearbyOffers: 'offers/listNearbyOffers',
-  ChangeCity: 'offers/changeCity',
-  ChangeSort: 'offers/changeSort',
   FetchAllOffers: 'data/fetchOffers',
-  SetOffersDataLoadingStatus: 'data/setOffersDataLoadingStatus',
-  SetAuthorizationStatus: 'data/setAuthorizationStatus',
-  CheckAuth:'user/checkAuth',
+  FetchNearbyOffers: 'data/fetchNearbyOffers',
+  FetchOfferById: 'data/fetchOfferById',
+  SetUserData: 'data/setData',
+
+  SetAuthorizationStatus: 'user/setAuthorizationStatus',
   UserLogIn: 'user/login',
   UserLogOut: 'user/logout',
-  SetUserData: 'user/setData',
+
   RedirectToRoute: 'user/redirectToRoute'
 } as const;
