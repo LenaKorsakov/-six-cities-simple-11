@@ -91,5 +91,4 @@ function SortOptions({selectedSortOption}: SortOptionsProps): JSX.Element {
     </form>
   );
 }
-//TODO закрытие по клику вне меню
 export default memo(SortOptions);
