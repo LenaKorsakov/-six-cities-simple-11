@@ -20,6 +20,7 @@ export type AuthData = {
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
   user: UserData;
+  isLoginLoading: boolean;
 };
 
 export type OffersData = {

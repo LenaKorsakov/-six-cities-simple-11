@@ -1,12 +1,14 @@
 import { FormEvent, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { useAppDispatch} from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
 import { checkHasNumberAndLetter, checkNotEmpty } from '../../utiles/validation';
 
 function LoginForm(): JSX.Element{
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
+  const isLoginLoading = useSelector(getIsLoginLoading);
   const dispatch = useAppDispatch();
 
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
@@ -61,7 +63,7 @@ function LoginForm(): JSX.Element{
           className="login__submit form__submit button"
           type="submit"
         >
-          Sign in
+          { isLoginLoading ? 'Sign in...' : 'Sign in' }
         </button>
       </form>
     </section>

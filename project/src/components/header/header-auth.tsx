@@ -1,9 +1,11 @@
 import './header-avatar-picture.css';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/app-route';
 import { useAppDispatch } from '../../hooks';
 import { UserData } from '../../store/@types';
 import { logoutAction } from '../../store/api-actions';
+import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
 
 type HeaderAuthProps = {
   user: UserData;
@@ -11,6 +13,8 @@ type HeaderAuthProps = {
 
 function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
   const {email, avatarUrl, name} = user;
+
+  const isLoginLoading = useSelector(getIsLoginLoading);
   const dispatch = useAppDispatch();
 
   function handleNavigationItemClick() {
@@ -43,7 +47,9 @@ function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
           className="header__nav-link"
           to={AppRoute.Main}
         >
-          <span className="header__signout">Sign out</span>
+          <span className="header__signout">
+            { isLoginLoading ? 'Sign out...' : 'Sign out' }
+          </span>
         </Link>
       </li>
     </>
