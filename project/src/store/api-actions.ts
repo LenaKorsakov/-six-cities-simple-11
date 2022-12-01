@@ -47,7 +47,7 @@ export const fetchOfferByIdAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >(Action.FetchOfferById,
-  async (id, {dispatch, extra: api}) => {
+  async (id, { extra: api }) => {
     const { data } = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
 
     return data;
@@ -63,7 +63,7 @@ export const checkAuthAction = createAsyncThunk<
   extra: AxiosInstance;
 }
 >(Action.SetAuthorizationStatus,
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, { extra: api }) => {
     const { data } = await api.get<UserData>(ApiRoute.Login);
 
     return data;
@@ -79,7 +79,7 @@ export const loginAction = createAsyncThunk<
     extra: AxiosInstance;
   }
   >(Action.UserLogIn,
-    async({login: email, password}, {dispatch, extra: api}) => {
+    async({login: email, password}, { extra: api }) => {
       const { data } = await api.post<UserData>(ApiRoute.Login, {email, password});
       saveToken(data.token);
 
@@ -96,7 +96,7 @@ export const logoutAction = createAsyncThunk<
     extra: AxiosInstance;
   }
   >(Action.UserLogOut,
-    async (_arg, { dispatch, extra: api}) => {
+    async (_arg, { extra: api }) => {
       await api.delete(ApiRoute.Logout);
       dropToken();
     }

@@ -47,11 +47,10 @@ function Map(props: MapProps): JSX.Element {
       return new Marker({ lat, lng }, {
         icon: offer.id === selectedOffer?.id ? currentCustomIcon : defaultCustomIcon,
       });
-      //TODO - проблема, каждый раз, когда происходит наведение мышки на новый оффер, предыдущее масштабирование сбрасывается ( потому что карта отрисовывается заново)
     });
 
-    const {latitude: lat, longitude: lng, zoom} = city.location;
-    map.setView({lat, lng}, zoom, {animate: true}, );
+    const {latitude: lat, longitude: lng} = city.location;
+    map.setView({lat, lng});
 
     const markerGroup = new LayerGroup(markers);
 
