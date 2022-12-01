@@ -3,6 +3,7 @@ import StarPicker from './star-picker';
 import { StarNumber } from '../../const/star-number';
 import { StarTitle } from '../../const/star-title';
 import type { ReviewPost } from '../../@types/review-types';
+import { MIN_REVIEW_LENGTH } from '../../utiles/validation';
 
 const starPickerOptions = (Object.keys(StarNumber)
   .map((key: string) => ({
@@ -61,7 +62,7 @@ function ReviewsForm(): JSX.Element {
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span>{' '}
             and describe your stay with at least{' '}
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"

@@ -18,6 +18,12 @@ export type AuthData = {
   password: string;
 };
 
+export type ReviewData = {
+  id: number;
+  comment: string;
+  rating: number;
+};
+
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
   user: UserData;
@@ -39,6 +45,7 @@ export type OfferPropertyData = {
   nearbyOffers: Offer[];
   isOfferPropertyDataLoading: boolean;
   reviews: Review[];
+  isReviewLoading: boolean;
 };
 
 export type State = ReturnType<typeof store.getState>;

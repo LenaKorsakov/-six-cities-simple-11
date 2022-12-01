@@ -4,7 +4,7 @@ import { Offer } from '../@types/offer-types';
 import { Review } from '../@types/review-types';
 import { ApiRoute } from '../const/api-route';
 import { Action } from '../const/action';
-import { AuthData, UserData, State, AppDispatch} from './@types';
+import { AuthData, UserData, State, AppDispatch, ReviewData} from './@types';
 import { dropToken, saveToken } from '../services/token';
 
 export const fetchAllOffersAction = createAsyncThunk<
@@ -96,7 +96,7 @@ export const loginAction = createAsyncThunk<
     extra: AxiosInstance;
   }
   >(Action.UserLogIn,
-    async({login: email, password}, { extra: api }) => {
+    async({ login: email, password }, { extra: api }) => {
       const { data } = await api.post<UserData>(ApiRoute.Login, {email, password});
       saveToken(data.token);
 
@@ -116,5 +116,19 @@ export const logoutAction = createAsyncThunk<
     async (_arg, { extra: api }) => {
       await api.delete(ApiRoute.Logout);
       dropToken();
+    }
+  );
+
+export const sendReviewAction = createAsyncThunk<
+  void,
+  ReviewData,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+  >(Action.SendReview,
+    async({ id, rating, comment }, { extra: api }) => {
+      await api.post<ReviewData>(`${ApiRoute.Reviews}/${id}`, {rating, comment});
     }
   );

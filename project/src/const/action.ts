@@ -4,6 +4,7 @@ export const Action = {
 
   FetchOfferById: 'property/fetchOfferById',
   FetchReviewsById: 'property/fetchReviewsById',
+  SendReview: 'property/sendReview',
 
   SetUserData: 'user/setUserData',
   SetAuthorizationStatus: 'user/setAuthorizationStatus',

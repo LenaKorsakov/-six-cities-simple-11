@@ -5,7 +5,7 @@ const passwordRegex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{2,}$/;
 const loginRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const MAX_REVIEW_LENGTH = 300;
-const MIN_REVIEW_LENGTH = 50;
+export const MIN_REVIEW_LENGTH = 50;
 
 export const validateLogin = (value: string) => {
   if (!value.match(loginRegex)) {
