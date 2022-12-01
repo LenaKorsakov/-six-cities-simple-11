@@ -9,7 +9,7 @@ const initialState: OfferPropertyData = {
   nearbyOffers: [],
   isOfferPropertyDataLoading: false,
   reviews: [],
-  isReviewLoading: false
+  isReviewSending: false
 };
 
 export const offerPropertyData = createSlice({
@@ -42,10 +42,13 @@ export const offerPropertyData = createSlice({
         state.reviews = action.payload;
       })
       .addCase(sendReviewAction.pending, (state) => {
-        state.isReviewLoading = true;
+        state.isReviewSending = true;
       })
       .addCase(sendReviewAction.fulfilled, (state) => {
-        state.isReviewLoading = false;
+        state.isReviewSending = false;
+      })
+      .addCase(sendReviewAction.rejected, (state) => {
+        state.isReviewSending = false;
       });
   }
 });

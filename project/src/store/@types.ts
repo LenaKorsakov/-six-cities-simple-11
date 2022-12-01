@@ -45,7 +45,7 @@ export type OfferPropertyData = {
   nearbyOffers: Offer[];
   isOfferPropertyDataLoading: boolean;
   reviews: Review[];
-  isReviewLoading: boolean;
+  isReviewSending: boolean;
 };
 
 export type State = ReturnType<typeof store.getState>;

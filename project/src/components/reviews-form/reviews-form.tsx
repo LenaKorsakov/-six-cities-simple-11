@@ -1,9 +1,11 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import StarPicker from './star-picker';
 import { StarNumber } from '../../const/star-number';
 import { StarTitle } from '../../const/star-title';
+import { MIN_REVIEW_LENGTH, validateReviewForm } from '../../utiles/validation';
+import { useAppSelector } from '../../hooks';
+import { getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
 import type { ReviewPost } from '../../@types/review-types';
-import { MIN_REVIEW_LENGTH } from '../../utiles/validation';
 
 const starPickerOptions = (Object.keys(StarNumber)
   .map((key: string) => ({
@@ -17,6 +19,9 @@ function ReviewsForm(): JSX.Element {
     comment: '',
     rating: 0}
   );
+
+  const isReviewSending = useAppSelector(getReviewSendingStatus);
+  const isFormDataValide = useMemo( () => validateReviewForm(formData), [formData]);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -33,7 +38,10 @@ function ReviewsForm(): JSX.Element {
   }, [formData]);
 
   return(
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#" method="post"
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -44,6 +52,7 @@ function ReviewsForm(): JSX.Element {
             option={item}
             key={`${item.rating}-${item.title}`}
             onInputChange={handleInputChange}
+            isDisabled={isReviewSending}
           />
         )
         )}
@@ -56,6 +65,7 @@ function ReviewsForm(): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.comment}
         onChange = {handleTextAreaChange}
+        disabled={isReviewSending}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -67,7 +77,7 @@ function ReviewsForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={isReviewSending && isFormDataValide}
         >
           Submit
         </button>
