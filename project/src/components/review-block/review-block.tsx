@@ -1,15 +1,19 @@
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
 import { useAppSelector } from '../../hooks';
+
 import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
+
 import { AuthorizationStatus } from '../../const/authorization-status';
+
 import type { Review} from '../../@types/review-types';
 
 type ReviewBlockProps = {
  reviews: Review[];
+ offerId: number;
 }
 
-function ReviewBlock({reviews}: ReviewBlockProps): JSX.Element {
+function ReviewBlock({offerId, reviews}: ReviewBlockProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
@@ -26,7 +30,7 @@ function ReviewBlock({reviews}: ReviewBlockProps): JSX.Element {
           />
         ))}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm />}
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm offerId={offerId} />}
     </section>
   );
 }

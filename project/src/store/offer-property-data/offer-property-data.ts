@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction, sendReviewAction } from '../api-actions';
+
 import { NameSpace } from '../../const/name-spaces';
 import { Offer } from '../../@types/offer-types';
+
 import { OfferPropertyData} from '../@types';
 
 const initialState: OfferPropertyData = {
@@ -9,7 +11,8 @@ const initialState: OfferPropertyData = {
   nearbyOffers: [],
   isOfferPropertyDataLoading: false,
   reviews: [],
-  isReviewSending: false
+  isReviewSending: false,
+  isError: false
 };
 
 export const offerPropertyData = createSlice({
@@ -46,9 +49,11 @@ export const offerPropertyData = createSlice({
       })
       .addCase(sendReviewAction.fulfilled, (state) => {
         state.isReviewSending = false;
+        state.isError = false;
       })
       .addCase(sendReviewAction.rejected, (state) => {
         state.isReviewSending = false;
+        state.isError = true;
       });
   }
 });

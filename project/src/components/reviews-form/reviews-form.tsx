@@ -1,11 +1,15 @@
-import { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import { getReviewSendingError, getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
+
+import { MIN_REVIEW_LENGTH, validateReviewForm } from '../../utiles/validation';
 import StarPicker from './star-picker';
 import { StarNumber } from '../../const/star-number';
 import { StarTitle } from '../../const/star-title';
-import { MIN_REVIEW_LENGTH, validateReviewForm } from '../../utiles/validation';
-import { useAppSelector } from '../../hooks';
-import { getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
-import type { ReviewPost } from '../../@types/review-types';
+
+import { sendReviewAction } from '../../store/api-actions';
+import { ReviewData } from '../../store/@types';
 
 const starPickerOptions = (Object.keys(StarNumber)
   .map((key: string) => ({
@@ -13,14 +17,21 @@ const starPickerOptions = (Object.keys(StarNumber)
     title: StarTitle[key as keyof typeof StarTitle]
   })));
 
+type ReviewFormProps = {
+  offerId: number;
+}
 
-function ReviewsForm(): JSX.Element {
-  const [formData, setFormData] = useState<ReviewPost>({
+function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
+  const [formData, setFormData] = useState<ReviewData>({
+    id: offerId,
     comment: '',
     rating: 0}
   );
 
+  const dispatch = useAppDispatch();
+
   const isReviewSending = useAppSelector(getReviewSendingStatus);
+  const isReviewSendingError = useAppSelector(getReviewSendingError);
   const isFormDataValide = useMemo( () => validateReviewForm(formData), [formData]);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -37,10 +48,25 @@ function ReviewsForm(): JSX.Element {
     });
   }, [formData]);
 
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    dispatch(sendReviewAction(formData));
+
+    if(!isReviewSendingError) {
+      setFormData({
+        id: offerId,
+        comment: '',
+        rating: 0
+      });
+    }
+  };
+
   return(
     <form
       className="reviews__form form"
-      action="#" method="post"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">
         Your review

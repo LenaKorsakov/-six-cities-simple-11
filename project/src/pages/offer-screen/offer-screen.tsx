@@ -1,15 +1,16 @@
 import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useEffect, memo } from 'react';
+import { useAppSelector } from '../../hooks';
+
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Header from '../../components/header/header';
-import OfferMain from '../../components/offer-main/offer-main';
-import { store } from '../../store';
+import OfferContent from '../../components/offer-content/offer-content';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
 import { getAllOffers } from '../../store/offers-city-data/offers-city-data-selectors';
 import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction } from '../../store/api-actions';
-import LoadingScreen from '../loading-screen/loading-screen';
 import { getNearbyOffers, getOfferPropertyLoadingStatus, getReviews } from '../../store/offer-property-data/offer-property-data-selectors';
 
 
@@ -34,11 +35,11 @@ function OfferScreen():JSX.Element {
 
   if (offer === null) {
     return (
-      <NotFoundScreen/>
+      <NotFoundScreen />
     );
   } if (isDataLoading) {
     return (
-      <LoadingScreen/>
+      <LoadingScreen />
     );
   }
   return(
@@ -47,10 +48,11 @@ function OfferScreen():JSX.Element {
         <title>Six cities. Offer page</title>
       </Helmet>
       <Header />
-      <OfferMain
+      <OfferContent
         reviews={reviews}
         offer={offer}
         nearbyOffers={nearbyOffers}
+        offerId={propId}
       />
     </div>
   );
