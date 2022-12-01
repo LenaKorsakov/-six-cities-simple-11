@@ -44,7 +44,7 @@ function OfferScreen():JSX.Element {
   return(
     <div className="page">
       <Helmet>
-        <title>Шесть городов.Страничка апартаментов.</title>
+        <title>Six cities. Offer page</title>
       </Helmet>
       <Header />
       <OfferMain

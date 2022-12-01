@@ -14,24 +14,12 @@ export const validateLogin = (value: string) => {
     return false;
   }
 
-  if (value.trim() === '') {
-    toast.info('Email must not be empty');
-
-    return false;
-  }
-
   return true;
-};
+};//добавила для однообразия
 
 export const validatePassword = (value: string) => {
   if (!value.match(passwordRegex)) {
     toast.info('Password must contain at least one number and one letter');
-
-    return false;
-  }
-
-  if (value.trim() === '') {
-    toast.info('Password must not be empty');
 
     return false;
   }
@@ -41,7 +29,7 @@ export const validatePassword = (value: string) => {
 
 
 export const validateReviewForm = (review: ReviewPost) => {
-  if (review.rating === null) {
+  if (review.rating === 0) {
     toast.info('Rating is required');
 
     return false;

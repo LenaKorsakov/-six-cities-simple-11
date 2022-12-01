@@ -79,7 +79,7 @@ function ReviewsForm(): JSX.Element {
           type="submit"
           disabled={isReviewSending && isFormDataValide}
         >
-          Submit
+          {isReviewSending ? 'Sending...' : 'Submit'}
         </button>
       </div>
     </form>

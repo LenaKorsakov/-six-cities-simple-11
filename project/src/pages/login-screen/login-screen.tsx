@@ -22,7 +22,7 @@ function LoginScreen({locations}: LoginScreenProps): JSX.Element{
       :
       <div className="page page--gray page--login">
         <Helmet>
-          <title>Шесть городов. Страничка регистрации.</title>
+          <title>Six cities. Login page</title>
         </Helmet>
         <HeaderLogoOnly />
         <main className="page__main page__main--login">

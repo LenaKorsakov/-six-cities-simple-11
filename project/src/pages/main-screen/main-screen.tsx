@@ -7,7 +7,7 @@ function MainScreen({cities}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
-        <title>Шесть городов.Требуется регистрация!</title>
+        <title>Six cities. Main page</title>
       </Helmet>
       <Header />
       <MainContent cities={cities}/>
