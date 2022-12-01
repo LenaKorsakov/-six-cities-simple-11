@@ -13,7 +13,6 @@ import browserHistory from '../../browser-history';
 import {AppRoute} from '../../const/app-route';
 
 import type { City} from '../../@types/offer-types';
-import { Review } from '../../@types/review-types';
 import MainScreen from '../../pages/main-screen/main-screen';
 
 import { useAppSelector } from '../../hooks';
@@ -22,10 +21,9 @@ import { getAuthorizationStatus } from '../../store/user-process/user-process-se
 
 type AppProps = {
   cities: City[];
-  reviews: Review[];
 }
 
-function App({cities, reviews}: AppProps): JSX.Element {
+function App({cities}: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return(
@@ -51,9 +49,7 @@ function App({cities, reviews}: AppProps): JSX.Element {
             <Route
               path={`${AppRoute.Offer}/:id`}
               element={
-                <OfferScreen
-                  reviews={reviews}
-                />
+                <OfferScreen />
               }
             />
             <Route

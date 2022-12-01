@@ -1,7 +1,8 @@
 import { store } from './index';
 import { AuthorizationStatus } from '../const/authorization-status';
-import { City, Offer } from '../@types/offer-types';
 import { SortEnum } from '../const/@types';
+import { City, Offer } from '../@types/offer-types';
+import { Review } from '../@types/review-types';
 
 export type UserData = {
   avatarUrl: string;
@@ -23,16 +24,21 @@ export type UserProcess = {
   isLoginLoading: boolean;
 };
 
-export type OffersData = {
+export type OffersCityData = {
   offers: Offer[];
-  selectedOffer: Offer;
-  nearbyOffers:Offer[];
   isOffersDataLoading: boolean;
 };
 
 export type OffersProcess = {
   city: City;
   sortOption: SortEnum;
+};
+
+export type OfferPropertyData = {
+  selectedOffer: Offer;
+  nearbyOffers: Offer[];
+  isOfferPropertyDataLoading: boolean;
+  reviews: Review[];
 };
 
 export type State = ReturnType<typeof store.getState>;

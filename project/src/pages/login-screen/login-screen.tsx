@@ -5,9 +5,9 @@ import { AppRoute } from '../../const/app-route';
 import { AuthorizationStatus } from '../../const/authorization-status';
 import { useAppSelector } from '../../hooks';
 import { City } from '../../@types/offer-types';
-import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 import LoginForm from '../../components/login-form/login-form';
 import RandomCity from '../../components/random-city/random-city';
+import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 type LoginScreenProps = {
   locations: City[];

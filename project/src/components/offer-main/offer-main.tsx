@@ -1,6 +1,6 @@
 import OfferHost from '../offer-host/offer-host';
 import OfferProperty from '../offer-property/offer-property';
-import ReviewList from '../review-list/review-list';
+import ReviewBlock from '../review-block/review-block';
 import OfferGallery from '../offer-gallery/offer-gallery';
 import OffersListNearby from '../offers-list-nearby/offers-list-nearby';
 import Map from '../map/map';
@@ -28,7 +28,7 @@ function OfferMain({reviews, offer, nearbyOffers}: OfferMainProps):JSX.Element {
               host={offer.host}
               description={offer.description}
             />
-            <ReviewList reviews={reviews}/>
+            <ReviewBlock reviews={reviews}/>
           </div>
         </div>
 

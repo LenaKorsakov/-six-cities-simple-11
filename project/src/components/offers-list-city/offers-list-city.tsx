@@ -7,7 +7,7 @@ import OffersListEmpty from '../offers-list-empty/offers-list-empty';
 
 import { useAppSelector } from '../../hooks';
 import { getSort } from '../../store/offers-process/offers-process-selectors';
-import { getAllOffers } from '../../store/offers-data/offers-data-selectors';
+import { getAllOffers } from '../../store/offers-city-data/offers-city-data-selectors';
 
 import { SortType } from '../../const/sort-type';
 import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';

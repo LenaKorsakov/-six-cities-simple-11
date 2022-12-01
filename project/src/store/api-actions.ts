@@ -1,6 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { Offer } from '../@types/offer-types';
+import { Review } from '../@types/review-types';
 import { ApiRoute } from '../const/api-route';
 import { Action } from '../const/action';
 import { AuthData, UserData, State, AppDispatch} from './@types';
@@ -15,7 +16,7 @@ export const fetchAllOffersAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >(Action.FetchAllOffers,
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const { data } = await api.get<Offer[]>(ApiRoute.Offers);
 
     return data;
@@ -31,7 +32,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >(Action.FetchNearbyOffers,
-  async (id, {dispatch, extra: api}) => {
+  async (id, {extra: api}) => {
     const { data } = await api.get<Offer[]>(`${ApiRoute.Offers}/${id}/nearby`);
 
     return data;
@@ -49,6 +50,22 @@ export const fetchOfferByIdAction = createAsyncThunk<
 >(Action.FetchOfferById,
   async (id, { extra: api }) => {
     const { data } = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
+
+    return data;
+  }
+);
+
+export const fetchReviewsByIdAction = createAsyncThunk<
+  Review[],
+  number,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(Action.FetchReviewsById,
+  async (id, {extra: api }) => {
+    const { data } = await api.get<Review[]>(`${ApiRoute.Reviews}/${id}`);
 
     return data;
   }

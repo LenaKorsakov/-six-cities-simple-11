@@ -8,7 +8,7 @@ import type {City} from '../../@types/offer-types';
 
 import { useAppSelector } from '../../hooks';
 import { getCity} from '../../store/offers-process/offers-process-selectors';
-import { getOffersLoadingStatus } from '../../store/offers-data/offers-data-selectors';
+import { getOffersLoadingStatus } from '../../store/offers-city-data/offers-city-data-selectors';
 
 type MainContentProps = {
   cities: City[];

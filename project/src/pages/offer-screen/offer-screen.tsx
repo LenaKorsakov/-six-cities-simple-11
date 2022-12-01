@@ -1,27 +1,24 @@
 import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Header from '../../components/header/header';
 import OfferMain from '../../components/offer-main/offer-main';
 import { store } from '../../store';
 
 import { useAppSelector } from '../../hooks';
-import type { Review } from '../../@types/review-types';
-import { getAllOffers, getNearbyOffers, getOffersLoadingStatus } from '../../store/offers-data/offers-data-selectors';
-import { fetchNearbyOffersAction, fetchOfferByIdAction } from '../../store/api-actions';
+import { getAllOffers } from '../../store/offers-city-data/offers-city-data-selectors';
+import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { getNearbyOffers, getOfferPropertyLoadingStatus, getReviews } from '../../store/offer-property-data/offer-property-data-selectors';
 
 
-type OfferScreenProps = {
-  reviews: Review[];
-}
-
-function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
+function OfferScreen():JSX.Element {
 
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const offers = useAppSelector(getAllOffers);
-  const isDataLoading = useAppSelector(getOffersLoadingStatus);
+  const isDataLoading = useAppSelector(getOfferPropertyLoadingStatus);
+  const reviews = useAppSelector(getReviews);
 
   const {id} = useParams() as {id: string};
   const propId = +id;
@@ -29,6 +26,7 @@ function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
   useEffect(() => {
     store.dispatch(fetchNearbyOffersAction(propId));
     store.dispatch(fetchOfferByIdAction(propId));
+    store.dispatch(fetchReviewsByIdAction(propId));
   }, [propId]);
 
 
@@ -58,4 +56,4 @@ function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
   );
 }
 
-export default OfferScreen;
+export default memo(OfferScreen);

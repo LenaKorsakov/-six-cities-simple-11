@@ -1,10 +1,10 @@
 import ReviewItem from '../review-item/review-item';
 import { StarNumber } from '../../const/star-number';
 import { StarTitle } from '../../const/star-title';
-import ReviewsForm from '../../components/reviews-form/reviews-form';
+import ReviewsForm from '../reviews-form/reviews-form';
 import type { Review} from '../../@types/review-types';
 
-type ReviewListProps = {
+type ReviewBlockProps = {
  reviews: Review[];
 }
 
@@ -14,7 +14,7 @@ const starPickerOptions = (Object.keys(StarNumber)
     title: StarTitle[key as keyof typeof StarTitle]
   })));
 
-function ReviewList({reviews}: ReviewListProps): JSX.Element {
+function ReviewBlock({reviews}: ReviewBlockProps): JSX.Element {
 
   return (
     <section className="property__reviews reviews">
@@ -35,4 +35,4 @@ function ReviewList({reviews}: ReviewListProps): JSX.Element {
   );
 }
 
-export default ReviewList;
+export default ReviewBlock;

@@ -1,9 +1,10 @@
 export const Action = {
-  FetchAllOffers: 'data/fetchOffers',
-  FetchNearbyOffers: 'data/fetchNearbyOffers',
-  FetchOfferById: 'data/fetchOfferById',
-  SetUserData: 'data/setData',
+  FetchAllOffers: 'city/fetchOffers',
+  FetchNearbyOffers: 'city/fetchNearbyOffers',
+  FetchOfferById: 'property/fetchOfferById',
+  FetchReviewsById: 'data/fetchReviewsById',
 
+  SetUserData: 'user/setUserData',
   SetAuthorizationStatus: 'user/setAuthorizationStatus',
   UserLogIn: 'user/login',
   UserLogOut: 'user/logout',
