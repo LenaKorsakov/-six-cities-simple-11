@@ -1,8 +1,9 @@
 export const Action = {
   FetchAllOffers: 'city/fetchOffers',
   FetchNearbyOffers: 'city/fetchNearbyOffers',
+
   FetchOfferById: 'property/fetchOfferById',
-  FetchReviewsById: 'data/fetchReviewsById',
+  FetchReviewsById: 'property/fetchReviewsById',
 
   SetUserData: 'user/setUserData',
   SetAuthorizationStatus: 'user/setAuthorizationStatus',

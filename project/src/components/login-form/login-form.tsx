@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch} from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
-import { checkHasNumberAndLetter, checkNotEmpty } from '../../utiles/validation';
+import { validatePassword, validateLogin} from '../../utiles/validation';
 
 function LoginForm(): JSX.Element{
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -15,9 +15,8 @@ function LoginForm(): JSX.Element{
     event.preventDefault();
 
     if(emailRef.current !== null && passwordRef.current !== null) {
-      if(checkNotEmpty(emailRef.current.value)
-        && checkNotEmpty(passwordRef.current.value)
-        && checkHasNumberAndLetter(passwordRef.current.value)) {
+      if(validateLogin(emailRef.current.value)
+        && validatePassword(passwordRef.current.value)) {
 
         dispatch(loginAction({
           login: emailRef.current.value,

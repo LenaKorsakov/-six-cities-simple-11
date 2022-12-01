@@ -1,32 +1,36 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import StarPicker from './star-picker';
-import type {Star} from '../../@types/star-types';
-import type {ReviewPost} from '../../@types/review-types';
+import { StarNumber } from '../../const/star-number';
+import { StarTitle } from '../../const/star-title';
+import type { ReviewPost } from '../../@types/review-types';
 
-type ReviewsFormProps = {
-  options: Star[];
-}
+const starPickerOptions = (Object.keys(StarNumber)
+  .map((key: string) => ({
+    rating: StarNumber[key as keyof typeof StarNumber],
+    title: StarTitle[key as keyof typeof StarTitle]
+  })));
 
-function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
 
+function ReviewsForm(): JSX.Element {
   const [formData, setFormData] = useState<ReviewPost>({
     comment: '',
     rating: 0}
   );
 
-  function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
+  const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       comment: event.target.value
     });
-  }
+  };
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       rating: +event.target.value
     });
-  }
+  }, [formData]);
+
   return(
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">
@@ -34,7 +38,7 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
 
-        {options.map((item) => (
+        {starPickerOptions.map((item) => (
           <StarPicker
             option={item}
             key={`${item.rating}-${item.title}`}

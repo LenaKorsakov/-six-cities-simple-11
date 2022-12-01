@@ -1,20 +1,16 @@
 import ReviewItem from '../review-item/review-item';
-import { StarNumber } from '../../const/star-number';
-import { StarTitle } from '../../const/star-title';
 import ReviewsForm from '../reviews-form/reviews-form';
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
+import { AuthorizationStatus } from '../../const/authorization-status';
 import type { Review} from '../../@types/review-types';
 
 type ReviewBlockProps = {
  reviews: Review[];
 }
 
-const starPickerOptions = (Object.keys(StarNumber)
-  .map((key: string) => ({
-    rating: StarNumber[key as keyof typeof StarNumber],
-    title: StarTitle[key as keyof typeof StarTitle]
-  })));
-
 function ReviewBlock({reviews}: ReviewBlockProps): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <section className="property__reviews reviews">
@@ -30,7 +26,7 @@ function ReviewBlock({reviews}: ReviewBlockProps): JSX.Element {
           />
         ))}
       </ul>
-      <ReviewsForm options={starPickerOptions}/>
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm />}
     </section>
   );
 }
