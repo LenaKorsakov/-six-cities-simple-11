@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchAllOffersAction} from '../api-actions';
-import { NameSpace } from '../../const/name-spaces';
+import { NameSpace } from '../../const/name-space';
 import { OffersCityData} from '../@types';
 
 const initialState: OffersCityData = {

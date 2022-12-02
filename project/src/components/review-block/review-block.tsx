@@ -6,13 +6,11 @@ import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 import { AuthorizationStatus } from '../../const/authorization-status';
+import { MAX_REVIEWS_COUNT, MIN_REVIEWS_COUNT } from '../../const/review';
 
 import { getReviews } from '../../store/offer-property-data/offer-property-data-selectors';
 import { sortData } from '../../utiles/sort-compare';
 import { getAdaptedReview } from '../../adapter/adapter';
-
-const MAX_REVIEWS_COUNT = 9;
-const MIN_REVIEWS_COUNT = 0;
 
 type ReviewBlockProps = {
  offerId: number;

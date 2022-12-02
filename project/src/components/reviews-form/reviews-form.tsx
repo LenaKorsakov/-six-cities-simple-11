@@ -1,38 +1,31 @@
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-
-import { getReviewSendingError, getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
-
-import { MIN_REVIEW_LENGTH} from '../../utiles/validation';
+import { ChangeEvent, FormEvent, useCallback, useState, memo } from 'react';
 import StarPicker from './star-picker';
-import { StarNumber } from '../../const/star-number';
-import { StarTitle } from '../../const/star-title';
 
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getReviewSendingError, getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
 import { sendReviewAction } from '../../store/api-actions';
-import { ReviewData } from '../../store/@types';
 
-const starPickerOptions = (Object.keys(StarNumber)
-  .map((key: string) => ({
-    rating: StarNumber[key as keyof typeof StarNumber],
-    title: StarTitle[key as keyof typeof StarTitle]
-  })));
+import { MIN_REVIEW_LENGTH, validateReviewForm} from '../../utiles/validation';
+import { RATING_TITLES, InitialReviewState} from '../../const/review';
+
+import { ReviewData } from '../../store/@types';
 
 type ReviewFormProps = {
   offerId: number;
-}
+};
 
 function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
   const [formData, setFormData] = useState<ReviewData>({
     id: offerId,
-    comment: '',
-    rating: 0}
+    ...InitialReviewState
+  }
   );
+  //стоит ли разбивать на два отдельных стейта, чтобы избежать перерисовки? или это незначительно?
 
   const dispatch = useAppDispatch();
 
   const isReviewSending = useAppSelector(getReviewSendingStatus);
   const isReviewSendingError = useAppSelector(getReviewSendingError);
-  //const isFormDataValide = useMemo( () => validateReviewForm(formData), [formData]);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -48,16 +41,21 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
     });
   }, [formData]);
 
-  const handleFormSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    dispatch(sendReviewAction(formData));
-
+  const resetForm = () => {
     if(!isReviewSendingError) {
       setFormData({
         id: offerId,
-        comment: '',
-        rating: 0
-      });
+        ...InitialReviewState
+      } as ReviewData);
+    }};
+
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    if(validateReviewForm(formData)) {
+      dispatch(sendReviewAction(formData));
+
+      resetForm();
     }
   };
 
@@ -73,12 +71,14 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
 
-        {starPickerOptions.map((item) => (
+        {RATING_TITLES.map(({rating, title}) => (
           <StarPicker
-            option={item}
-            key={`${item.rating}-${item.title}`}
+            rating={rating}
+            title={title}
+            key={`${rating}-${title}`}
             onInputChange={handleInputChange}
             isDisabled={isReviewSending}
+            isChecked={+rating === formData.rating}
           />
         )
         )}
@@ -112,4 +112,4 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
   );
 }
 
-export default ReviewsForm;
+export default memo(ReviewsForm);

@@ -1,14 +1,14 @@
 import { ChangeEvent} from 'react';
-import type {Star} from '../../@types/star-types';
 
 type StarPickerProps = {
-  option: Star;
+  rating: string;
+  title: string;
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   isDisabled: boolean;
+  isChecked: boolean;
 };
 
-function StarPicker({option, onInputChange, isDisabled}: StarPickerProps): JSX.Element {
-  const {rating, title} = option;
+function StarPicker({rating, title, onInputChange, isDisabled, isChecked}: StarPickerProps): JSX.Element {
 
   return(
     <div>
@@ -20,11 +20,15 @@ function StarPicker({option, onInputChange, isDisabled}: StarPickerProps): JSX.E
         type="radio"
         onChange={onInputChange}
         disabled={isDisabled}
+        checked={isChecked}
       />
       <label
         htmlFor={`${rating}-stars`}
         className="reviews__rating-label form__rating-label"
         title={title}
+        style={{
+          pointerEvents: isDisabled ? 'none' : 'auto'
+        }}
       >
         <svg className="form__star-image" width={37} height={33}>
           <use xlinkHref="#icon-star" />

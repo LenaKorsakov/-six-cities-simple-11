@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 import App from './components/app/app';
-import { cities } from './const/city-name';
+import { CITIES } from './const/city-name';
 import {store} from '../src/store/index';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,7 +22,7 @@ root.render(
     <Provider store={store}>
       <ToastContainer/>
       <App
-        cities={cities}
+        cities={CITIES}
       />
     </Provider>
   </React.StrictMode>,
