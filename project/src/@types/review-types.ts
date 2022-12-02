@@ -1,4 +1,4 @@
-export type Review = {
+export type ReviewAdapter = {
     comment: string;
     date: Date;
     id: number;
@@ -6,11 +6,19 @@ export type Review = {
     user: User;
 }
 
-export type ReviewPost = Pick<Review, 'comment' | 'rating'>
+export type ReviewPost = Pick<ReviewAdapter, 'comment' | 'rating'>
 
 export type User = {
   avatarUrl: string;
     id: number;
     isPro: boolean;
     name: string;
+}
+
+export type Review = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: User;
 }

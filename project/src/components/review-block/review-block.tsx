@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
 import { useAppSelector } from '../../hooks';
@@ -6,15 +7,25 @@ import { getAuthorizationStatus } from '../../store/user-process/user-process-se
 
 import { AuthorizationStatus } from '../../const/authorization-status';
 
-import type { Review} from '../../@types/review-types';
+import { getReviews } from '../../store/offer-property-data/offer-property-data-selectors';
+import { sortData } from '../../utiles/sort-compare';
+import { getAdaptedReview } from '../../adapter/adapter';
+
+const MAX_REVIEWS_COUNT = 9;
+const MIN_REVIEWS_COUNT = 0;
 
 type ReviewBlockProps = {
- reviews: Review[];
  offerId: number;
 }
 
-function ReviewBlock({offerId, reviews}: ReviewBlockProps): JSX.Element {
+function ReviewBlock({offerId}: ReviewBlockProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const allReviews = useAppSelector(getReviews);
+  const reviewsAdapted = allReviews.map(getAdaptedReview);
+
+  const reviews = useMemo( () => reviewsAdapted.slice(MIN_REVIEWS_COUNT, MAX_REVIEWS_COUNT).sort(sortData),[reviewsAdapted]);
+  //можно ли сделать так, чтобы я получала отсортированные, адаптированные и обрезанные отзывы по селектору?Понимаю, что две строчки выше - это работа для модели, но реализовать не получилось
+  //+ оказалось, что в state Date хранить нельзя
 
   return (
     <section className="property__reviews reviews">

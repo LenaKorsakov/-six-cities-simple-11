@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import type { Review, User } from '../../@types/review-types';
+import type { ReviewAdapter, User } from '../../@types/review-types';
 import { formatReviewDate, createRatingWidth} from '../../utiles/format';
 
 type ReviewItemProps = {
- review: Review;
+ review: ReviewAdapter;
  user: User;
 }
 function ReviewItem({review, user}: ReviewItemProps): JSX.Element {

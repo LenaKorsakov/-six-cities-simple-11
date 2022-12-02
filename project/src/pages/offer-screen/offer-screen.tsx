@@ -11,7 +11,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import { store } from '../../store';
 import { getAllOffers } from '../../store/offers-city-data/offers-city-data-selectors';
 import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction } from '../../store/api-actions';
-import { getNearbyOffers, getOfferPropertyLoadingStatus, getReviews } from '../../store/offer-property-data/offer-property-data-selectors';
+import { getNearbyOffers, getOfferPropertyLoadingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
 
 
 function OfferScreen():JSX.Element {
@@ -19,7 +19,6 @@ function OfferScreen():JSX.Element {
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const offers = useAppSelector(getAllOffers);
   const isDataLoading = useAppSelector(getOfferPropertyLoadingStatus);
-  const reviews = useAppSelector(getReviews);
 
   const {id} = useParams() as {id: string};
   const propId = +id;
@@ -49,7 +48,6 @@ function OfferScreen():JSX.Element {
       </Helmet>
       <Header />
       <OfferContent
-        reviews={reviews}
         offer={offer}
         nearbyOffers={nearbyOffers}
         offerId={propId}

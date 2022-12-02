@@ -1,9 +1,9 @@
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { getReviewSendingError, getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
 
-import { MIN_REVIEW_LENGTH, validateReviewForm } from '../../utiles/validation';
+import { MIN_REVIEW_LENGTH} from '../../utiles/validation';
 import StarPicker from './star-picker';
 import { StarNumber } from '../../const/star-number';
 import { StarTitle } from '../../const/star-title';
@@ -32,7 +32,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
 
   const isReviewSending = useAppSelector(getReviewSendingStatus);
   const isReviewSendingError = useAppSelector(getReviewSendingError);
-  const isFormDataValide = useMemo( () => validateReviewForm(formData), [formData]);
+  //const isFormDataValide = useMemo( () => validateReviewForm(formData), [formData]);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -103,7 +103,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={isReviewSending && isFormDataValide}
+          disabled={isReviewSending}
         >
           {isReviewSending ? 'Sending...' : 'Submit'}
         </button>

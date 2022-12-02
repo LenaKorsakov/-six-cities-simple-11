@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction, sendReviewAction } from '../api-actions';
 
 import { NameSpace } from '../../const/name-spaces';
-import { Offer } from '../../@types/offer-types';
 
+import { Offer } from '../../@types/offer-types';
 import { OfferPropertyData} from '../@types';
 
 const initialState: OfferPropertyData = {

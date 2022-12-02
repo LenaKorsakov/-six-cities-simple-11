@@ -5,17 +5,15 @@ import OfferGallery from '../offer-gallery/offer-gallery';
 import OffersListNearby from '../offers-list-nearby/offers-list-nearby';
 import Map from '../map/map';
 
-import type { Review } from '../../@types/review-types';
 import { Offer } from '../../@types/offer-types';
 
 type OfferContentProps = {
-  reviews: Review[];
   offer: Offer;
   nearbyOffers: Offer[];
   offerId: number;
 }
 
-function OfferContent({reviews, offer, nearbyOffers, offerId}: OfferContentProps):JSX.Element {
+function OfferContent({offer, nearbyOffers, offerId}: OfferContentProps):JSX.Element {
 
   return(
     <main className="page__main page__main--property">
@@ -30,7 +28,6 @@ function OfferContent({reviews, offer, nearbyOffers, offerId}: OfferContentProps
               description={offer.description}
             />
             <ReviewBlock
-              reviews={reviews}
               offerId={offerId}
             />
           </div>
