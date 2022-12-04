@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useCallback, useState, memo } from 'react';
-import StarPicker from './star-picker';
+import RatingPicker from './rating-picker';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getReviewSendingError, getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
@@ -22,16 +22,20 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
   }
   );
 
+  const [isValid, setIsValid] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
 
   const isReviewSending = useAppSelector(getReviewSendingStatus);
-  const isReviewSendingError = useAppSelector(getReviewSendingError);
+  const isReviewSendingFailed = useAppSelector(getReviewSendingError);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       comment: event.target.value
     });
+
+    setIsValid(validateReviewForm(formData));
   };
 
   const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -39,22 +43,24 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
       ...formData,
       rating: +event.target.value
     });
+
+    setIsValid(validateReviewForm(formData));
   }, [formData]);
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    if(validateReviewForm(formData)) {
-      dispatch(sendReviewAction(formData));
-    }
+    dispatch(sendReviewAction(formData));
 
-    if(!isReviewSendingError) {
+    if(!isReviewSendingFailed) {
       setFormData({
         id: offerId,
         ...InitialReviewState
       });
 
       dispatch(fetchReviewsByIdAction(offerId));
+
+      setIsValid(false);
     }
   };
 
@@ -71,7 +77,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
       <div className="reviews__rating-form form__rating">
 
         {RATING_TITLES.map(({rating, title}) => (
-          <StarPicker
+          <RatingPicker
             rating={rating}
             title={title}
             key={`${rating}-${title}`}
@@ -102,7 +108,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={isReviewSending}
+          disabled={!isValid || isReviewSending}
         >
           {isReviewSending ? ReviewFormButtonText.Clicked : ReviewFormButtonText.Default}
         </button>

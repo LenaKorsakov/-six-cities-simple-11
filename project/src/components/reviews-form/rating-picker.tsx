@@ -1,6 +1,6 @@
 import { ChangeEvent} from 'react';
 
-type StarPickerProps = {
+type RatingPickerProps = {
   rating: number;
   title: string;
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -8,7 +8,7 @@ type StarPickerProps = {
   isChecked: boolean;
 };
 
-function StarPicker({rating, title, onInputChange, isDisabled, isChecked}: StarPickerProps): JSX.Element {
+function RatingPicker({rating, title, onInputChange, isDisabled, isChecked}: RatingPickerProps): JSX.Element {
 
   return(
     <>
@@ -38,4 +38,4 @@ function StarPicker({rating, title, onInputChange, isDisabled, isChecked}: StarP
   );
 }
 
-export default StarPicker;
+export default RatingPicker;

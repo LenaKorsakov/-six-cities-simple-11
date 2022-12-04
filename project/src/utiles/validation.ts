@@ -13,7 +13,7 @@ export const validateLogin = (value: string) => {
   }
 
   return true;
-};//добавила для однообразия
+};
 
 export const validatePassword = (value: string) => {
   if (!value.match(passwordRegex)) {
@@ -27,18 +27,8 @@ export const validatePassword = (value: string) => {
 
 
 export const validateReviewForm = (review: ReviewPost) => {
-  if (review.rating === 0) {
-    toast.info('Rating is required');
-
-    return false;
-  }
-  if (review.comment.length < ReviewLength.Min) {
-    toast.info(`Review must contain at least ${ReviewLength.Min} characters`);
-
-    return false;
-  }
-  if (review.comment.length > ReviewLength.Max) {
-    toast.info(`Review must be less than ${ReviewLength.Max} characters`);
+  if (review.rating === 0 || review.comment.length < ReviewLength.Min || review.comment.length > ReviewLength.Max) {
+    //toast.info('Enter a valid review');
 
     return false;
   }
