@@ -9,7 +9,7 @@ import { validateReviewForm} from '../../utiles/validation';
 import { RATING_TITLES, InitialReviewState, ReviewLength} from '../../const/review';
 
 import { ReviewData } from '../../@types/store-types';
-import { ReviewButtonText } from '../../const/buttons-text';
+import { ReviewFormButtonText } from '../../const/buttons-text';
 
 type ReviewFormProps = {
   offerId: number;
@@ -104,7 +104,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
           type="submit"
           disabled={isReviewSending}
         >
-          {isReviewSending ? ReviewButtonText.Clicked : ReviewButtonText.Default}
+          {isReviewSending ? ReviewFormButtonText.Clicked : ReviewFormButtonText.Default}
         </button>
       </div>
     </form>

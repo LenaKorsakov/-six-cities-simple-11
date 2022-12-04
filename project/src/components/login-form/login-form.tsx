@@ -1,5 +1,6 @@
 import { FormEvent, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { LoginFormButtonText } from '../../const/buttons-text';
 import { useAppDispatch} from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
@@ -62,7 +63,7 @@ function LoginForm(): JSX.Element{
           className="login__submit form__submit button"
           type="submit"
         >
-          { isLoginLoading ? 'Sign in...' : 'Sign in' }
+          { isLoginLoading ? LoginFormButtonText.Clicked : LoginFormButtonText.Default }
         </button>
       </form>
     </section>
