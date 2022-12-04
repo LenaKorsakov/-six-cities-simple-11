@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../hooks';
 import useOnClickOutside from '../../hooks/use-on-click-outside';
 import { changeSort } from '../../store/offers-process/offers-process';
 
-import type { SortEnum } from '../../const/@types';
+import type { SortEnum } from '../../@types/sort-types';
 
 type SortOptionsProps = {
   selectedSortOption: SortEnum;

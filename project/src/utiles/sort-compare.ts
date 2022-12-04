@@ -9,4 +9,4 @@ export const sortRatingHightToLow = (a: Offer, b: Offer) => b.rating - a.rating;
 
 export const sortDefault = (a: Offer, b: Offer) => 0;
 
-export const sortReviewByTime = (a: Review, b: Review) => b.date.getTime() - a.date.getTime();
+export const sortReviewByTime = (a: Review, b: Review):number => b.date.getTime() - a.date.getTime();

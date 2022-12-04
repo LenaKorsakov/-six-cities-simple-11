@@ -4,7 +4,7 @@ import { Offer } from '../@types/offer-types';
 import { ReviewRaw } from '../@types/review-types';
 import { ApiRoute } from '../const/api-route';
 import { Action } from '../const/action';
-import { AuthData, UserData, State, AppDispatch, ReviewData} from './@types';
+import { AuthData, UserData, State, AppDispatch, ReviewData} from '../@types/store-types';
 import { dropToken, saveToken } from '../services/token';
 
 export const fetchAllOffersAction = createAsyncThunk<

@@ -1,4 +1,4 @@
-import type { SortEnum } from './@types';
+import type { SortEnum } from '../@types/sort-types';
 
 export const SortType = {
   Popular: 'Popular',

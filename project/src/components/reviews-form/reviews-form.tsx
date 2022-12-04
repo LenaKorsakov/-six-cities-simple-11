@@ -3,12 +3,13 @@ import StarPicker from './star-picker';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getReviewSendingError, getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
-import { sendReviewAction } from '../../store/api-actions';
+import { fetchReviewsByIdAction, sendReviewAction } from '../../store/api-actions';
 
 import { validateReviewForm} from '../../utiles/validation';
 import { RATING_TITLES, InitialReviewState, ReviewLength} from '../../const/review';
 
-import { ReviewData } from '../../store/@types';
+import { ReviewData } from '../../@types/store-types';
+import { ReviewButtonText } from '../../const/buttons-text';
 
 type ReviewFormProps = {
   offerId: number;
@@ -20,7 +21,6 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
     ...InitialReviewState
   }
   );
-  //стоит ли разбивать на два отдельных стейта, чтобы избежать перерисовки? или это незначительно?
 
   const dispatch = useAppDispatch();
 
@@ -41,21 +41,20 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
     });
   }, [formData]);
 
-  const resetForm = () => {
-    if(!isReviewSendingError) {
-      setFormData({
-        id: offerId,
-        ...InitialReviewState
-      } as ReviewData);
-    }};
-
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     if(validateReviewForm(formData)) {
       dispatch(sendReviewAction(formData));
+    }
 
-      resetForm();
+    if(!isReviewSendingError) {
+      setFormData({
+        id: offerId,
+        ...InitialReviewState
+      });
+
+      dispatch(fetchReviewsByIdAction(offerId));
     }
   };
 
@@ -105,7 +104,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
           type="submit"
           disabled={isReviewSending}
         >
-          {isReviewSending ? 'Sending...' : 'Submit'}
+          {isReviewSending ? ReviewButtonText.Clicked : ReviewButtonText.Default}
         </button>
       </div>
     </form>

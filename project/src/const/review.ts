@@ -6,10 +6,7 @@ export const RATING_TITLES = [
   {rating: 1, title: 'terribly'}
 ];
 
-export const ReviewCount = {
-  Start: 0,
-  End: 10
-} as const;
+export const REVIEW_MAX_COUNT = 10;
 
 export const InitialReviewState = {
   comment: '',

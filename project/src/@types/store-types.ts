@@ -1,8 +1,8 @@
-import { store } from './index';
+import { store } from '../store/index';
 import { AuthorizationStatus } from '../const/authorization-status';
-import { SortEnum } from '../const/@types';
-import { City, Offer } from '../@types/offer-types';
-import { ReviewRaw } from '../@types/review-types';
+import { SortEnum } from './sort-types';
+import { City, Offer } from './offer-types';
+import { ReviewRaw } from './review-types';
 
 export type UserData = {
   avatarUrl: string;

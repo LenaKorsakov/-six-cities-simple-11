@@ -4,7 +4,7 @@ import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction, 
 import { NameSpace } from '../../const/name-space';
 
 import { Offer } from '../../@types/offer-types';
-import { OfferPropertyData} from '../@types';
+import { OfferPropertyData} from '../../@types/store-types';
 
 const initialState: OfferPropertyData = {
   selectedOffer: {} as Offer,
