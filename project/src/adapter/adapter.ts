@@ -1,7 +1,7 @@
+import type { ReviewRaw } from '../@types/review-types';
 import type { Review } from '../@types/review-types';
-import type { ReviewAdapter } from '../@types/review-types';
 
-export const getAdaptedReview = (review: Review): ReviewAdapter => (
+export const getAdaptedReview = (review: ReviewRaw): Review => (
   {
     ...review,
     date: new Date (review.date)

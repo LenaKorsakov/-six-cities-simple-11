@@ -6,10 +6,10 @@ import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 import { AuthorizationStatus } from '../../const/authorization-status';
-import { MAX_REVIEWS_COUNT, MIN_REVIEWS_COUNT } from '../../const/review';
+import { ReviewCount} from '../../const/review';
 
 import { getReviews } from '../../store/offer-property-data/offer-property-data-selectors';
-import { sortData } from '../../utiles/sort-compare';
+import { sortReviewByTime } from '../../utiles/sort-compare';
 import { getAdaptedReview } from '../../adapter/adapter';
 
 type ReviewBlockProps = {
@@ -21,7 +21,7 @@ function ReviewBlock({offerId}: ReviewBlockProps): JSX.Element {
   const allReviews = useAppSelector(getReviews);
   const reviewsAdapted = allReviews.map(getAdaptedReview);
 
-  const reviews = useMemo( () => reviewsAdapted.slice(MIN_REVIEWS_COUNT, MAX_REVIEWS_COUNT).sort(sortData),[reviewsAdapted]);
+  const reviews = useMemo( () => reviewsAdapted.slice(ReviewCount.Start, ReviewCount.End).sort(sortReviewByTime),[reviewsAdapted]);
   //можно ли сделать так, чтобы я получала отсортированные, адаптированные и обрезанные отзывы по селектору?Понимаю, что две строчки выше - это работа для модели, но реализовать не получилось
   //+ оказалось, что в state Date хранить нельзя
 

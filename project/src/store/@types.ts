@@ -2,7 +2,7 @@ import { store } from './index';
 import { AuthorizationStatus } from '../const/authorization-status';
 import { SortEnum } from '../const/@types';
 import { City, Offer } from '../@types/offer-types';
-import { Review } from '../@types/review-types';
+import { ReviewRaw } from '../@types/review-types';
 
 export type UserData = {
   avatarUrl: string;
@@ -44,7 +44,7 @@ export type OfferPropertyData = {
   selectedOffer: Offer;
   nearbyOffers: Offer[];
   isOfferPropertyDataLoading: boolean;
-  reviews: Review[];
+  reviews: ReviewRaw[];
   isReviewSending: boolean;
   isError: boolean;
 };

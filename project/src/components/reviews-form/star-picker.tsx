@@ -1,7 +1,7 @@
 import { ChangeEvent} from 'react';
 
 type StarPickerProps = {
-  rating: string;
+  rating: number;
   title: string;
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   isDisabled: boolean;
@@ -11,7 +11,7 @@ type StarPickerProps = {
 function StarPicker({rating, title, onInputChange, isDisabled, isChecked}: StarPickerProps): JSX.Element {
 
   return(
-    <div>
+    <>
       <input
         className="form__rating-input visually-hidden"
         name="rating"
@@ -34,7 +34,7 @@ function StarPicker({rating, title, onInputChange, isDisabled, isChecked}: StarP
           <use xlinkHref="#icon-star" />
         </svg>
       </label>
-    </div>
+    </>
   );
 }
 

@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getReviewSendingError, getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
 import { sendReviewAction } from '../../store/api-actions';
 
-import { MIN_REVIEW_LENGTH, validateReviewForm} from '../../utiles/validation';
-import { RATING_TITLES, InitialReviewState} from '../../const/review';
+import { validateReviewForm} from '../../utiles/validation';
+import { RATING_TITLES, InitialReviewState, ReviewLength} from '../../const/review';
 
 import { ReviewData } from '../../store/@types';
 
@@ -78,7 +78,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
             key={`${rating}-${title}`}
             onInputChange={handleInputChange}
             isDisabled={isReviewSending}
-            isChecked={+rating === formData.rating}
+            isChecked={rating === formData.rating}
           />
         )
         )}
@@ -98,7 +98,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span>{' '}
             and describe your stay with at least{' '}
-          <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} characters</b>.
+          <b className="reviews__text-amount">{ReviewLength.Min} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"

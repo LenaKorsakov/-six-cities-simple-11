@@ -1,7 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { useEffect, memo } from 'react';
-import { useAppSelector } from '../../hooks';
+import { memo, useEffect } from 'react';
+import { useAppSelector} from '../../hooks';
 
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Header from '../../components/header/header';
@@ -15,28 +15,32 @@ import { getNearbyOffers, getOfferPropertyLoadingStatus } from '../../store/offe
 
 
 function OfferScreen():JSX.Element {
-
-  const nearbyOffers = useAppSelector(getNearbyOffers);
   const offers = useAppSelector(getAllOffers);
-  const isDataLoading = useAppSelector(getOfferPropertyLoadingStatus);
 
   const {id} = useParams() as {id: string};
   const propId = +id;
 
-  useEffect(() => {
-    store.dispatch(fetchNearbyOffersAction(propId));
-    store.dispatch(fetchOfferByIdAction(propId));
-    store.dispatch(fetchReviewsByIdAction(propId));
-  }, [propId]);
-
-
   const offer = offers.find((item) => item.id === propId) ?? null;
+
+  useEffect(() => {
+    if (offer !== null) {
+      store.dispatch(fetchNearbyOffersAction(offer.id));
+      store.dispatch(fetchOfferByIdAction(offer.id));
+      store.dispatch(fetchReviewsByIdAction(offer.id));
+    }
+  }, [offer]);
+
+
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isDataLoading = useAppSelector(getOfferPropertyLoadingStatus);
 
   if (offer === null) {
     return (
       <NotFoundScreen />
     );
-  } if (isDataLoading) {
+  }
+
+  if (isDataLoading) {
     return (
       <LoadingScreen />
     );
