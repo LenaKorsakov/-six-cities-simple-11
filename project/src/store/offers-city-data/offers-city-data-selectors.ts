@@ -4,3 +4,5 @@ import { State } from '../../@types/store-types';
 
 export const getAllOffers = (state: State): Offer[] => state[NameSpace.CityData].offers;
 export const getOffersLoadingStatus = (state: State): boolean => state[NameSpace.CityData].isOffersDataLoading;
+
+

@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
 import { useAppSelector } from '../../hooks';
@@ -6,11 +6,8 @@ import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 import { AuthorizationStatus } from '../../const/authorization-status';
-import { REVIEW_MAX_COUNT} from '../../const/review';
 
-import { getReviews } from '../../store/offer-property-data/offer-property-data-selectors';
-import { sortReviewByTime } from '../../utiles/sort-compare';
-import { getAdaptedReview } from '../../adapter/adapter';
+import { getSortedReviews } from '../../store/offer-property-data/offer-property-data-selectors';
 
 type ReviewBlockProps = {
  offerId: number;
@@ -18,10 +15,7 @@ type ReviewBlockProps = {
 
 function ReviewBlock({offerId}: ReviewBlockProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const allReviews = useAppSelector(getReviews);
-  const reviewsAdapted = allReviews.map(getAdaptedReview);
-
-  const reviews = useMemo(() => reviewsAdapted.sort(sortReviewByTime).slice(0, REVIEW_MAX_COUNT), [reviewsAdapted]);
+  const reviews = useAppSelector(getSortedReviews);
 
   return (
     <section className="property__reviews reviews">
