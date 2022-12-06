@@ -28,7 +28,7 @@ function LoginScreen({locations}: LoginScreenProps): JSX.Element{
         <main className="page__main page__main--login">
           <div className="page__login-container container">
             <LoginForm />
-            <RandomCity locations={locations}/>
+            <RandomCity cities={locations}/>
           </div>
         </main>
       </div>

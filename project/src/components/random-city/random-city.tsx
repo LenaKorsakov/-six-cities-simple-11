@@ -6,10 +6,10 @@ import { getRandomItem } from '../../utiles/get-random-item';
 import { changeCity } from '../../store/offers-process/offers-process';
 
 type RandomCityProps = {
-  locations: City[];
+  cities: City[];
 }
 
-function RandomCity({locations}: RandomCityProps): JSX.Element{
+function RandomCity({cities: locations}: RandomCityProps): JSX.Element{
   const dispatch = useAppDispatch();
   const randomCity = getRandomItem<City>(locations);
 

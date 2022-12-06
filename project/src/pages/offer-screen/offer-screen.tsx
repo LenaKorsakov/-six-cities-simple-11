@@ -9,13 +9,13 @@ import OfferContent from '../../components/offer-content/offer-content';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 import { store } from '../../store';
-import { getAllOffers } from '../../store/offers-city-data/offers-city-data-selectors';
+import { getOffersByCity } from '../../store/offers-city-data/offers-city-data-selectors';
 import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction } from '../../store/api-actions';
 import { getNearbyOffers, getOfferPropertyLoadingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
 
 
 function OfferScreen():JSX.Element {
-  const offers = useAppSelector(getAllOffers);
+  const offers = useAppSelector(getOffersByCity);
 
   const {id} = useParams() as {id: string};
   const propId = +id;
