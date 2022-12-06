@@ -11,5 +11,6 @@ export const Action = {
   UserLogIn: 'user/login',
   UserLogOut: 'user/logout',
 
-  RedirectToRoute: 'user/redirectToRoute'
+  RedirectToRoute: 'user/redirectToRoute',
+  ValidateForm: 'user/validateForm'
 } as const;

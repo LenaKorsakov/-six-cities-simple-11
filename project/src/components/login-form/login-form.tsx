@@ -2,9 +2,29 @@ import { FormEvent, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { LoginFormButtonText } from '../../const/buttons-text';
 import { useAppDispatch} from '../../hooks';
+import { validateForm } from '../../store/actions';
 import { loginAction } from '../../store/api-actions';
 import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
-import { validatePassword, validateLogin} from '../../utiles/validation';
+
+const passwordRegex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{2,}$/;
+const loginRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+const validatePassword = (value: string) => {
+  if (!value.match(passwordRegex)) {
+    return 'Password must contain at least one number and one letter';
+  }
+
+  return '';
+};
+
+const validateLogin = (value: string) => {
+  if (!value.match(loginRegex)) {
+    return 'Enter correct email';
+  }
+
+  return '';
+};
+
 
 function LoginForm(): JSX.Element{
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -15,16 +35,18 @@ function LoginForm(): JSX.Element{
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if(emailRef.current !== null && passwordRef.current !== null) {
-      if(validateLogin(emailRef.current.value)
-        && validatePassword(passwordRef.current.value)) {
+    if (emailRef.current !== null && passwordRef.current !== null) {
 
+      const errorMessage = validatePassword(passwordRef.current.value) || validateLogin(emailRef.current.value);
+
+      if (errorMessage.length > 0) {
+        dispatch(validateForm(errorMessage));
+      } else {
         dispatch(loginAction({
           login: emailRef.current.value,
           password: passwordRef.current.value
         }));
-      }
-    }
+      }}
   }
 
   return (
