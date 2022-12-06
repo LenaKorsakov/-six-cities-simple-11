@@ -2,7 +2,7 @@ type RatingPickerProps = {
   rating: number;
   title: string;
   isDisabled: boolean;
-  isChecked: boolean;//без данного атрибута "звездочки" не становятся серыми при отправки формы на сервер и сбросе формы
+  isChecked: boolean;//без данного атрибута "звездочки" не становятся серыми при отправки формы на сервер и сбросе формы, а так как на input нет onChange пришлось сделать его readOnly.
 };
 
 function RatingPicker({rating, title, isDisabled, isChecked}: RatingPickerProps): JSX.Element {
@@ -16,15 +16,12 @@ function RatingPicker({rating, title, isDisabled, isChecked}: RatingPickerProps)
         id={`${rating}-stars`}
         type="radio"
         disabled={isDisabled}
-        checked={isChecked}
+        checked={isChecked} readOnly
       />
       <label
         htmlFor={`${rating}-stars`}
         className="reviews__rating-label form__rating-label"
         title={title}
-        style={{
-          pointerEvents: isDisabled ? 'none' : 'auto'
-        }}
       >
         <svg className="form__star-image" width={37} height={33}>
           <use xlinkHref="#icon-star" />

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, memo, FormEvent, useEffect } from 'react';
+import { ChangeEvent, useState, memo, FormEvent } from 'react';
 import RatingPicker from './rating-picker';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -15,19 +15,12 @@ type ReviewFormProps = {
 };
 
 function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const [formData, setFormData] = useState<ReviewPost>(InitialReviewState);
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   const isReviewFormBloked = useAppSelector(checkIsReviewFormBlocked);
   const isReviewSendingFailed = useAppSelector(checkReviewSendingError);
-
-  useEffect(()=> {
-    if (formData.comment.length < ReviewLength.Min || formData.comment.length > ReviewLength.Max || formData.rating === 0) {
-      setIsButtonDisabled(true);
-    } else {
-      setIsButtonDisabled(false);
-    }
-  },[formData.comment, formData.rating]);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -43,7 +36,6 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
     });
   };
 
-  const dispatch = useAppDispatch();
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -59,6 +51,8 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
       dispatch(fetchReviewsByIdAction(offerId));
     }
   };
+
+  const isButtonDisabled = formData.comment.length < ReviewLength.Min || formData.comment.length > ReviewLength.Max || formData.rating === 0;
 
   return(
     <form
