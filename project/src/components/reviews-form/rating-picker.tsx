@@ -1,14 +1,11 @@
-import { ChangeEvent} from 'react';
-
 type RatingPickerProps = {
   rating: number;
   title: string;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   isDisabled: boolean;
-  isChecked: boolean;
+  isChecked: boolean;//без данного атрибута "звездочки" не становятся серыми при отправки формы на сервер и сбросе формы
 };
 
-function RatingPicker({rating, title, onInputChange, isDisabled, isChecked}: RatingPickerProps): JSX.Element {
+function RatingPicker({rating, title, isDisabled, isChecked}: RatingPickerProps): JSX.Element {
 
   return(
     <>
@@ -18,7 +15,6 @@ function RatingPicker({rating, title, onInputChange, isDisabled, isChecked}: Rat
         value={rating}
         id={`${rating}-stars`}
         type="radio"
-        onChange={onInputChange}
         disabled={isDisabled}
         checked={isChecked}
       />

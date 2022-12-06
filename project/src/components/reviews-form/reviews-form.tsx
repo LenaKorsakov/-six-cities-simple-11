@@ -1,66 +1,62 @@
-import { ChangeEvent, FormEvent, useCallback, useState, memo } from 'react';
+import { ChangeEvent, useState, memo, FormEvent, useEffect } from 'react';
 import RatingPicker from './rating-picker';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getReviewSendingError, getReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
+import { checkReviewSendingError, checkIsReviewFormBlocked } from '../../store/offer-property-data/offer-property-data-selectors';
 import { fetchReviewsByIdAction, sendReviewAction } from '../../store/api-actions';
 
-import { validateReviewForm} from '../../utiles/validation';
 import { RATING_TITLES, InitialReviewState, ReviewLength} from '../../const/review';
 
-import { ReviewData } from '../../@types/store-types';
 import { ReviewFormButtonText } from '../../const/buttons-text';
+import { ReviewPost } from '../../@types/review-types';
 
 type ReviewFormProps = {
   offerId: number;
 };
 
 function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
-  const [formData, setFormData] = useState<ReviewData>({
-    id: offerId,
-    ...InitialReviewState
-  }
-  );
+  const [formData, setFormData] = useState<ReviewPost>(InitialReviewState);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
-  const [isValid, setIsValid] = useState<boolean>(false);
+  const isReviewFormBloked = useAppSelector(checkIsReviewFormBlocked);
+  const isReviewSendingFailed = useAppSelector(checkReviewSendingError);
 
-  const dispatch = useAppDispatch();
-
-  const isReviewSending = useAppSelector(getReviewSendingStatus);
-  const isReviewSendingFailed = useAppSelector(getReviewSendingError);
+  useEffect(()=> {
+    if (formData.comment.length < ReviewLength.Min || formData.comment.length > ReviewLength.Max || formData.rating === 0) {
+      setIsButtonDisabled(true);
+    } else {
+      setIsButtonDisabled(false);
+    }
+  },[formData.comment, formData.rating]);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       comment: event.target.value
     });
-
-    setIsValid(validateReviewForm(formData));
   };
 
-  const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       rating: +event.target.value
     });
+  };
 
-    setIsValid(validateReviewForm(formData));
-  }, [formData]);
+  const dispatch = useAppDispatch();
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    dispatch(sendReviewAction(formData));
+    dispatch(sendReviewAction({
+      ...formData,
+      id: offerId
+    }));
 
     if(!isReviewSendingFailed) {
-      setFormData({
-        id: offerId,
-        ...InitialReviewState
-      });
+      setFormData(InitialReviewState);
 
       dispatch(fetchReviewsByIdAction(offerId));
-
-      setIsValid(false);
     }
   };
 
@@ -74,16 +70,18 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <div className="reviews__rating-form form__rating">
+      <div
+        className="reviews__rating-form form__rating"
+        onChange={handleInputChange}
+      >
 
         {RATING_TITLES.map(({rating, title}) => (
           <RatingPicker
             rating={rating}
             title={title}
             key={`${rating}-${title}`}
-            onInputChange={handleInputChange}
-            isDisabled={isReviewSending}
-            isChecked={rating === formData.rating}
+            isDisabled={isReviewFormBloked}
+            isChecked={formData.rating === rating}
           />
         )
         )}
@@ -96,7 +94,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.comment}
         onChange = {handleTextAreaChange}
-        disabled={isReviewSending}
+        disabled={isReviewFormBloked}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -108,9 +106,9 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!isValid || isReviewSending}
+          disabled={isButtonDisabled || isReviewFormBloked}
         >
-          {isReviewSending ? ReviewFormButtonText.Clicked : ReviewFormButtonText.Default}
+          {isReviewFormBloked ? ReviewFormButtonText.Clicked : ReviewFormButtonText.Default}
         </button>
       </div>
     </form>

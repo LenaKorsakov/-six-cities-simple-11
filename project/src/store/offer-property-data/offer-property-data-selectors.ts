@@ -11,8 +11,8 @@ import { REVIEW_MAX_COUNT } from '../../const/review';
 
 export const getOfferPropertyLoadingStatus = (state: State): boolean => state[NameSpace.PropertyData].isOfferPropertyDataLoading;
 export const getNearbyOffers = (state: State): Offer[] => state[NameSpace.PropertyData].nearbyOffers;
-export const getReviewSendingStatus = (state: State): boolean => state[NameSpace.PropertyData].isReviewSending;
-export const getReviewSendingError = (state: State): boolean => state[NameSpace.PropertyData].isError;
+export const checkIsReviewFormBlocked = (state: State): boolean => state[NameSpace.PropertyData].isReviewFormBlocked;
+export const checkReviewSendingError = (state: State): boolean => state[NameSpace.PropertyData].isError;
 
 const getReviews = (state:State): ReviewRaw[] => state[NameSpace.PropertyData].reviews;
 const getAdaptedReviews = createSelector(getReviews, (reviews: ReviewRaw[]) => reviews.map(adaptReview));

@@ -45,7 +45,7 @@ export type OfferPropertyData = {
   nearbyOffers: Offer[];
   isOfferPropertyDataLoading: boolean;
   reviews: ReviewRaw[];
-  isReviewSending: boolean;
+  isReviewFormBlocked: boolean;
   isError: boolean;
 };
 
