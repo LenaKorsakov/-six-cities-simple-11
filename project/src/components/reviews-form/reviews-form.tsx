@@ -2,12 +2,14 @@ import { ChangeEvent, useState, memo, FormEvent } from 'react';
 import RatingPicker from './rating-picker';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { checkReviewSendingError, checkIsReviewFormBlocked } from '../../store/offer-property-data/offer-property-data-selectors';
+import { checkIsReviewFormBlocked, checkReviewSendingSuccessfully } from '../../store/offer-property-data/offer-property-data-selectors';
 import { fetchReviewsByIdAction, sendReviewAction } from '../../store/api-actions';
+import { displayError } from '../../store/actions';
 
 import { RATING_TITLES, InitialReviewState, ReviewLength} from '../../const/review';
-
 import { ReviewFormButtonText } from '../../const/buttons-text';
+import { WarningMessage } from '../../const/warning-message';
+
 import { ReviewPost } from '../../@types/review-types';
 
 type ReviewFormProps = {
@@ -20,7 +22,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
   const [formData, setFormData] = useState<ReviewPost>(InitialReviewState);
 
   const isReviewFormBloked = useAppSelector(checkIsReviewFormBlocked);
-  const isReviewSendingFailed = useAppSelector(checkReviewSendingError);
+  const isReviewSendingSuccess = useAppSelector(checkReviewSendingSuccessfully);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -45,10 +47,13 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
       id: offerId
     }));
 
-    if(!isReviewSendingFailed) {
+    //как сделать так, чтобы код далее начал выполняться сразу после завершения sendReviewAction?
+    //сейчас выполнение опирается на предыдущий статус
+    if(isReviewSendingSuccess) {
       setFormData(InitialReviewState);
-
       dispatch(fetchReviewsByIdAction(offerId));
+    } else {
+      dispatch(displayError(WarningMessage.SendingError));
     }
   };
 

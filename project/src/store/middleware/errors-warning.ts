@@ -6,12 +6,16 @@ import { Action } from '../../const/action';
 
 type Reducer = ReturnType<typeof rootReducer>;
 
-export const validationInfo: Middleware<unknown, Reducer> =
+export const errorsWarning: Middleware<unknown, Reducer> =
   (_store) =>
     (next) =>
       (action: PayloadAction<string>) => {
         if (action.type === Action.ValidateForm) {
           toast.info(action.payload);
+        }
+
+        if (action.type === Action.DisplayError) {
+          toast.warn(action.payload);
         }
 
         return next(action);

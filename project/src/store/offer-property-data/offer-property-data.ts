@@ -12,7 +12,7 @@ const initialState: OfferPropertyData = {
   isOfferPropertyDataLoading: false,
   reviews: [],
   isReviewFormBlocked: false,
-  isError: false
+  isSuccess: true
 };
 
 export const offerPropertyData = createSlice({
@@ -49,11 +49,11 @@ export const offerPropertyData = createSlice({
       })
       .addCase(sendReviewAction.fulfilled, (state) => {
         state.isReviewFormBlocked = false;
-        state.isError = false;
+        state.isSuccess = true;
       })
       .addCase(sendReviewAction.rejected, (state) => {
         state.isReviewFormBlocked = false;
-        state.isError = true;
+        state.isSuccess = false;
       });
   }
 });

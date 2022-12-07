@@ -2,7 +2,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import {rootReducer} from './root-reducer';
 import { createAPI } from '../services/api';
 import { redirect } from './middleware/redirect';
-import { validationInfo } from './middleware/validation-info';
+import { errorsWarning } from './middleware/errors-warning';
 
 const api = createAPI();
 
@@ -13,5 +13,5 @@ export const store = configureStore({
       thunk: {
         extraArgument: api,
       },
-    }).concat(redirect, validationInfo)
+    }).concat(redirect, errorsWarning)
 });

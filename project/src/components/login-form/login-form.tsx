@@ -1,8 +1,9 @@
 import { FormEvent, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { LoginFormButtonText } from '../../const/buttons-text';
+import { WarningMessage } from '../../const/warning-message';
 import { useAppDispatch} from '../../hooks';
-import { validateForm } from '../../store/actions';
+import { displayInfo } from '../../store/actions';
 import { loginAction } from '../../store/api-actions';
 import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
 
@@ -11,7 +12,7 @@ const loginRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0
 
 const validatePassword = (value: string) => {
   if (!value.match(passwordRegex)) {
-    return 'Password must contain at least one number and one letter';
+    return WarningMessage.ValidatePassword;
   }
 
   return '';
@@ -19,7 +20,7 @@ const validatePassword = (value: string) => {
 
 const validateLogin = (value: string) => {
   if (!value.match(loginRegex)) {
-    return 'Enter correct email';
+    return WarningMessage.ValidateLogin;
   }
 
   return '';
@@ -40,7 +41,7 @@ function LoginForm(): JSX.Element{
       const errorMessage = validatePassword(passwordRef.current.value) || validateLogin(emailRef.current.value);
 
       if (errorMessage.length > 0) {
-        dispatch(validateForm(errorMessage));
+        dispatch(displayInfo(errorMessage));
       } else {
         dispatch(loginAction({
           login: emailRef.current.value,
@@ -63,7 +64,6 @@ function LoginForm(): JSX.Element{
           <input
             ref={emailRef}
             className="login__input form__input"
-            type="email"
             name="email"
             placeholder="Email"
             required
