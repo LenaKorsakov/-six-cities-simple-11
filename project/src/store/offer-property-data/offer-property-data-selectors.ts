@@ -1,18 +1,21 @@
 import { createSelector } from 'reselect';
 
+import { sortReviewByTime } from '../../utiles/sort-compare';
+import { adaptReview } from '../../adapter/adapter';
+
 import { NameSpace } from '../../const/name-space';
+import { REVIEW_MAX_COUNT } from '../../const/review';
+import { ReviewSendingStatus } from '../../const/review-sending-status';
 
 import { Offer } from '../../@types/offer-types';
 import { ReviewRaw, Review } from '../../@types/review-types';
 import { State } from '../../@types/store-types';
-import { adaptReview } from '../../adapter/adapter';
-import { sortReviewByTime } from '../../utiles/sort-compare';
-import { REVIEW_MAX_COUNT } from '../../const/review';
+
 
 export const getOfferPropertyLoadingStatus = (state: State): boolean => state[NameSpace.PropertyData].isOfferPropertyDataLoading;
 export const getNearbyOffers = (state: State): Offer[] => state[NameSpace.PropertyData].nearbyOffers;
 export const checkIsReviewFormBlocked = (state: State): boolean => state[NameSpace.PropertyData].isReviewFormBlocked;
-export const checkReviewSendingSuccessfully = (state: State):boolean => state[NameSpace.PropertyData].isSuccess;
+export const checkReviewSendingStatus = (state: State): ReviewSendingStatus => state[NameSpace.PropertyData].reviewSendingStatus;
 
 const getReviews = (state:State): ReviewRaw[] => state[NameSpace.PropertyData].reviews;
 const getAdaptedReviews = createSelector(getReviews, (reviews: ReviewRaw[]) => reviews.map(adaptReview));

@@ -1,11 +1,16 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import { Offer } from '../@types/offer-types';
-import { ReviewRaw } from '../@types/review-types';
+
+import { displayError } from './actions';
+import { dropToken, saveToken } from '../services/token';
+
 import { ApiRoute } from '../const/api-route';
 import { Action } from '../const/action';
+import { WarningMessage } from '../const/warning-message';
+
+import { ReviewRaw } from '../@types/review-types';
+import { Offer } from '../@types/offer-types';
 import { AuthData, UserData, State, AppDispatch, ReviewData} from '../@types/store-types';
-import { dropToken, saveToken } from '../services/token';
 
 export const fetchAllOffersAction = createAsyncThunk<
   Offer[],
@@ -128,7 +133,16 @@ export const sendReviewAction = createAsyncThunk<
     extra: AxiosInstance;
   }
   >(Action.SendReview,
-    async({ id, rating, comment }, { extra: api }) => {
-      await api.post<ReviewData>(`${ApiRoute.Reviews}/${id}`, {rating, comment});
+    async({ id, rating, comment }, {dispatch, extra: api}) => {
+
+      try {
+
+        await api.post<ReviewData>(`${ApiRoute.Reviews}/${id}`, {rating, comment});
+
+        dispatch(fetchReviewsByIdAction(id));
+
+      } catch {
+        dispatch(displayError(WarningMessage.SendingError));
+      }
     }
   );

@@ -1,13 +1,14 @@
 import { memo } from 'react';
+
 import ReviewItem from '../review-item/review-item';
 import ReviewsForm from '../reviews-form/reviews-form';
-import { useAppSelector } from '../../hooks';
 
+import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
+import { getSortedReviews } from '../../store/offer-property-data/offer-property-data-selectors';
 
 import { AuthorizationStatus } from '../../const/authorization-status';
 
-import { getSortedReviews } from '../../store/offer-property-data/offer-property-data-selectors';
 
 type ReviewBlockProps = {
  offerId: number;

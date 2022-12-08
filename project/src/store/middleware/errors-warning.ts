@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {Middleware} from 'redux';
+
 import {rootReducer} from '../root-reducer';
 import { Action } from '../../const/action';
 

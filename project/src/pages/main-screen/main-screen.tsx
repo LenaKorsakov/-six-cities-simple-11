@@ -1,6 +1,7 @@
+import {Helmet} from 'react-helmet-async';
+
 import MainContent from '../../components/main-content/main-content';
 import Header from '../../components/header/header';
-import {Helmet} from 'react-helmet-async';
 import type { MainScreenProps } from '../../components/main-content/main-content';
 
 function MainScreen({cities}: MainScreenProps): JSX.Element {

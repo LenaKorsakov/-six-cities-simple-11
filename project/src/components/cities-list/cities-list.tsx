@@ -1,8 +1,10 @@
 import { memo, useCallback, MouseEvent} from 'react';
 import { Link } from 'react-router-dom';
+
 import { AppRoute } from '../../const/app-route';
 import { useAppDispatch } from '../../hooks';
 import { changeCity } from '../../store/offers-process/offers-process';
+
 import type { City, CityName } from '../../@types/offer-types';
 
 type CitiesListProps ={

@@ -1,11 +1,13 @@
 import { FormEvent, useRef } from 'react';
 import { useSelector } from 'react-redux';
+
+import { useAppDispatch} from '../../hooks';
+import { loginAction } from '../../store/api-actions';
+import { displayInfo } from '../../store/actions';
+import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
+
 import { LoginFormButtonText } from '../../const/buttons-text';
 import { WarningMessage } from '../../const/warning-message';
-import { useAppDispatch} from '../../hooks';
-import { displayInfo } from '../../store/actions';
-import { loginAction } from '../../store/api-actions';
-import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
 
 const passwordRegex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{2,}$/;
 const loginRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -15,7 +17,7 @@ const validatePassword = (value: string) => {
     return WarningMessage.ValidatePassword;
   }
 
-  return '';
+  return WarningMessage.NoError;
 };
 
 const validateLogin = (value: string) => {
@@ -23,7 +25,7 @@ const validateLogin = (value: string) => {
     return WarningMessage.ValidateLogin;
   }
 
-  return '';
+  return WarningMessage.NoError;
 };
 
 

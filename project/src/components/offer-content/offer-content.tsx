@@ -1,5 +1,3 @@
-
-
 import OfferHost from '../offer-host/offer-host';
 import OfferProperty from '../offer-property/offer-property';
 import ReviewBlock from '../review-block/review-block';

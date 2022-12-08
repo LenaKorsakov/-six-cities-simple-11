@@ -3,6 +3,7 @@ import { AuthorizationStatus } from '../const/authorization-status';
 import { SortEnum } from './sort-types';
 import { City, Offer } from './offer-types';
 import { ReviewRaw } from './review-types';
+import { ReviewSendingStatus } from '../const/review-sending-status';
 
 export type UserData = {
   avatarUrl: string;
@@ -46,7 +47,7 @@ export type OfferPropertyData = {
   isOfferPropertyDataLoading: boolean;
   reviews: ReviewRaw[];
   isReviewFormBlocked: boolean;
-  isSuccess: boolean;
+  reviewSendingStatus: ReviewSendingStatus;
 };
 
 export type State = ReturnType<typeof store.getState>;

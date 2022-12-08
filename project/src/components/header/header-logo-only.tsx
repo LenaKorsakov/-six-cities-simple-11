@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
 import Logo from './logo';
 
-
 type HeaderProps = PropsWithChildren;
 
 function HeaderLogoOnly({children}: HeaderProps): JSX.Element {

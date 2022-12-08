@@ -1,13 +1,17 @@
 import {Helmet} from 'react-helmet-async';
 import { Navigate } from 'react-router-dom';
+
 import HeaderLogoOnly from '../../components/header/header-logo-only';
+import RandomCity from '../../components/random-city/random-city';
+import LoginForm from '../../components/login-form/login-form';
+
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
+
 import { AppRoute } from '../../const/app-route';
 import { AuthorizationStatus } from '../../const/authorization-status';
-import { useAppSelector } from '../../hooks';
+
 import { City } from '../../@types/offer-types';
-import LoginForm from '../../components/login-form/login-form';
-import RandomCity from '../../components/random-city/random-city';
-import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 type LoginScreenProps = {
   locations: City[];

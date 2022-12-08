@@ -2,13 +2,12 @@ import { ChangeEvent, useState, memo, FormEvent } from 'react';
 import RatingPicker from './rating-picker';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { checkIsReviewFormBlocked, checkReviewSendingSuccessfully } from '../../store/offer-property-data/offer-property-data-selectors';
-import { fetchReviewsByIdAction, sendReviewAction } from '../../store/api-actions';
-import { displayError } from '../../store/actions';
+import { checkIsReviewFormBlocked, checkReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
+import { sendReviewAction } from '../../store/api-actions';
 
 import { RATING_TITLES, InitialReviewState, ReviewLength} from '../../const/review';
 import { ReviewFormButtonText } from '../../const/buttons-text';
-import { WarningMessage } from '../../const/warning-message';
+import { ReviewSendingStatus } from '../../const/review-sending-status';
 
 import { ReviewPost } from '../../@types/review-types';
 
@@ -22,7 +21,7 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
   const [formData, setFormData] = useState<ReviewPost>(InitialReviewState);
 
   const isReviewFormBloked = useAppSelector(checkIsReviewFormBlocked);
-  const isReviewSendingSuccess = useAppSelector(checkReviewSendingSuccessfully);
+  const reviewSendingStatus = useAppSelector(checkReviewSendingStatus);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -47,13 +46,8 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
       id: offerId
     }));
 
-    //как сделать так, чтобы код далее начал выполняться сразу после завершения sendReviewAction?
-    //сейчас выполнение опирается на предыдущий статус
-    if(isReviewSendingSuccess) {
+    if (reviewSendingStatus !== ReviewSendingStatus.Rejected) {
       setFormData(InitialReviewState);
-      dispatch(fetchReviewsByIdAction(offerId));
-    } else {
-      dispatch(displayError(WarningMessage.SendingError));
     }
   };
 

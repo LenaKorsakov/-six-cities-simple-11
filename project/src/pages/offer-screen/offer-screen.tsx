@@ -1,13 +1,13 @@
 import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { memo, useEffect } from 'react';
-import { useAppSelector} from '../../hooks';
 
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Header from '../../components/header/header';
 import OfferContent from '../../components/offer-content/offer-content';
 import LoadingScreen from '../loading-screen/loading-screen';
 
+import { useAppSelector} from '../../hooks';
 import { store } from '../../store';
 import { getOffersByCity } from '../../store/offers-city-data/offers-city-data-selectors';
 import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction } from '../../store/api-actions';
