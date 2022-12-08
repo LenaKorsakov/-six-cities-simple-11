@@ -1,7 +1,9 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
+
 import { capitalizeFirstLetter, formatPrice, createRatingWidth } from '../../utiles/format';
 import { AppRoute } from '../../const/app-route';
+
 import type {OfferPreview} from '../../@types/offer-types';
 
 type OfferCardProps = {

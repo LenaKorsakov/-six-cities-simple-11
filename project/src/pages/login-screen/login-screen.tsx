@@ -1,13 +1,17 @@
 import {Helmet} from 'react-helmet-async';
 import { Navigate } from 'react-router-dom';
+
 import HeaderLogoOnly from '../../components/header/header-logo-only';
+import RandomCity from '../../components/random-city/random-city';
+import LoginForm from '../../components/login-form/login-form';
+
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
+
 import { AppRoute } from '../../const/app-route';
 import { AuthorizationStatus } from '../../const/authorization-status';
-import { useAppSelector } from '../../hooks';
+
 import { City } from '../../@types/offer-types';
-import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
-import LoginForm from '../../components/login-form/login-form';
-import RandomCity from '../../components/random-city/random-city';
 
 type LoginScreenProps = {
   locations: City[];
@@ -22,13 +26,13 @@ function LoginScreen({locations}: LoginScreenProps): JSX.Element{
       :
       <div className="page page--gray page--login">
         <Helmet>
-          <title>Шесть городов. Страничка регистрации.</title>
+          <title>Six cities. Login page</title>
         </Helmet>
         <HeaderLogoOnly />
         <main className="page__main page__main--login">
           <div className="page__login-container container">
             <LoginForm />
-            <RandomCity locations={locations}/>
+            <RandomCity cities={locations}/>
           </div>
         </main>
       </div>

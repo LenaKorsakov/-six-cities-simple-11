@@ -1,4 +1,4 @@
-import { useCallback, memo, useMemo, useState} from 'react';
+import { useCallback, memo, useState} from 'react';
 
 import SortOptions from '../sort-options/sort-options';
 import Map from '../map/map';
@@ -7,10 +7,7 @@ import OffersListEmpty from '../offers-list-empty/offers-list-empty';
 
 import { useAppSelector } from '../../hooks';
 import { getSort } from '../../store/offers-process/offers-process-selectors';
-import { getAllOffers } from '../../store/offers-data/offers-data-selectors';
-
-import { SortType } from '../../const/sort-type';
-import { sortPriceHightToLow, sortPriceLowToHight, sortRatingHightToLow, sortDefault } from '../../utiles/sort-compare';
+import { getOffersByCity, getOffersBySort } from '../../store/offers-city-data/offers-city-data-selectors';
 
 import type {Offer, City} from '../../@types/offer-types';
 
@@ -19,29 +16,12 @@ type OffersListCityProps = {
 }
 
 function OffersListCity({ selectedCity}: OffersListCityProps): JSX.Element{
-  const selectedCityName = selectedCity.name;
-
-  const allOffers = useAppSelector(getAllOffers);
   const selectedSortOption = useAppSelector(getSort);
 
-  const offers = useMemo(() => allOffers.filter((offer: Offer) => offer.city.name === selectedCityName),[allOffers, selectedCityName]);
+  const offers = useAppSelector(getOffersByCity);
   const offersCount = offers.length;
 
-  const sortedOffers = useMemo(() => {
-    switch(selectedSortOption) {
-      case SortType.PriseLowToHight:
-        return offers.slice().sort(sortPriceLowToHight);
-      case SortType.PriceLowToHight:
-        return offers.slice().sort(sortPriceHightToLow);
-      case SortType.TopRatedFirst:
-        return offers.slice().sort(sortRatingHightToLow);
-      case SortType.Popular:
-        return offers.slice().sort(sortDefault);
-
-      default:
-        return offers.slice().sort(sortDefault);
-    }
-  },[offers, selectedSortOption]);
+  const sortedOffers = useAppSelector(getOffersBySort);
 
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
 

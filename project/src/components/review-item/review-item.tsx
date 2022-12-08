@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import type { Review, User } from '../../@types/review-types';
 import { formatReviewDate, createRatingWidth} from '../../utiles/format';
+import type { Review, User } from '../../@types/review-types';
 
 type ReviewItemProps = {
  review: Review;

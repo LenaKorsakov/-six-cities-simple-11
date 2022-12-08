@@ -1,14 +1,13 @@
 import {useRef, useEffect, memo} from 'react';
-
 import cn from 'classnames';
-
 import {Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
+import useMap from '../../hooks/use-map';
 
 import { MarkerUrl } from '../../const/marker-url';
 import { MarkerShape } from '../../const/marker-shape';
 
-import useMap from '../../hooks/use-map';
 import type {City, Offer} from '../../@types/offer-types';
 
 type MapProps = {
@@ -47,11 +46,10 @@ function Map(props: MapProps): JSX.Element {
       return new Marker({ lat, lng }, {
         icon: offer.id === selectedOffer?.id ? currentCustomIcon : defaultCustomIcon,
       });
-      //TODO - проблема, каждый раз, когда происходит наведение мышки на новый оффер, предыдущее масштабирование сбрасывается ( потому что карта отрисовывается заново)
     });
 
-    const {latitude: lat, longitude: lng, zoom} = city.location;
-    map.setView({lat, lng}, zoom, {animate: true}, );
+    const {latitude: lat, longitude: lng} = city.location;
+    map.setView({lat, lng});
 
     const markerGroup = new LayerGroup(markers);
 

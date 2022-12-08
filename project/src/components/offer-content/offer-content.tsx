@@ -1,20 +1,19 @@
 import OfferHost from '../offer-host/offer-host';
 import OfferProperty from '../offer-property/offer-property';
-import ReviewList from '../review-list/review-list';
+import ReviewBlock from '../review-block/review-block';
 import OfferGallery from '../offer-gallery/offer-gallery';
 import OffersListNearby from '../offers-list-nearby/offers-list-nearby';
 import Map from '../map/map';
 
-import type { Review } from '../../@types/review-types';
 import { Offer } from '../../@types/offer-types';
 
-type OfferMainProps = {
-  reviews: Review[];
+type OfferContentProps = {
   offer: Offer;
   nearbyOffers: Offer[];
+  offerId: number;
 }
 
-function OfferMain({reviews, offer, nearbyOffers}: OfferMainProps):JSX.Element {
+function OfferContent({offer, nearbyOffers, offerId}: OfferContentProps):JSX.Element {
 
   return(
     <main className="page__main page__main--property">
@@ -28,7 +27,9 @@ function OfferMain({reviews, offer, nearbyOffers}: OfferMainProps):JSX.Element {
               host={offer.host}
               description={offer.description}
             />
-            <ReviewList reviews={reviews}/>
+            <ReviewBlock
+              offerId={offerId}
+            />
           </div>
         </div>
 
@@ -52,4 +53,4 @@ function OfferMain({reviews, offer, nearbyOffers}: OfferMainProps):JSX.Element {
   );
 }
 
-export default OfferMain;
+export default OfferContent;

@@ -1,44 +1,83 @@
-import { ChangeEvent, useState } from 'react';
-import StarPicker from './star-picker';
-import type {Star} from '../../@types/star-types';
-import type {ReviewPost} from '../../@types/review-types';
+import { ChangeEvent, useState, memo, FormEvent } from 'react';
+import RatingPicker from './rating-picker';
 
-type ReviewsFormProps = {
-  options: Star[];
-}
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { checkIsReviewFormBlocked } from '../../store/offer-property-data/offer-property-data-selectors';
+import { fetchReviewsByIdAction, sendReviewAction } from '../../store/api-actions';
 
-function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
+import { RATING_TITLES, InitialReviewState, ReviewLength} from '../../const/review';
+import { ReviewFormButtonText } from '../../const/buttons-text';
 
-  const [formData, setFormData] = useState<ReviewPost>({
-    comment: '',
-    rating: 0}
-  );
+import { ReviewPost } from '../../@types/review-types';
+import { displayError } from '../../store/actions';
+import { WarningMessage } from '../../const/warning-message';
 
-  function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
+type ReviewFormProps = {
+  offerId: number;
+};
+
+function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const [formData, setFormData] = useState<ReviewPost>(InitialReviewState);
+
+  const isReviewFormBloked = useAppSelector(checkIsReviewFormBlocked);
+
+  const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       comment: event.target.value
     });
-  }
+  };
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       rating: +event.target.value
     });
-  }
+  };
+
+
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    dispatch(sendReviewAction({
+      ...formData,
+      id: offerId
+    })).unwrap().then(
+      () => {
+        dispatch(fetchReviewsByIdAction(offerId));
+        setFormData(InitialReviewState);
+      },
+      () => {
+        dispatch(displayError(WarningMessage.SendingError));
+      });
+  };
+
+  const isButtonDisabled = formData.comment.length < ReviewLength.Min || formData.comment.length > ReviewLength.Max || formData.rating === 0;
+
   return(
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <div className="reviews__rating-form form__rating">
+      <div
+        className="reviews__rating-form form__rating"
+        onChange={handleInputChange}
+      >
 
-        {options.map((item) => (
-          <StarPicker
-            option={item}
-            key={`${item.rating}-${item.title}`}
-            onInputChange={handleInputChange}
+        {RATING_TITLES.map(({rating, title}) => (
+          <RatingPicker
+            rating={rating}
+            title={title}
+            key={`${rating}-${title}`}
+            isDisabled={isReviewFormBloked}
+            isChecked={formData.rating === rating}
           />
         )
         )}
@@ -51,24 +90,25 @@ function ReviewsForm({options}: ReviewsFormProps): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.comment}
         onChange = {handleTextAreaChange}
+        disabled={isReviewFormBloked}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
-          <span className="reviews__star">rating</span>
+          <span className="reviews__star">rating</span>{' '}
             and describe your stay with at least{' '}
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className="reviews__text-amount">{ReviewLength.Min} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={isButtonDisabled || isReviewFormBloked}
         >
-          Submit
+          {isReviewFormBloked ? ReviewFormButtonText.Clicked : ReviewFormButtonText.Default}
         </button>
       </div>
     </form>
   );
 }
 
-export default ReviewsForm;
+export default memo(ReviewsForm);

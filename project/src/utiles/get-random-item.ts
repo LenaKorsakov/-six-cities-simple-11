@@ -1,4 +1,3 @@
-export function getRandomItem<T>(items: T[]):T {
-  return items[Math.floor(Math.random() * items.length)];
-}
+export const getRandomItem = <T>(items: T[]):T => items[Math.floor(Math.random() * items.length)];
+
 

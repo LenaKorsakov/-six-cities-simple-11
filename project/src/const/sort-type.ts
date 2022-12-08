@@ -1,9 +1,9 @@
-import type { SortEnum } from './@types';
+import type { SortEnum } from '../@types/sort-types';
 
 export const SortType = {
   Popular: 'Popular',
   PriseLowToHight: 'Price: low to high',
-  PriceLowToHight: 'Price: high to low',
+  PriceHightToLow: 'Price: high to low',
   TopRatedFirst: 'Top rated first'
 } as const;
 

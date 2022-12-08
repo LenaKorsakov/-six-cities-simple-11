@@ -1,11 +1,15 @@
 import './header-avatar-picture.css';
+
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const/app-route';
-import { useAppDispatch } from '../../hooks';
-import { UserData } from '../../store/@types';
+
 import { logoutAction } from '../../store/api-actions';
 import { getIsLoginLoading } from '../../store/user-process/user-process-selectors';
+import { useAppDispatch } from '../../hooks';
+
+import { AppRoute } from '../../const/app-route';
+
+import { UserData } from '../../@types/store-types';
 
 type HeaderAuthProps = {
   user: UserData;

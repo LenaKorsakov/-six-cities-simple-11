@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { City } from '../../@types/offer-types';
-import { SortEnum } from '../../const/@types';
+import { SortEnum } from '../../@types/sort-types';
 import { DEFAULT_CITY } from '../../const/city-name';
-import { NameSpace } from '../../const/name-spaces';
+import { NameSpace } from '../../const/name-space';
 import { DEFAULT_SORT } from '../../const/sort-type';
-import { OffersProcess} from '../@types';
+import { OffersProcess} from '../../@types/store-types';
 
 const initialState: OffersProcess = {
   city: DEFAULT_CITY,
@@ -12,7 +12,7 @@ const initialState: OffersProcess = {
 };
 
 export const offersProcess = createSlice({
-  name: NameSpace.Data,
+  name: NameSpace.CityData,
   initialState,
   reducers: {
     changeCity: (state, action: PayloadAction<City>) => {

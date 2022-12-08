@@ -1,15 +1,18 @@
 import { Link} from 'react-router-dom';
-import { AppRoute } from '../../const/app-route';
-import { useAppDispatch} from '../../hooks';
-import { City } from '../../@types/offer-types';
-import { getRandomItem } from '../../utiles/get-random-item';
+
 import { changeCity } from '../../store/offers-process/offers-process';
+import { useAppDispatch} from '../../hooks';
+
+import { getRandomItem } from '../../utiles/get-random-item';
+import { AppRoute } from '../../const/app-route';
+
+import { City } from '../../@types/offer-types';
 
 type RandomCityProps = {
-  locations: City[];
+  cities: City[];
 }
 
-function RandomCity({locations}: RandomCityProps): JSX.Element{
+function RandomCity({cities: locations}: RandomCityProps): JSX.Element{
   const dispatch = useAppDispatch();
   const randomCity = getRandomItem<City>(locations);
 

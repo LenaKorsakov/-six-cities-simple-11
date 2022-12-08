@@ -1,7 +1,9 @@
-import { store } from './index';
+import { store } from '../store/index';
 import { AuthorizationStatus } from '../const/authorization-status';
-import { City, Offer } from '../@types/offer-types';
-import { SortEnum } from '../const/@types';
+import { SortEnum } from './sort-types';
+import { City, Offer } from './offer-types';
+import { ReviewRaw } from './review-types';
+import { ReviewSendingStatus } from '../const/review-sending-status';
 
 export type UserData = {
   avatarUrl: string;
@@ -17,22 +19,35 @@ export type AuthData = {
   password: string;
 };
 
+export type ReviewData = {
+  id: number;
+  comment: string;
+  rating: number;
+};
+
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
   user: UserData;
   isLoginLoading: boolean;
 };
 
-export type OffersData = {
+export type OffersCityData = {
   offers: Offer[];
-  selectedOffer: Offer;
-  nearbyOffers:Offer[];
   isOffersDataLoading: boolean;
 };
 
 export type OffersProcess = {
   city: City;
   sortOption: SortEnum;
+};
+
+export type OfferPropertyData = {
+  selectedOffer: Offer;
+  nearbyOffers: Offer[];
+  isOfferPropertyDataLoading: boolean;
+  reviews: ReviewRaw[];
+  isReviewFormBlocked: boolean;
+  reviewSendingStatus: ReviewSendingStatus;
 };
 
 export type State = ReturnType<typeof store.getState>;

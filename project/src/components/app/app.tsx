@@ -1,31 +1,30 @@
 import {Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
+
 import NotFoundScreen from '../../pages/not-found-screen//not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-
+import MainScreen from '../../pages/main-screen/main-screen';
 import HistoryRoute from '../history-route/history-route';
+
 import browserHistory from '../../browser-history';
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 import {AppRoute} from '../../const/app-route';
+import { AuthorizationStatus } from '../../const/authorization-status';
 
 import type { City} from '../../@types/offer-types';
-import { Review } from '../../@types/review-types';
-import MainScreen from '../../pages/main-screen/main-screen';
 
-import { useAppSelector } from '../../hooks';
-import { AuthorizationStatus } from '../../const/authorization-status';
-import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
 type AppProps = {
   cities: City[];
-  reviews: Review[];
 }
 
-function App({cities, reviews}: AppProps): JSX.Element {
+function App({cities}: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return(
@@ -51,9 +50,7 @@ function App({cities, reviews}: AppProps): JSX.Element {
             <Route
               path={`${AppRoute.Offer}/:id`}
               element={
-                <OfferScreen
-                  reviews={reviews}
-                />
+                <OfferScreen />
               }
             />
             <Route

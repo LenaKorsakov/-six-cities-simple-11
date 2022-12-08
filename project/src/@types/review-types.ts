@@ -14,3 +14,11 @@ export type User = {
     isPro: boolean;
     name: string;
 }
+
+export type ReviewRaw = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: User;
+}

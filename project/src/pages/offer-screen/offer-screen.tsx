@@ -1,61 +1,63 @@
 import {Helmet} from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
+
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Header from '../../components/header/header';
-import OfferMain from '../../components/offer-main/offer-main';
-import { store } from '../../store';
-
-import { useAppSelector } from '../../hooks';
-import type { Review } from '../../@types/review-types';
-import { getAllOffers, getNearbyOffers, getOffersLoadingStatus } from '../../store/offers-data/offers-data-selectors';
-import { fetchNearbyOffersAction, fetchOfferByIdAction } from '../../store/api-actions';
+import OfferContent from '../../components/offer-content/offer-content';
 import LoadingScreen from '../loading-screen/loading-screen';
 
+import { useAppSelector} from '../../hooks';
+import { store } from '../../store';
+import { getOffersByCity } from '../../store/offers-city-data/offers-city-data-selectors';
+import { fetchNearbyOffersAction, fetchOfferByIdAction, fetchReviewsByIdAction } from '../../store/api-actions';
+import { getNearbyOffers, getOfferPropertyLoadingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
 
-type OfferScreenProps = {
-  reviews: Review[];
-}
 
-function OfferScreen({reviews}: OfferScreenProps):JSX.Element {
-
-  const nearbyOffers = useAppSelector(getNearbyOffers);
-  const offers = useAppSelector(getAllOffers);
-  const isDataLoading = useAppSelector(getOffersLoadingStatus);
+function OfferScreen():JSX.Element {
+  const offers = useAppSelector(getOffersByCity);
 
   const {id} = useParams() as {id: string};
   const propId = +id;
 
-  useEffect(() => {
-    store.dispatch(fetchNearbyOffersAction(propId));
-    store.dispatch(fetchOfferByIdAction(propId));
-  }, [propId]);
-
-
   const offer = offers.find((item) => item.id === propId) ?? null;
+
+  useEffect(() => {
+    if (offer !== null) {
+      store.dispatch(fetchNearbyOffersAction(offer.id));
+      store.dispatch(fetchOfferByIdAction(offer.id));
+      store.dispatch(fetchReviewsByIdAction(offer.id));
+    }
+  }, [offer]);
+
+
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isDataLoading = useAppSelector(getOfferPropertyLoadingStatus);
 
   if (offer === null) {
     return (
-      <NotFoundScreen/>
+      <NotFoundScreen />
     );
-  } if (isDataLoading) {
+  }
+
+  if (isDataLoading) {
     return (
-      <LoadingScreen/>
+      <LoadingScreen />
     );
   }
   return(
     <div className="page">
       <Helmet>
-        <title>Шесть городов.Страничка апартаментов.</title>
+        <title>Six cities. Offer page</title>
       </Helmet>
       <Header />
-      <OfferMain
-        reviews={reviews}
+      <OfferContent
         offer={offer}
         nearbyOffers={nearbyOffers}
+        offerId={propId}
       />
     </div>
   );
 }
 
-export default OfferScreen;
+export default memo(OfferScreen);
