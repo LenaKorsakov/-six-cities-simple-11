@@ -1,12 +1,10 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
-import { displayError } from './actions';
 import { dropToken, saveToken } from '../services/token';
 
 import { ApiRoute } from '../const/api-route';
 import { Action } from '../const/action';
-import { WarningMessage } from '../const/warning-message';
 
 import { ReviewRaw } from '../@types/review-types';
 import { Offer } from '../@types/offer-types';
@@ -133,16 +131,8 @@ export const sendReviewAction = createAsyncThunk<
     extra: AxiosInstance;
   }
   >(Action.SendReview,
-    async({ id, rating, comment }, {dispatch, extra: api}) => {
+    async({ id, rating, comment }, {extra: api}) => {
 
-      try {
-
-        await api.post<ReviewData>(`${ApiRoute.Reviews}/${id}`, {rating, comment});
-
-        dispatch(fetchReviewsByIdAction(id));
-
-      } catch {
-        dispatch(displayError(WarningMessage.SendingError));
-      }
+      await api.post<ReviewData>(`${ApiRoute.Reviews}/${id}`, {rating, comment});
     }
   );

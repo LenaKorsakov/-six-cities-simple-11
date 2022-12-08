@@ -2,14 +2,15 @@ import { ChangeEvent, useState, memo, FormEvent } from 'react';
 import RatingPicker from './rating-picker';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { checkIsReviewFormBlocked, checkReviewSendingStatus } from '../../store/offer-property-data/offer-property-data-selectors';
-import { sendReviewAction } from '../../store/api-actions';
+import { checkIsReviewFormBlocked } from '../../store/offer-property-data/offer-property-data-selectors';
+import { fetchReviewsByIdAction, sendReviewAction } from '../../store/api-actions';
 
 import { RATING_TITLES, InitialReviewState, ReviewLength} from '../../const/review';
 import { ReviewFormButtonText } from '../../const/buttons-text';
-import { ReviewSendingStatus } from '../../const/review-sending-status';
 
 import { ReviewPost } from '../../@types/review-types';
+import { displayError } from '../../store/actions';
+import { WarningMessage } from '../../const/warning-message';
 
 type ReviewFormProps = {
   offerId: number;
@@ -21,7 +22,6 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
   const [formData, setFormData] = useState<ReviewPost>(InitialReviewState);
 
   const isReviewFormBloked = useAppSelector(checkIsReviewFormBlocked);
-  const reviewSendingStatus = useAppSelector(checkReviewSendingStatus);
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -44,11 +44,14 @@ function ReviewsForm({offerId}: ReviewFormProps): JSX.Element {
     dispatch(sendReviewAction({
       ...formData,
       id: offerId
-    }));
-
-    if (reviewSendingStatus !== ReviewSendingStatus.Rejected) {
-      setFormData(InitialReviewState);
-    }
+    })).unwrap().then(
+      () => {
+        dispatch(fetchReviewsByIdAction(offerId));
+        setFormData(InitialReviewState);
+      },
+      () => {
+        dispatch(displayError(WarningMessage.SendingError));
+      });
   };
 
   const isButtonDisabled = formData.comment.length < ReviewLength.Min || formData.comment.length > ReviewLength.Max || formData.rating === 0;
