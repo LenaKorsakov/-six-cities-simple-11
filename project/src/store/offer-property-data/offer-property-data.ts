@@ -5,7 +5,6 @@ import { NameSpace } from '../../const/name-space';
 
 import { Offer } from '../../@types/offer-types';
 import { OfferPropertyData} from '../../@types/store-types';
-import { ReviewSendingStatus } from '../../const/review-sending-status';
 
 const initialState: OfferPropertyData = {
   selectedOffer: {} as Offer,
@@ -13,7 +12,6 @@ const initialState: OfferPropertyData = {
   isOfferPropertyDataLoading: false,
   reviews: [],
   isReviewFormBlocked: false,
-  reviewSendingStatus: ReviewSendingStatus.Default,
 };
 
 export const offerPropertyData = createSlice({
@@ -40,15 +38,12 @@ export const offerPropertyData = createSlice({
       })
       .addCase(sendReviewAction.pending, (state) => {
         state.isReviewFormBlocked = true;
-        state.reviewSendingStatus = ReviewSendingStatus.Default;
       })
       .addCase(sendReviewAction.fulfilled, (state) => {
         state.isReviewFormBlocked = false;
-        state.reviewSendingStatus = ReviewSendingStatus.Fulfilled;
       })
       .addCase(sendReviewAction.rejected, (state) => {
         state.isReviewFormBlocked = false;
-        state.reviewSendingStatus = ReviewSendingStatus.Rejected;
       });
   }
 });
