@@ -44,7 +44,7 @@ describe('Reducer: offersPropertyData', () => {
     });
   });
 
-  describe('fetchOfferByIdAction test', () => {
+  describe('fetchReviewsByIdAction test', () => {
 
     it('should return reviews if fetchReviewsByIdAction fulfilled', () => {
       expect(offerPropertyData.reducer(state, {type: fetchReviewsByIdAction.fulfilled.type, payload: fakeReviews}))
