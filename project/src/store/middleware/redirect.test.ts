@@ -12,7 +12,7 @@ const fakeHistory = {
   },
 };
 
-jest.mock('../browser-history.ts', () => fakeHistory);
+jest.mock('../../browser-history.ts', () => fakeHistory);
 
 const middlewares = [redirect];
 const mockStore = configureMockStore<State, AnyAction>(middlewares);
