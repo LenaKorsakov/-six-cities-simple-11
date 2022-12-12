@@ -5,6 +5,8 @@ import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 
 import App from './components/app/app';
+import HistoryRoute from './components/history-route/history-route';
+import browserHistory from './browser-history';
 
 import {store} from '../src/store/index';
 import { checkAuthAction, fetchAllOffersAction } from './store/api-actions';
@@ -23,10 +25,12 @@ store.dispatch(fetchAllOffersAction());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer/>
-      <App
-        cities={CITIES}
-      />
+      <HistoryRoute history={browserHistory}>
+        <ToastContainer/>
+        <App
+          cities={CITIES}
+        />
+      </HistoryRoute>
     </Provider>
   </React.StrictMode>,
 );

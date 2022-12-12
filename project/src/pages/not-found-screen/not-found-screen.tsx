@@ -15,7 +15,7 @@ function NotFoundScreen(): JSX.Element {
         <h1 className="property__name">404. Page not found</h1>
 
         <Link title="To the main page" to={AppRoute.Main}>
-          <div className="property__mark">Вернуться на главную</div>
+          <div className="property__mark">To the main page</div>
         </Link>
       </div>
     </div>
