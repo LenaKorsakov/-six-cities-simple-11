@@ -8,9 +8,7 @@ import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
-import HistoryRoute from '../history-route/history-route';
 
-import browserHistory from '../../browser-history';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
 
@@ -32,33 +30,31 @@ function App({cities}: AppProps): JSX.Element {
       ? <LoadingScreen />
       :
       <HelmetProvider>
-        <HistoryRoute history={browserHistory}>
-          <ScrollToTop/>
-          <Routes>
-            <Route
-              path={AppRoute.Main}
-              element={<MainScreen cities = {cities} />}
-            />
-            <Route
-              path={AppRoute.Login}
-              element={
-                <PrivateRoute authorizationStatus={authorizationStatus}>
-                  <LoginScreen locations = {cities}/>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={`${AppRoute.Offer}/:id`}
-              element={
-                <OfferScreen />
-              }
-            />
-            <Route
-              path={AppRoute.NotFound}
-              element={<NotFoundScreen />}
-            />
-          </Routes>
-        </HistoryRoute>
+        <ScrollToTop/>
+        <Routes>
+          <Route
+            path={AppRoute.Main}
+            element={<MainScreen cities = {cities} />}
+          />
+          <Route
+            path={AppRoute.Login}
+            element={
+              <PrivateRoute authorizationStatus={authorizationStatus}>
+                <LoginScreen locations = {cities}/>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${AppRoute.Offer}/:id`}
+            element={
+              <OfferScreen />
+            }
+          />
+          <Route
+            path={AppRoute.NotFound}
+            element={<NotFoundScreen />}
+          />
+        </Routes>
       </HelmetProvider>
   );
 }

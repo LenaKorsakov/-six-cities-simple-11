@@ -27,7 +27,7 @@ export const makeFakeOffer = (): Offer => ( {
   description: commerce.productDescription(),
   goods: Array.from({length: 5}, () => commerce.product()),
   host: makeFakeHost(),
-  id: datatype.number(),
+  id: datatype.number({ min: 1, max: 5, precision: 0.0 }),
   images: Array.from({length: 6}, () => image.imageUrl(260, 200)),
   isPremium: datatype.boolean(),
   location: makeFakeLocation(),
@@ -39,7 +39,7 @@ export const makeFakeOffer = (): Offer => ( {
   type: commerce.product()
 });
 
-export const fakeOffers = Array.from({length: 15}, makeFakeOffer);
+export const fakeOffers = Array.from({length: 10}, makeFakeOffer);
 export const fakeNeabyOffers = Array.from({length: 3}, makeFakeOffer);
 
 export const makeFakeReview = (): ReviewRaw => ({
