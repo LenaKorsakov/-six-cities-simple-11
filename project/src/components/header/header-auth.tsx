@@ -46,6 +46,7 @@ function HeaderAuth({user}: HeaderAuthProps): JSX.Element {
       <li
         className="header__nav-item"
         onClick={handleNavigationItemClick}
+        data-testid="nav-item"
       >
         <Link
           className="header__nav-link"
