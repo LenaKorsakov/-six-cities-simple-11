@@ -1,49 +1,40 @@
-# Личный проект «Шесть городов (простой)»
+# Six Cities
+Six Cities is a one-page application (SPA) for finding short-term rentals in different cities. With an interactive map, convenient sorting and filtering, and viewing reviews, the user can easily and quickly choose the ideal option for a stay.
 
-* Студент: [Lena Korsakova](https://up.htmlacademy.ru/react/11/user/2063853).
-* Наставник: `Александр Мастеров`.
+## Description
+//Here is a description with pictures.
 
----
+## Stack
+- ReactJS,
+- Typescript,
+- React Router Dom,
+- Redux Toolkit,
+- Axios,
+- Jest.
 
-_Не удаляйте и не изменяйте папки и файлы:_
-_`.editorconfig`, `.gitattributes`, `.gitignore`._
+## Demo site
+//Here is a link
 
----
+## How to run app:
 
-### Памятка
-
-#### 1. Зарегистрируйтесь на Гитхабе
-
-Если у вас ещё нет аккаунта на [github.com](https://github.com/join), скорее зарегистрируйтесь.
-
-#### 2. Создайте форк
-
-Откройте репозиторий и нажмите кнопку «Fork» в правом верхнем углу. Репозиторий из Академии будет скопирован в ваш аккаунт.
-
-<img width="769" alt="Press 'Fork'" src="https://cloud.githubusercontent.com/assets/259739/20264045/a1ddbf40-aa7a-11e6-9a1a-724a1c0123c8.png">
-
-Получится вот так:
-
-<img width="769" alt="Forked" src="https://cloud.githubusercontent.com/assets/259739/20264122/f63219a6-aa7a-11e6-945a-89818fc7c014.png">
-
-#### 3. Клонируйте репозиторий на свой компьютер
-
-Будьте внимательны: нужно клонировать свой репозиторий (форк), а не репозиторий Академии. Также обратите внимание, что клонировать репозиторий нужно через SSH, а не через HTTPS. Нажмите зелёную кнопку в правой части экрана, чтобы скопировать SSH-адрес вашего репозитория:
-
-<img width="769" alt="SSH" src="https://cloud.githubusercontent.com/assets/259739/20264180/42704126-aa7b-11e6-9ab4-73372b812a53.png">
-
-Клонировать репозиторий можно так:
-
-```
-git clone SSH-адрес_вашего_форка
+- Clone repository:
+```bash
+git clone git@github.com:LenaKorsakov/six-city.git
 ```
 
-Команда клонирует репозиторий на ваш компьютер и подготовит всё необходимое для старта работы.
+- Install dependencies repository:
 
-#### 4. Начинайте обучение!
+```bash
+npm install
+```
 
----
+- Run application:
 
-<a href="https://htmlacademy.ru/intensive/react"><img align="left" width="50" height="50" title="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/react/logo-for-github.png"></a>
+```bash
+npm start
+```
 
-Репозиторий создан для обучения на профессиональном онлайн‑курсе «[React. Разработка сложных клиентских приложений](https://htmlacademy.ru/intensive/react)» от [HTML Academy](https://htmlacademy.ru).
+- Check tests
+```bash
+npm test
+```
