@@ -13,7 +13,7 @@ Six Cities is a one-page application (SPA) for finding short-term rentals in dif
 - Jest.
 
 ## Demo site
-//Here is a link
+Visit site: https://six-cities-korsakova.vercel.app/
 
 ## How to run app:
 
