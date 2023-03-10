@@ -10,14 +10,11 @@ On the main page, the user sees a list of offers. The user can switch between th
 An interesting feature of the application is the interactive map with markers. When you hover your mouse over a offer's card, the marker on the map is highlighted in orange.
 ![Map-screenshot](https://github.com/LenaKorsakov/six-cities/blob/master/project/screenshots/map-screenshot.png)
 
-In addition, the user has several options for sorting the offers: by ascending/descending price, by popularity, and by default.
+In addition, the user has several options for sorting the offers: by ascending/descending price, by popularity,by default.
 ![Sort-screenshot](https://github.com/LenaKorsakov/six-cities/blob/master/project/screenshots/sort-screenshot.png)
 
-When going to the page of each appartments, the user finds a detailed description of the apartments, sees their rating and gets acquainted with the host.
+When going to the page of each appartments, the user finds a detailed description of the apartments, sees their rating and gets acquainted with the host.On the same page there is a list of reviews on the given apartments.
 ![Offer-screenshot](https://github.com/LenaKorsakov/six-cities/blob/master/project/screenshots/offer-screenshot.png)
-
-On the same page there is a list of reviews on the given apartments.
-![Reviews-screenshot](https://github.com/LenaKorsakov/six-cities/blob/master/project/screenshots/reviews-screenshot.png)
 
 Under the list of reviews, the user can see a list of nearby offers and a map showing the current offer and theirs. They are very useful when the user is not sure exactly what they want.
 ![Similar-screenshot](https://github.com/LenaKorsakov/six-cities/blob/master/project/screenshots/similar-screenshot.png)
@@ -25,8 +22,11 @@ Under the list of reviews, the user can see a list of nearby offers and a map sh
 In order to leave a review, the user must be log in the application. He is redirected to a page where the user must fill out a small registration form. 
 ![Log in-screenshot](https://github.com/LenaKorsakov/six-cities/blob/master/project/screenshots/log-in-screenshot.png)
 
-After that, the user can easily leave a review, which will immediately appear in the list of reviews for the apartments. Attention, the review must contain from 50 to 300 characters. As long as the review does not meet this criterion, the button to send it remains disabled.
+After that, the user can easily leave a review,
 ![New-review-screenshot](https://github.com/LenaKorsakov/six-cities/blob/master/project/screenshots/new-review-screenshot.png)
+
+Review will immediately appear in the list of reviews for the apartments. Attention, the review must contain from 50 to 300 characters. As long as the review does not meet this criterion, the button to send it remains disabled.
+![Reviews-screenshot](https://github.com/LenaKorsakov/six-cities/blob/master/project/screenshots/reviews-screenshot.png)
 
 
 ## Stack
