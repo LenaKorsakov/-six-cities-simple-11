@@ -1,5 +1,5 @@
 ## Six Cities
-# Six Cities is a one-page application (SPA) on REACT.
+# Six Cities is a one-page React application (SPA).
 It's the application for finding short-term rentals in different cities. With an interactive map, convenient sorting and filtering, and viewing reviews, the user can easily and quickly choose the ideal option for a stay.
 
 ## Description
